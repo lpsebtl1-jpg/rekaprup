@@ -69,7 +69,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col"><section id="cloudPanel" style="position:sticky;top:0;z-index:99999;background:#fff;padding:12px;border-bottom:1px solid #ccc;color:#172033"><strong>Database RUP</strong> — <span id="cloudStatus">Memeriksa koneksi...</span><form id="cloudLogin" onsubmit="loginCloud(event)" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><input id="cloudEmail" type="email" required placeholder="Email admin" style="border:1px solid #aaa;padding:6px"><input id="cloudPassword" type="password" required placeholder="Password admin" style="border:1px solid #aaa;padding:6px"><button style="background:#166534;color:white;padding:6px 16px">Login</button></form><button id="cloudLogout" hidden onclick="logoutCloud()" style="padding:6px 12px;border:1px solid #aaa">Logout</button></section>
 
     <!-- KOP SURAT & HEADER APLIKASI -->
     <header class="bg-slate-900 text-white border-b border-slate-800 shadow-lg">
@@ -606,6 +606,7 @@
         <span id="toastMessage"></span>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const STORAGE_KEY = 'REKAP_RUP_BATOLA_V1';
         const ARCHIVE_STORAGE_KEY = 'REKAP_RUP_BATOLA_ARCHIVES_V1';
@@ -614,22 +615,8 @@
         let lastActivePasteTarget = 'PENYEDIA';
         let yearlyArchives = [];
 
-        const DEFAULT_SKPD_DATA = [
-            { no: 1, name: 'DINAS PEKERJAAN UMUM DAN PENATAAN RUANG KAB. BARITO KUALA', sipd: 185420500000, pegawai: 18250400000, transfer: 0, penyedia: 128450100000, swakelola: 38720000000, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' },
-            { no: 2, name: 'DINAS KESEHATAN KAB. BARITO KUALA', sipd: 164890250000, pegawai: 54120800000, transfer: 0, penyedia: 86540450000, swakelola: 24229000000, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' },
-            { no: 29, name: 'DINAS PENDIDIKAN KAB. BARITO KUALA', sipd: 522338113421, pegawai: 435699433616, transfer: 0, penyedia: 25720347697, swakelola: 60918332108, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' },
-            { no: 30, name: 'SEKRETARIAT DPRD', sipd: 55810559803, pegawai: 27467859279, transfer: 0, penyedia: 5157665284, swakelola: 23185035240, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' },
-            { no: 31, name: 'BADAN PENGELOLAAN PAJAK DAN RETRIBUSI DAERAH KAB. BARITO KUALA', sipd: 10907421503, pegawai: 6232160077, transfer: 0, penyedia: 2724333926, swakelola: 1950927500, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' },
-            { no: 32, name: 'DINAS PERHUBUNGAN KAB. BARITO KUALA', sipd: 30133715299, pegawai: 4665221724, transfer: 0, penyedia: 15828303951, swakelola: 9945089624, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' },
-            { no: 33, name: 'INSPEKTORAT DAERAH KABUPATEN BARITO KUALA', sipd: 11995063741, pegawai: 9365057097, transfer: 0, penyedia: 3234553852, swakelola: 999149728, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' },
-            { no: 34, name: 'SATUAN POLISI PAMONG PRAJA KAB. BARITO KUALA', sipd: 15914860686, pegawai: 8956705522, transfer: 0, penyedia: 4997918724, swakelola: 1960236440, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' },
-            { no: 35, name: 'KECAMATAN JEJANGKIT', sipd: 2070805215, pegawai: 1746885962, transfer: 0, penyedia: 246394258, swakelola: 77524995, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' },
-            { no: 36, name: 'KECAMATAN TABUKAN', sipd: 2085282063, pegawai: 1772754279, transfer: 0, penyedia: 202895344, swakelola: 109632440, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' },
-            { no: 37, name: 'KECAMATAN TABUNGANEN', sipd: 1733279007, pegawai: 1450276477, transfer: 0, penyedia: 143356930, swakelola: 139645600, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' },
-            { no: 39, name: 'DINAS KOMUNIKASI DAN INFORMATIKA', sipd: 8222086016, pegawai: 3180313746, transfer: 0, penyedia: 4449712470, swakelola: 732019800, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' },
-            { no: 43, name: 'KECAMATAN BARAMBAI', sipd: 2383999949, pegawai: 2090016474, transfer: 0, penyedia: 205189235, swakelola: 88794240, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' },
-            { no: 45, name: 'KECAMATAN KURIPAN', sipd: 2072379682, pegawai: 1612193592, transfer: 0, penyedia: 496253980, swakelola: 199993480, penyediaSwakelola: 0, aktif: 'TIDAK/ 25 November 2026' }
-        ];
+        // Data awal dikosongkan; tampilan KPI, tabel, dan total akan otomatis menyesuaikan saat data ditambahkan/diimpor/dimuat
+        const DEFAULT_SKPD_DATA = [];
 
         let skpdRows = [];
 
@@ -767,6 +754,7 @@
                     rows: skpdRows
                 };
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+                queueCloud();
             } catch (err) {
                 console.warn('Gagal menyimpan state:', err);
             }
@@ -786,7 +774,7 @@
                     if (parsed.logo) {
                         applyCustomLogo(parsed.logo);
                     }
-                    if (Array.isArray(parsed.rows) && parsed.rows.length > 0) {
+                    if (Array.isArray(parsed.rows)) {
                         skpdRows = parsed.rows;
                         return;
                     }
@@ -1264,7 +1252,7 @@
             skpdRows = DEFAULT_SKPD_DATA.map(r => ({ ...r }));
             saveState();
             renderTable();
-            showToast('Data dikembalikan ke data awal Kabupaten Barito Kuala.');
+            showToast('Data awal dikosongkan. Silakan Tambah SKPD, Import Excel, atau muat arsip.');
         }
 
         function openScanModal(rowIdx = null, focusType = 'BOTH') {
@@ -2041,6 +2029,7 @@ Balas HANYA JSON valid sesuai schema.`;
             loadState();
             loadArchives();
             renderTable();
+            initCloud();
         });
 
         function getActiveYear() {
@@ -2085,6 +2074,7 @@ Balas HANYA JSON valid sesuai schema.`;
         function saveArchives() {
             try {
                 localStorage.setItem(ARCHIVE_STORAGE_KEY, JSON.stringify(yearlyArchives));
+                queueCloud();
             } catch (err) {
                 console.warn('Gagal menyimpan arsip tahunan:', err);
             }
@@ -2249,5 +2239,26 @@ Balas HANYA JSON valid sesuai schema.`;
             }).join('');
         }
     </script>
+
+<script>
+const cloud = window.supabase?.createClient('https://exuxwgcnhuwsokyuoefk.supabase.co','sb_publishable_8Yi4u1GURXdl8CyoSNKK7A_0LC7UjH9');
+let cloudReady=false, timer, dirty=false, busy=false, revision=null;
+const statusCloud = t => document.getElementById('cloudStatus').textContent=t;
+function lockCloud(lock){ for(const el of document.body.children){if(el.id!=='cloudPanel' && el.tagName!=='SCRIPT') el.inert=lock;} }
+function snapshotCloud(){return {state:{title:document.getElementById('docTitleInput').value,date:document.getElementById('docDateInput').value,logo:customLogoDataUrl||'',rows:skpdRows},archives:yearlyArchives};}
+async function pullCloud(){
+ const {data,error}=await cloud.from('rup_data').select('data,updated_at').eq('id','main').maybeSingle(); if(error) throw error;
+ revision=data?.updated_at||null;
+ if(data){if(!Array.isArray(data.data?.state?.rows))throw Error('Format data online tidak sesuai');localStorage.setItem(STORAGE_KEY,JSON.stringify(data.data.state));localStorage.setItem(ARCHIVE_STORAGE_KEY,JSON.stringify(data.data.archives||[]));loadState();loadArchives();renderTable();}
+ else {if(!confirm('Database masih kosong. Unggah data lokal dari perangkat ini sebagai data awal?'))throw Error('Inisialisasi dibatalkan'); const r=await cloud.from('rup_data').insert({id:'main',data:snapshotCloud()}).select('updated_at').single();if(r.error)throw r.error;revision=r.data.updated_at;}
+}
+async function initCloud(){lockCloud(true);if(!cloud){statusCloud('SDK gagal dimuat. Muat ulang halaman.');return;}try{const {data}=await cloud.auth.getSession();if(data.session)await startCloud();else statusCloud('Silakan login admin');}catch(e){statusCloud(e.message);}}
+async function startCloud(){cloudReady=false;lockCloud(true);await pullCloud();cloudReady=true;lockCloud(false);document.getElementById('cloudLogin').hidden=true;document.getElementById('cloudLogout').hidden=false;statusCloud('Online • data tersinkron');}
+async function loginCloud(e){e.preventDefault();try{statusCloud('Menghubungkan...');const {error}=await cloud.auth.signInWithPassword({email:document.getElementById('cloudEmail').value,password:document.getElementById('cloudPassword').value});document.getElementById('cloudPassword').value='';if(error)throw error;await startCloud();}catch(e){statusCloud(e.message);}}
+function queueCloud(){if(!cloudReady)return;dirty=true;statusCloud('Perubahan belum tersimpan');clearTimeout(timer);timer=setTimeout(pushCloud,700);}
+async function pushCloud(){if(!cloudReady||busy||!dirty)return;busy=true;dirty=false;try{const next=new Date().toISOString();const r=await cloud.from('rup_data').update({data:snapshotCloud(),updated_at:next}).eq('id','main').eq('updated_at',revision).select('updated_at').maybeSingle();if(r.error)throw r.error;if(!r.data)throw Error('Data berubah di perangkat lain. Cadangkan data lokal sebelum memuat ulang.');revision=r.data.updated_at;statusCloud('Online • tersimpan');}catch(e){dirty=true;statusCloud('Gagal simpan: '+e.message);return;}finally{busy=false;}if(dirty)queueCloud();}
+async function logoutCloud(){if(dirty||busy){alert('Tunggu penyimpanan selesai atau cadangkan data.');return;}cloudReady=false;await cloud.auth.signOut();location.reload();}
+window.addEventListener('beforeunload',e=>{if(dirty||busy){e.preventDefault();e.returnValue='';}});
+</script>
 </body>
 </html>
