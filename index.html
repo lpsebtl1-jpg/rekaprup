@@ -10,6 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
     <style>
+ body[data-cloud-locked="true"] > :not(#cloudPanel):not(script) {display:none !important;} #cloudPanel [hidden] {display:none !important;}
+
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
@@ -69,7 +71,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col"><section id="cloudPanel" style="position:sticky;top:0;z-index:99999;background:#fff;padding:12px;border-bottom:1px solid #ccc;color:#172033"><strong>Database RUP</strong> — <span id="cloudStatus">Memeriksa koneksi...</span><form id="cloudLogin" onsubmit="loginCloud(event)" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><input id="cloudEmail" type="email" required placeholder="Email admin" style="border:1px solid #aaa;padding:6px"><input id="cloudPassword" type="password" required placeholder="Password admin" style="border:1px solid #aaa;padding:6px"><button style="background:#166534;color:white;padding:6px 16px">Login</button></form><button id="cloudLogout" hidden onclick="logoutCloud()" style="padding:6px 12px;border:1px solid #aaa">Logout</button></section>
+<body data-cloud-locked="true" class="min-h-screen flex flex-col"><section id="cloudPanel" style="position:sticky;top:0;z-index:99999;background:#fff;padding:12px;border-bottom:1px solid #ccc;color:#172033"><strong>Database RUP</strong> — <span id="cloudStatus">Memeriksa koneksi...</span><form id="cloudLogin" onsubmit="loginCloud(event)" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><input id="cloudEmail" type="email" required placeholder="Email admin" style="border:1px solid #aaa;padding:6px"><input id="cloudPassword" type="password" required placeholder="Password admin" style="border:1px solid #aaa;padding:6px"><button style="background:#166534;color:white;padding:6px 16px">Login</button></form><button id="cloudLogout" hidden onclick="logoutCloud()" style="padding:6px 12px;border:1px solid #aaa">Logout</button></section>
 
     <!-- KOP SURAT & HEADER APLIKASI -->
     <header class="bg-slate-900 text-white border-b border-slate-800 shadow-lg">
@@ -753,7 +755,7 @@
                     logo: customLogoDataUrl || '',
                     rows: skpdRows
                 };
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+                if (!cloudReady) return;
                 queueCloud();
             } catch (err) {
                 console.warn('Gagal menyimpan state:', err);
@@ -2026,9 +2028,6 @@ Balas HANYA JSON valid sesuai schema.`;
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            loadState();
-            loadArchives();
-            renderTable();
             initCloud();
         });
 
@@ -2073,7 +2072,7 @@ Balas HANYA JSON valid sesuai schema.`;
 
         function saveArchives() {
             try {
-                localStorage.setItem(ARCHIVE_STORAGE_KEY, JSON.stringify(yearlyArchives));
+                if (!cloudReady) return;
                 queueCloud();
             } catch (err) {
                 console.warn('Gagal menyimpan arsip tahunan:', err);
@@ -2244,20 +2243,22 @@ Balas HANYA JSON valid sesuai schema.`;
 const cloud = window.supabase?.createClient('https://exuxwgcnhuwsokyuoefk.supabase.co','sb_publishable_8Yi4u1GURXdl8CyoSNKK7A_0LC7UjH9');
 let cloudReady=false, timer, dirty=false, busy=false, revision=null;
 const statusCloud = t => document.getElementById('cloudStatus').textContent=t;
-function lockCloud(lock){ for(const el of document.body.children){if(el.id!=='cloudPanel' && el.tagName!=='SCRIPT') el.inert=lock;} }
+function lockCloud(lock){ document.body.dataset.cloudLocked=String(lock); for(const el of document.body.children){if(el.id!=='cloudPanel' && el.tagName!=='SCRIPT') el.inert=lock;} }
 function snapshotCloud(){return {state:{title:document.getElementById('docTitleInput').value,date:document.getElementById('docDateInput').value,logo:customLogoDataUrl||'',rows:skpdRows},archives:yearlyArchives};}
 async function pullCloud(){
  const {data,error}=await cloud.from('rup_data').select('data,updated_at').eq('id','main').maybeSingle(); if(error) throw error;
  revision=data?.updated_at||null;
- if(data){if(!Array.isArray(data.data?.state?.rows))throw Error('Format data online tidak sesuai');localStorage.setItem(STORAGE_KEY,JSON.stringify(data.data.state));localStorage.setItem(ARCHIVE_STORAGE_KEY,JSON.stringify(data.data.archives||[]));loadState();loadArchives();renderTable();}
- else {if(!confirm('Database masih kosong. Unggah data lokal dari perangkat ini sebagai data awal?'))throw Error('Inisialisasi dibatalkan'); const r=await cloud.from('rup_data').insert({id:'main',data:snapshotCloud()}).select('updated_at').single();if(r.error)throw r.error;revision=r.data.updated_at;}
+ if(data){if(!Array.isArray(data.data?.state?.rows))throw Error('Format data online tidak sesuai');const st=data.data.state; skpdRows=st.rows; yearlyArchives=Array.isArray(data.data.archives)?data.data.archives:[]; document.getElementById('docTitleInput').value=st.title||''; document.getElementById('docDateInput').value=st.date||''; if(st.logo)applyCustomLogo(st.logo); renderTable();}
+ else {if(!confirm('Database kosong. Buat data awal kosong?'))throw Error('Inisialisasi dibatalkan'); const r=await cloud.from('rup_data').insert({id:'main',data:snapshotCloud()}).select('updated_at').single();if(r.error)throw r.error;revision=r.data.updated_at;}
 }
-async function initCloud(){lockCloud(true);if(!cloud){statusCloud('SDK gagal dimuat. Muat ulang halaman.');return;}try{const {data}=await cloud.auth.getSession();if(data.session)await startCloud();else statusCloud('Silakan login admin');}catch(e){statusCloud(e.message);}}
+function clearCloudCache(){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(ARCHIVE_STORAGE_KEY);}
+async function initCloud(){lockCloud(true);clearCloudCache();if(!cloud){statusCloud('SDK gagal dimuat. Muat ulang halaman.');return;}try{const {data}=await cloud.auth.getSession();if(data.session)await startCloud();else statusCloud('Silakan login admin');}catch(e){statusCloud(e.message);}}
 async function startCloud(){cloudReady=false;lockCloud(true);await pullCloud();cloudReady=true;lockCloud(false);document.getElementById('cloudLogin').hidden=true;document.getElementById('cloudLogout').hidden=false;statusCloud('Online • data tersinkron');}
 async function loginCloud(e){e.preventDefault();try{statusCloud('Menghubungkan...');const {error}=await cloud.auth.signInWithPassword({email:document.getElementById('cloudEmail').value,password:document.getElementById('cloudPassword').value});document.getElementById('cloudPassword').value='';if(error)throw error;await startCloud();}catch(e){statusCloud(e.message);}}
 function queueCloud(){if(!cloudReady)return;dirty=true;statusCloud('Perubahan belum tersimpan');clearTimeout(timer);timer=setTimeout(pushCloud,700);}
 async function pushCloud(){if(!cloudReady||busy||!dirty)return;busy=true;dirty=false;try{const next=new Date().toISOString();const r=await cloud.from('rup_data').update({data:snapshotCloud(),updated_at:next}).eq('id','main').eq('updated_at',revision).select('updated_at').maybeSingle();if(r.error)throw r.error;if(!r.data)throw Error('Data berubah di perangkat lain. Cadangkan data lokal sebelum memuat ulang.');revision=r.data.updated_at;statusCloud('Online • tersimpan');}catch(e){dirty=true;statusCloud('Gagal simpan: '+e.message);return;}finally{busy=false;}if(dirty)queueCloud();}
-async function logoutCloud(){if(dirty||busy){alert('Tunggu penyimpanan selesai atau cadangkan data.');return;}cloudReady=false;await cloud.auth.signOut();location.reload();}
+async function logoutCloud(){if(dirty||busy){alert('Tunggu penyimpanan selesai atau cadangkan data.');return;}cloudReady=false;lockCloud(true);clearCloudCache();skpdRows=[];yearlyArchives=[];const {error}=await cloud.auth.signOut();if(error){statusCloud('Logout gagal: '+error.message);cloudReady=true;lockCloud(false);await pullCloud();return;}location.reload();}
+window.addEventListener('pageshow',e=>{if(e.persisted)location.reload();});
 window.addEventListener('beforeunload',e=>{if(dirty||busy){e.preventDefault();e.returnValue='';}});
 </script>
 </body>
