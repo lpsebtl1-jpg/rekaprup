@@ -9,8 +9,6 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-    <!-- Tesseract.js untuk OCR Otomatis Offline/Tanpa API Key -->
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap');
         body {
@@ -45,13 +43,13 @@
             position: sticky;
             left: 0;
             z-index: 15;
-            min-width: 165px;
-            max-width: 195px;
+            min-width: 175px;
+            max-width: 210px;
         }
         @media (min-width: 640px) {
             .sticky-col-skpd {
-                min-width: 220px;
-                max-width: 260px;
+                min-width: 230px;
+                max-width: 270px;
             }
         }
         .badge-aman {
@@ -72,21 +70,11 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
-    <section id="cloudPanel" style="position:sticky;top:0;z-index:99999;background:#fff;padding:12px;border-bottom:1px solid #ccc;color:#172033">
-        <strong>Database RUP</strong> — <span id="cloudStatus">Memeriksa koneksi...</span>
-        <form id="cloudLogin" onsubmit="loginCloud(event)" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
-            <input id="cloudEmail" type="email" required placeholder="Email admin" style="border:1px solid #aaa;padding:6px">
-            <input id="cloudPassword" type="password" required placeholder="Password admin" style="border:1px solid #aaa;padding:6px">
-            <button style="background:#166534;color:white;padding:6px 16px">Login</button>
-        </form>
-        <button id="cloudLogout" hidden onclick="logoutCloud()" style="padding:6px 12px;border:1px solid #aaa">Logout</button>
-    </section>
-
     <!-- KOP SURAT & HEADER APLIKASI -->
     <header class="bg-slate-900 text-white border-b border-slate-800 shadow-lg">
         <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-4">
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-800 pb-4">
-                <div class="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-2">
+                <div class="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-3">
                     <div class="relative group shrink-0">
                         <div id="headerLogoContainer" class="w-12 h-14 rounded-xl bg-white p-1 border border-slate-300 shadow-md flex items-center justify-center overflow-hidden">
                             <svg id="defaultSelidahSvg" viewBox="0 0 220 240" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -95,34 +83,8 @@
                                 <path d="M92,175 C62,145 58,92 84,54" fill="none" stroke="#15803d" stroke-width="3.5" stroke-linecap="round"/>
                                 <path d="M84,174 C50,148 44,102 64,66" fill="none" stroke="#15803d" stroke-width="3.2" stroke-linecap="round"/>
                                 <path d="M76,173 C38,152 30,115 44,82" fill="none" stroke="#15803d" stroke-width="3" stroke-linecap="round"/>
-                                <ellipse cx="76" cy="72" rx="4" ry="9" transform="rotate(-20 76 72)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
-                                <circle cx="80" cy="64" r="3.5" fill="#dc2626"/>
-                                <ellipse cx="64" cy="96" rx="4.5" ry="10" transform="rotate(-18 64 96)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
-                                <circle cx="71" cy="92" r="3.5" fill="#dc2626"/>
-                                <ellipse cx="52" cy="112" rx="4.5" ry="10" transform="rotate(-15 52 112)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
-                                <circle cx="62" cy="122" r="3.5" fill="#dc2626"/>
-                                <ellipse cx="42" cy="134" rx="4.5" ry="9.5" transform="rotate(-12 42 134)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
-                                <circle cx="55" cy="144" r="3.5" fill="#dc2626"/>
-                                <circle cx="66" cy="154" r="3.5" fill="#dc2626"/>
                                 <path d="M128,175 C162,152 174,105 144,46" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
-                                <g fill="#facc15" stroke="#1e293b" stroke-width="1.4">
-                                    <ellipse cx="144" cy="52" rx="4" ry="8" transform="rotate(-25 144 52)"/>
-                                    <ellipse cx="151" cy="64" rx="4.5" ry="8.5" transform="rotate(20 151 64)"/>
-                                    <ellipse cx="146" cy="74" rx="4.5" ry="8.5" transform="rotate(-25 146 74)"/>
-                                    <ellipse cx="156" cy="86" rx="4.5" ry="9" transform="rotate(22 156 86)"/>
-                                    <ellipse cx="150" cy="97" rx="4.5" ry="9" transform="rotate(-25 150 97)"/>
-                                    <ellipse cx="160" cy="110" rx="4.5" ry="9" transform="rotate(22 160 110)"/>
-                                    <ellipse cx="153" cy="121" rx="4.5" ry="9" transform="rotate(-25 153 121)"/>
-                                    <ellipse cx="160" cy="133" rx="4.5" ry="9" transform="rotate(22 160 133)"/>
-                                    <ellipse cx="152" cy="144" rx="4.5" ry="8.5" transform="rotate(-25 152 144)"/>
-                                    <ellipse cx="154" cy="155" rx="4.5" ry="8.5" transform="rotate(20 154 155)"/>
-                                    <ellipse cx="144" cy="164" rx="4.5" ry="8" transform="rotate(-22 144 164)"/>
-                                </g>
                                 <path d="M110,58 L138,76 L133,156 L110,174 L87,156 L82,76 Z" fill="#18181b" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
-                                <path d="M110,74 C115,92 115,118 111,134 L109,134 C105,118 105,92 110,74 Z" fill="#ffffff"/>
-                                <path d="M106,134 L115,134 L114,148 C113,156 104,160 95,158 L98,149 C103,150 106,147 106,142 Z" fill="#facc15"/>
-                                <path d="M46,166 L76,174 L76,204 L46,196 L56,181 Z" fill="#b91c1c" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
-                                <path d="M174,166 L144,174 L144,204 L174,196 L164,181 Z" fill="#b91c1c" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
                                 <path d="M74,172 Q110,164 146,172 L146,202 Q110,194 74,202 Z" fill="#dc2626" stroke="#18181b" stroke-width="2.2" stroke-linejoin="round"/>
                                 <text x="110" y="191" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="18" letter-spacing="1" fill="#ffffff">SELIDAH</text>
                             </svg>
@@ -205,7 +167,7 @@
     <main class="flex-1 max-w-[1600px] w-full mx-auto px-2.5 sm:px-6 py-3 sm:py-4 space-y-3 sm:space-y-4 overflow-x-hidden">
         <!-- TOOLBAR AKSI & FILTER -->
         <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-3 sm:p-3.5 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
-            <div class="grid grid-cols-1 xs:grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 w-full xl:w-auto">
+            <div class="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2 w-full xl:w-auto">
                 <button type="button" onclick="openScanModal(null, 'BOTH')"
                     class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
                     <i class="fa-solid fa-camera"></i> Upload Screenshot SIRUP (Penyedia &amp; Swakelola)
@@ -226,17 +188,13 @@
                     class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
                     <i class="fa-solid fa-file-pdf"></i> Export PDF
                 </button>
+                <button type="button" onclick="loadSampleSkpdData()"
+                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                    <i class="fa-solid fa-table-list"></i> Muat Contoh SKPD
+                </button>
                 <button type="button" onclick="resetDefaultData()"
                     class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition flex items-center justify-center sm:justify-start gap-1.5">
-                    <i class="fa-solid fa-rotate-left"></i> Reset Awal
-                </button>
-                <button type="button" onclick="deleteAllSkpd()"
-                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
-                    <i class="fa-solid fa-trash-can"></i> Hapus Semua SKPD
-                </button>
-                <button type="button" onclick="openYearlyArchiveModal()"
-                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
-                    <i class="fa-solid fa-calendar-days"></i> Rekap Pertahun &amp; Arsip
+                    <i class="fa-solid fa-rotate-left"></i> Kosongkan Tabel
                 </button>
             </div>
 
@@ -308,27 +266,6 @@
             </div>
 
             <div class="p-5 space-y-5 max-h-[82vh] overflow-y-auto">
-                <!-- PENGATURAN ENGINE PEMBACAAN OTOMATIS -->
-                <div class="rounded-2xl bg-indigo-50/70 border border-indigo-200 p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div class="text-xs text-indigo-950">
-                        <div class="font-extrabold flex items-center gap-1.5">
-                            <i class="fa-solid fa-robot text-indigo-600"></i>
-                            <span>Engine Pembacaan Otomatis Aktif (OCR Lokal + Gemini Vision AI)</span>
-                        </div>
-                        <p class="text-[11px] text-indigo-800 mt-0.5">
-                            Otomatis membaca seluruh angka rupiah tanpa API Key via OCR browser. Untuk akurasi tinggi pada screenshot panjang, tempelkan <strong>Gemini API Key</strong> (opsional, tersimpan lokal):
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-1.5 shrink-0">
-                        <input id="geminiApiKeyInput" type="password" onchange="saveGeminiApiKey(this.value)" placeholder="Tempel AIzaSy... (Opsional)"
-                            class="w-48 sm:w-56 rounded-xl border border-indigo-300 bg-white px-3 py-1.5 text-xs font-mono text-slate-800 focus:outline-none focus:border-indigo-600">
-                        <button type="button" onclick="saveGeminiApiKey(document.getElementById('geminiApiKeyInput').value)"
-                            class="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition">
-                            Simpan Key
-                        </button>
-                    </div>
-                </div>
-
                 <div class="rounded-2xl bg-slate-50 border border-slate-200 p-4 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
                     <div class="lg:col-span-5">
                         <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">
@@ -386,15 +323,21 @@
                         <div id="statusPenyedia" class="text-[11px] font-semibold text-slate-600 bg-white rounded-xl px-3 py-2 border border-blue-100">
                             Menunggu upload atau input nominal Paket Penyedia.
                         </div>
-                        <div class="flex flex-wrap items-center justify-between gap-2 text-[10px] text-slate-500 px-1">
-                            <span id="metaPenyediaInfo">0 paket terdeteksi</span>
-                            <button type="button" onclick="clearScanPreview('PENYEDIA')" class="text-rose-600 hover:text-rose-800 font-bold underline">
-                                Bersihkan Preview
-                            </button>
-                        </div>
-                        <div id="itemsPenyediaBox" class="hidden rounded-xl border border-blue-200 bg-white p-2.5 text-[11px] max-h-48 overflow-y-auto space-y-1"></div>
 
-                        <img id="previewPenyedia" alt="Preview Screenshot Penyedia" class="hidden w-full max-h-48 object-contain rounded-xl border border-blue-200 bg-white">
+                        <div class="bg-white rounded-xl border border-blue-200 p-2.5 space-y-1.5">
+                            <div class="flex items-center justify-between gap-2">
+                                <label for="manualListPenyedia" class="text-[10px] font-extrabold uppercase tracking-wider text-blue-900">
+                                    Hitung Persis Deretan Pagu Penyedia
+                                </label>
+                                <button type="button" onclick="applyManualSum('PENYEDIA')" class="px-2 py-0.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-bold">
+                                    Hitung &amp; Isi Total
+                                </button>
+                            </div>
+                            <textarea id="manualListPenyedia" rows="2" oninput="previewManualSum('PENYEDIA')" placeholder="Contoh: 60.000.000&#10;9.613.400&#10;12.400.000" class="w-full rounded-lg border border-blue-200 px-2.5 py-1.5 font-mono text-[11px] text-slate-800 focus:outline-none focus:border-blue-600"></textarea>
+                            <div id="manualSumInfoPenyedia" class="text-[10px] font-semibold text-blue-800">0 angka terdeteksi • Total: Rp 0</div>
+                        </div>
+
+                        <img id="previewPenyedia" alt="Preview Screenshot Penyedia" class="hidden w-full max-h-40 object-contain rounded-xl border border-blue-200 bg-white">
 
                         <div class="overflow-x-auto rounded-xl border border-blue-200 bg-white">
                             <table class="w-full text-xs">
@@ -452,16 +395,21 @@
                         <div id="statusSwakelola" class="text-[11px] font-semibold text-slate-600 bg-white rounded-xl px-3 py-2 border border-emerald-100">
                             Menunggu upload atau input nominal Paket Swakelola.
                         </div>
-                        <div class="flex flex-wrap items-center justify-between gap-2 text-[10px] text-slate-500 px-1">
-                            <span id="metaSwakelolaInfo">0 paket terdeteksi</span>
-                            <button type="button" onclick="clearScanPreview('SWAKELOLA')" class="text-rose-600 hover:text-rose-800 font-bold underline">
-                                Bersihkan Preview
-                            </button>
-                        </div>
-                        <div id="itemsSwakelolaBox" class="hidden rounded-xl border border-emerald-200 bg-white p-2.5 text-[11px] max-h-48 overflow-y-auto space-y-1"></div>
-                        <div id="debugSwakelolaBox" class="hidden rounded-xl border border-amber-300 bg-amber-50/70 p-2.5 text-[10px] text-amber-950 space-y-1"></div>
 
-                        <img id="previewSwakelola" alt="Preview Screenshot Swakelola" class="hidden w-full max-h-48 object-contain rounded-xl border border-emerald-200 bg-white">
+                        <div class="bg-white rounded-xl border border-emerald-200 p-2.5 space-y-1.5">
+                            <div class="flex items-center justify-between gap-2">
+                                <label for="manualListSwakelola" class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-900">
+                                    Hitung Persis Deretan Pagu Swakelola
+                                </label>
+                                <button type="button" onclick="applyManualSum('SWAKELOLA')" class="px-2 py-0.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold">
+                                    Hitung &amp; Isi Total
+                                </button>
+                            </div>
+                            <textarea id="manualListSwakelola" rows="2" oninput="previewManualSum('SWAKELOLA')" placeholder="Contoh: 7.800.000&#10;33.600.000&#10;86.400" class="w-full rounded-lg border border-emerald-200 px-2.5 py-1.5 font-mono text-[11px] text-slate-800 focus:outline-none focus:border-emerald-600"></textarea>
+                            <div id="manualSumInfoSwakelola" class="text-[10px] font-semibold text-emerald-800">0 angka terdeteksi • Total: Rp 0</div>
+                        </div>
+
+                        <img id="previewSwakelola" alt="Preview Screenshot Swakelola" class="hidden w-full max-h-40 object-contain rounded-xl border border-emerald-200 bg-white">
 
                         <div class="overflow-x-auto rounded-xl border border-emerald-200 bg-white">
                             <table class="w-full text-xs">
@@ -520,7 +468,7 @@
                     </div>
                     <div class="col-span-2">
                         <label class="block font-bold text-slate-700 mb-1">Nama Satuan Kerja</label>
-                        <input id="newSkpdName" type="text" required placeholder="Contoh: DINAS KESEHATAN KAB. BARITO KUALA"
+                        <input id="newSkpdName" type="text" required placeholder="Contoh: DINAS PERHUBUNGAN KAB. BARITO KUALA"
                             class="w-full rounded-xl border border-slate-300 px-3 py-2 font-semibold">
                     </div>
                 </div>
@@ -585,102 +533,54 @@
         </div>
     </div>
 
-    <!-- MODAL REKAP PERTAHUN & ARSIP -->
-    <div id="yearlyArchiveModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
-        <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 w-full max-w-4xl overflow-hidden my-auto">
-            <div class="bg-slate-900 text-white px-5 py-3.5 flex items-center justify-between">
-                <h3 class="font-bold text-sm sm:text-base flex items-center gap-2">
-                    <i class="fa-solid fa-box-archive text-indigo-400"></i>
-                    <span>Rekap Pertahun &amp; Manajemen Arsip Data SIRUP</span>
-                </h3>
-                <button type="button" onclick="closeYearlyArchiveModal()" class="text-slate-300 hover:text-white text-lg p-1">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <div class="p-5 space-y-5 max-h-[82vh] overflow-y-auto text-xs">
-                <div class="rounded-2xl bg-indigo-50/70 border border-indigo-200 p-4 grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
-                    <div class="md:col-span-3">
-                        <label class="block text-[10px] font-extrabold uppercase tracking-wider text-indigo-950 mb-1">
-                            Tahun Anggaran
-                        </label>
-                        <select id="archiveYearSelect" onchange="switchActiveYear(this.value)"
-                            class="w-full rounded-xl border border-indigo-300 bg-white px-3 py-2 font-mono font-bold text-slate-900 focus:outline-none focus:border-indigo-600">
-                            <option value="2024">TA 2024</option>
-                            <option value="2025">TA 2025</option>
-                            <option value="2026" selected>TA 2026</option>
-                            <option value="2027">TA 2027</option>
-                            <option value="2028">TA 2028</option>
-                        </select>
-                    </div>
-                    <div class="md:col-span-4">
-                        <label class="block text-[10px] font-extrabold uppercase tracking-wider text-indigo-950 mb-1">
-                            Label / Catatan Arsip
-                        </label>
-                        <input id="archiveLabelInput" type="text" placeholder="Contoh: Rekap Triwulan IV / Final TA 2026"
-                            class="w-full rounded-xl border border-indigo-300 bg-white px-3 py-2 font-medium text-slate-800 focus:outline-none focus:border-indigo-600">
-                    </div>
-                    <div class="md:col-span-5 flex flex-wrap gap-2 justify-start md:justify-end">
-                        <button type="button" onclick="saveCurrentYearArchive()"
-                            class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold shadow-sm transition flex items-center gap-1.5">
-                            <i class="fa-solid fa-floppy-disk"></i> Simpan Arsip Tahun Ini
-                        </button>
-                        <button type="button" onclick="exportArchiveBundleJson()"
-                            class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold shadow-sm transition flex items-center gap-1.5">
-                            <i class="fa-solid fa-download"></i> Backup Arsip (.json)
-                        </button>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <h4 class="font-extrabold text-slate-900 text-sm">Daftar Arsip Rekap Pertahun Tersimpan</h4>
-                        <span id="archiveCountBadge" class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 font-bold text-[11px]">
-                            0 Arsip
-                        </span>
-                    </div>
-                    <div id="yearlyArchiveList" class="space-y-2.5"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- TOAST NOTIFIKASI -->
     <div id="toastBox" class="fixed bottom-4 right-4 z-50 hidden max-w-sm rounded-2xl bg-slate-900 text-white px-4 py-3 text-xs font-semibold shadow-xl border border-slate-700">
         <span id="toastMessage"></span>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const STORAGE_KEY = 'REKAP_RUP_BATOLA_V1';
-        const ARCHIVE_STORAGE_KEY = 'REKAP_RUP_BATOLA_ARCHIVES_V1';
-        const GEMINI_KEY_STORAGE = 'REKAP_RUP_GEMINI_API_KEY';
+        const STORAGE_KEY = 'REKAP_RUP_BATOLA_PREVIEW_V1';
         let customLogoDataUrl = '';
         let currentScanRowIndex = null;
         let lastActivePasteTarget = 'PENYEDIA';
-        let yearlyArchives = [];
 
-        const DEFAULT_SKPD_DATA = [];
-        let skpdRows = [];
-
-        function saveGeminiApiKey(val) {
-            const clean = String(val || '').trim();
-            try {
-                if (clean) localStorage.setItem(GEMINI_KEY_STORAGE, clean);
-                else localStorage.removeItem(GEMINI_KEY_STORAGE);
-                showToast(clean ? 'Gemini API Key disimpan! Pembacaan AI Vision aktif.' : 'Gemini API Key dihapus (menggunakan OCR lokal).');
-            } catch (e) {}
-        }
-
-        function getSavedGeminiApiKey() {
-            const inp = document.getElementById('geminiApiKeyInput')?.value?.trim();
-            if (inp) return inp;
-            try {
-                return localStorage.getItem(GEMINI_KEY_STORAGE) || '';
-            } catch (e) {
-                return '';
+        const SAMPLE_SKPD_DATA = [
+            {
+                no: 1,
+                name: 'DINAS PERHUBUNGAN KAB. BARITO KUALA',
+                sipd: 25468493575,
+                pegawai: 5120000000,
+                transfer: 0,
+                penyedia: 12420000000,
+                swakelola: 7928493575,
+                penyediaSwakelola: 0,
+                aktif: 'AKTIF / 25 Nov 2026'
+            },
+            {
+                no: 2,
+                name: 'KECAMATAN TABUNGANEN',
+                sipd: 4850000000,
+                pegawai: 2150000000,
+                transfer: 0,
+                penyedia: 1450000000,
+                swakelola: 980000000,
+                penyediaSwakelola: 0,
+                aktif: 'TIDAK / 25 Nov 2026'
+            },
+            {
+                no: 3,
+                name: 'DINAS KOMUNIKASI DAN INFORMATIKA KAB. BARITO KUALA',
+                sipd: 18900000000,
+                pegawai: 3400000000,
+                transfer: 0,
+                penyedia: 11200000000,
+                swakelola: 4300000000,
+                penyediaSwakelola: 0,
+                aktif: 'AKTIF / 25 Nov 2026'
             }
-        }
+        ];
+
+        let skpdRows = [];
 
         function formatNum(val) {
             if (val === '' || val === null || val === undefined) return '0';
@@ -696,82 +596,19 @@
         function parseNum(str) {
             if (typeof str === 'number') return isNaN(str) ? 0 : Math.round(str);
             if (str === null || str === undefined) return 0;
-
             let raw = String(str).trim();
             if (!raw || raw === '-' || raw === '0') return 0;
-
             raw = raw.replace(/Rp\.?/gi, '').replace(/\s+/g, '').trim();
             const isNegative = raw.startsWith('-');
             const unsigned = raw.replace(/^[+-]/, '');
-
             if (/^\d{1,3}(\.\d{3})+(,\d+)?$/.test(unsigned)) {
-                const [intPart, decPart] = unsigned.split(',');
-                const cleanInt = intPart.replace(/\./g, '');
-                let num = parseInt(cleanInt, 10) || 0;
-                if (decPart) {
-                    const decVal = parseFloat('0.' + decPart.replace(/\D/g, ''));
-                    if (decVal >= 0.5) num += 1;
-                }
+                const num = parseInt(unsigned.split(',')[0].replace(/\./g, ''), 10) || 0;
                 return isNegative ? -num : num;
             }
-
             if (/^\d{1,3}(,\d{3})+(\.\d+)?$/.test(unsigned)) {
-                const [intPart, decPart] = unsigned.split('.');
-                const cleanInt = intPart.replace(/,/g, '');
-                let num = parseInt(cleanInt, 10) || 0;
-                if (decPart) {
-                    const decVal = parseFloat('0.' + decPart.replace(/\D/g, ''));
-                    if (decVal >= 0.5) num += 1;
-                }
+                const num = parseInt(unsigned.split('.')[0].replace(/,/g, ''), 10) || 0;
                 return isNegative ? -num : num;
             }
-
-            if (unsigned.includes('.') && unsigned.includes(',')) {
-                const lastDot = unsigned.lastIndexOf('.');
-                const lastComma = unsigned.lastIndexOf(',');
-                if (lastComma > lastDot) {
-                    const intPart = unsigned.slice(0, lastComma).replace(/\./g, '').replace(/,/g, '');
-                    const decPart = unsigned.slice(lastComma + 1).replace(/\D/g, '');
-                    let num = parseInt(intPart || '0', 10) || 0;
-                    if (decPart && parseFloat('0.' + decPart) >= 0.5) num += 1;
-                    return isNegative ? -num : num;
-                } else {
-                    const intPart = unsigned.slice(0, lastDot).replace(/,/g, '').replace(/\./g, '');
-                    const decPart = unsigned.slice(lastDot + 1).replace(/\D/g, '');
-                    let num = parseInt(intPart || '0', 10) || 0;
-                    if (decPart && parseFloat('0.' + decPart) >= 0.5) num += 1;
-                    return isNegative ? -num : num;
-                }
-            }
-
-            if (unsigned.includes(',')) {
-                if (/^\d{1,3}(,\d{3})+$/.test(unsigned)) {
-                    const num = parseInt(unsigned.replace(/,/g, ''), 10) || 0;
-                    return isNegative ? -num : num;
-                }
-                const [intPart, decPart] = unsigned.split(',');
-                let num = parseInt((intPart || '0').replace(/\D/g, ''), 10) || 0;
-                if (decPart && parseFloat('0.' + decPart.replace(/\D/g, '')) >= 0.5) num += 1;
-                return isNegative ? -num : num;
-            }
-
-            if (unsigned.includes('.')) {
-                if (/^\d{1,3}(\.\d{3})+$/.test(unsigned)) {
-                    const num = parseInt(unsigned.replace(/\./g, ''), 10) || 0;
-                    return isNegative ? -num : num;
-                }
-                const parts = unsigned.split('.');
-                const lastPart = parts[parts.length - 1];
-                if (lastPart.length === 3 && parts.every(p => /^\d+$/.test(p))) {
-                    const num = parseInt(unsigned.replace(/\./g, ''), 10) || 0;
-                    return isNegative ? -num : num;
-                }
-                const intPart = parts.slice(0, -1).join('').replace(/\D/g, '') || '0';
-                let num = parseInt(intPart, 10) || 0;
-                if (lastPart && parseFloat('0.' + lastPart.replace(/\D/g, '')) >= 0.5) num += 1;
-                return isNegative ? -num : num;
-            }
-
             const digitsOnly = unsigned.replace(/\D/g, '');
             const num = parseInt(digitsOnly || '0', 10) || 0;
             return isNegative ? -num : num;
@@ -803,7 +640,7 @@
             label.textContent = msg;
             box.classList.remove('hidden');
             clearTimeout(window._toastTimer);
-            window._toastTimer = setTimeout(() => box.classList.add('hidden'), 3500);
+            window._toastTimer = setTimeout(() => box.classList.add('hidden'), 3200);
         }
 
         function saveState() {
@@ -815,7 +652,6 @@
                     rows: skpdRows
                 };
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-                queueCloud();
             } catch (err) {
                 console.warn('Gagal menyimpan state:', err);
             }
@@ -823,10 +659,6 @@
 
         function loadState() {
             try {
-                const savedKey = localStorage.getItem(GEMINI_KEY_STORAGE);
-                if (savedKey && document.getElementById('geminiApiKeyInput')) {
-                    document.getElementById('geminiApiKeyInput').value = savedKey;
-                }
                 const raw = localStorage.getItem(STORAGE_KEY);
                 if (raw) {
                     const parsed = JSON.parse(raw);
@@ -839,7 +671,7 @@
                     if (parsed.logo) {
                         applyCustomLogo(parsed.logo);
                     }
-                    if (Array.isArray(parsed.rows)) {
+                    if (Array.isArray(parsed.rows) && parsed.rows.length > 0) {
                         skpdRows = parsed.rows;
                         return;
                     }
@@ -847,7 +679,21 @@
             } catch (err) {
                 console.warn('Gagal memuat state:', err);
             }
-            skpdRows = DEFAULT_SKPD_DATA.map(r => ({ ...r }));
+            skpdRows = SAMPLE_SKPD_DATA.map(r => ({ ...r }));
+        }
+
+        function loadSampleSkpdData() {
+            skpdRows = SAMPLE_SKPD_DATA.map(r => ({ ...r }));
+            saveState();
+            renderTable();
+            showToast('Contoh data SKPD Kabupaten Barito Kuala dimuat.');
+        }
+
+        function resetDefaultData() {
+            skpdRows = [];
+            saveState();
+            renderTable();
+            showToast('Tabel dikosongkan. Klik "Muat Contoh SKPD" atau "Tambah SKPD".');
         }
 
         function applyCustomLogo(dataUrl) {
@@ -868,246 +714,9 @@
             reader.onload = (e) => {
                 applyCustomLogo(e.target.result);
                 saveState();
-                showToast('Logo Selidah Kabupaten Barito Kuala berhasil diperbarui!');
+                showToast('Logo berhasil diperbarui!');
             };
             reader.readAsDataURL(file);
-        }
-
-        function getSelidahLogoPngDataUrl() {
-            return new Promise((resolve) => {
-                if (customLogoDataUrl) {
-                    const img = new Image();
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = 180;
-                        canvas.height = 210;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, 180, 210);
-                        resolve(canvas.toDataURL('image/png'));
-                    };
-                    img.onerror = () => resolve(null);
-                    img.src = customLogoDataUrl;
-                    return;
-                }
-
-                const svgEl = document.getElementById('defaultSelidahSvg');
-                if (!svgEl) {
-                    resolve(null);
-                    return;
-                }
-                const svgData = new XMLSerializer().serializeToString(svgEl);
-                const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
-                const url = URL.createObjectURL(svgBlob);
-                const img = new Image();
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = 180;
-                    canvas.height = 210;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, 180, 210);
-                    URL.revokeObjectURL(url);
-                    resolve(canvas.toDataURL('image/png'));
-                };
-                img.onerror = () => {
-                    URL.revokeObjectURL(url);
-                    resolve(null);
-                };
-                img.src = url;
-            });
-        }
-
-        async function exportToPdf() {
-            if (!window.jspdf || !window.jspdf.jsPDF) {
-                showToast('Pustaka PDF belum termuat.');
-                return;
-            }
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
-            const pageWidth = doc.internal.pageSize.getWidth();
-
-            const rawTitle = (document.getElementById('docTitleInput')?.value || 'REKAPITULASI SISTEM INFORMASI RENCANA UMUM PENGADAAN/ SIRUP APBD KAB. BARITO KUALA').trim();
-            const dateStr = (document.getElementById('docDateInput')?.value || '25 November 2026').trim();
-            const yearMatch = dateStr.match(/\b(20\d{2})\b/);
-            const activeYear = yearMatch ? yearMatch[1] : '2026';
-
-            const logoPng = await getSelidahLogoPngDataUrl();
-            if (logoPng) {
-                doc.addImage(logoPng, 'PNG', pageWidth / 2 - 64, 7, 14, 17);
-            }
-
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(11);
-            doc.setTextColor(15, 23, 42);
-            doc.text('PEMERINTAH KABUPATEN BARITO KUALA', pageWidth / 2 + 4, 11.5, { align: 'center' });
-            doc.setFontSize(13);
-            doc.text('SEKRETARIAT DAERAH', pageWidth / 2 + 4, 16.5, { align: 'center' });
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(8);
-            doc.text('Jalan Pangeran Antasari No.1 Marabahan 70511 Kalimantan Selatan', pageWidth / 2 + 4, 20.8, { align: 'center' });
-            doc.text('Telp. (0511) 4799041 Fax. (0511) 4799039', pageWidth / 2 + 4, 24.5, { align: 'center' });
-
-            doc.setDrawColor(15, 23, 42);
-            doc.setLineWidth(0.8);
-            doc.line(10, 27, pageWidth - 10, 27);
-            doc.setLineWidth(0.25);
-            doc.line(10, 28, pageWidth - 10, 28);
-
-            const cleanTitle = rawTitle.toUpperCase().endsWith(dateStr.toUpperCase())
-                ? rawTitle
-                : `${rawTitle} ${dateStr.toUpperCase()}`;
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(9.5);
-            doc.setTextColor(15, 23, 42);
-            doc.text(cleanTitle, pageWidth / 2, 33.5, { align: 'center' });
-
-            const bodyRows = [];
-            let sumSipd = 0, sumPegawai = 0, sumTransfer = 0, sumPengadaan = 0;
-            let sumPenyedia = 0, sumSwakelola = 0, sumPenyediaSwakelola = 0, sumSirup = 0, sumSelisih = 0;
-
-            skpdRows.forEach(r => {
-                const m = computeMetrics(r);
-                sumSipd += Number(r.sipd) || 0;
-                sumPegawai += Number(r.pegawai) || 0;
-                sumTransfer += Number(r.transfer) || 0;
-                sumPengadaan += m.paguPengadaan;
-                sumPenyedia += Number(r.penyedia) || 0;
-                sumSwakelola += Number(r.swakelola) || 0;
-                sumPenyediaSwakelola += Number(r.penyediaSwakelola) || 0;
-                sumSirup += m.totalSirup;
-                sumSelisih += m.selisih;
-
-                bodyRows.push([
-                    r.no,
-                    r.name,
-                    formatNum(r.sipd),
-                    formatNum(r.pegawai),
-                    formatNum(r.transfer),
-                    formatNum(m.paguPengadaan),
-                    formatNum(r.penyedia),
-                    formatNum(r.swakelola),
-                    formatNum(r.penyediaSwakelola),
-                    formatNum(m.totalSirup),
-                    formatNum(m.selisih),
-                    m.status,
-                    r.aktif || `TIDAK/ ${dateStr}`
-                ]);
-            });
-
-            bodyRows.push([
-                '',
-                'TOTAL KESELURUHAN',
-                formatNum(sumSipd),
-                formatNum(sumPegawai),
-                formatNum(sumTransfer),
-                formatNum(sumPengadaan),
-                formatNum(sumPenyedia),
-                formatNum(sumSwakelola),
-                formatNum(sumPenyediaSwakelola),
-                formatNum(sumSirup),
-                formatNum(sumSelisih),
-                sumSelisih === 0 ? 'TIDAK ADA SELISIH' : (sumSelisih > 0 ? 'SELISIH KURANG INPUT' : 'SELISIH KELEBIHAN INPUT SIRUP'),
-                ''
-            ]);
-
-            doc.autoTable({
-                startY: 36,
-                margin: { left: 10, right: 10 },
-                tableWidth: pageWidth - 20,
-                showHead: 'firstPage',
-                theme: 'grid',
-                styles: {
-                    font: 'helvetica',
-                    fontSize: 6.1,
-                    cellPadding: { top: 1.5, right: 1.6, bottom: 1.5, left: 1.6 },
-                    lineColor: [100, 116, 139],
-                    lineWidth: 0.15,
-                    textColor: [15, 23, 42],
-                    valign: 'middle',
-                    overflow: 'linebreak'
-                },
-                head: [
-                    [
-                        { content: 'NO.', rowSpan: 2, styles: { halign: 'center', fillColor: [30, 41, 59], textColor: 255 } },
-                        { content: 'SATUAN KERJA', rowSpan: 2, styles: { halign: 'center', fillColor: [30, 41, 59], textColor: 255 } },
-                        { content: `SIPD (SESUAI DPA REKAPITULASI SKPD TA ${activeYear})`, colSpan: 3, styles: { halign: 'center', fillColor: [51, 65, 85], textColor: 255 } },
-                        { content: 'TOTAL PAGU PENGADAAN\n(SIPD - Pegawai - Transfer)', rowSpan: 2, styles: { halign: 'center', fillColor: [49, 46, 129], textColor: 255 } },
-                        { content: 'SIRUP (SESUAI ISI REKAP)', colSpan: 4, styles: { halign: 'center', fillColor: [19, 78, 74], textColor: 255 } },
-                        { content: 'SELISIH\n(Pagu Pengadaan - SIRUP)', rowSpan: 2, styles: { halign: 'center', fillColor: [30, 41, 59], textColor: 255 } },
-                        { content: 'STATUS', rowSpan: 2, styles: { halign: 'center', fillColor: [30, 41, 59], textColor: 255 } },
-                        { content: 'PENGAKTIFAN PENGISIAN RUP', rowSpan: 2, styles: { halign: 'center', fillColor: [30, 41, 59], textColor: 255 } }
-                    ],
-                    [
-                        { content: `TOTAL PAGU SIPD / JUMLAH BELANJA (TA ${activeYear})`, styles: { halign: 'center', fillColor: [71, 85, 105], textColor: 255 } },
-                        { content: `TOTAL PAGU BELANJA PEGAWAI / NON PENGADAAN`, styles: { halign: 'center', fillColor: [71, 85, 105], textColor: 255 } },
-                        { content: `TOTAL PAGU BELANJA TRANSFER / NON PENGADAAN`, styles: { halign: 'center', fillColor: [71, 85, 105], textColor: 255 } },
-                        { content: 'TOTAL PAGU PAKET PENYEDIA PADA SIRUP', styles: { halign: 'center', fillColor: [30, 58, 138], textColor: 255 } },
-                        { content: 'TOTAL PAGU PAKET SWAKELOLA PADA SIRUP', styles: { halign: 'center', fillColor: [6, 95, 70], textColor: 255 } },
-                        { content: 'TOTAL PAGU PAKET PENYEDIA DALAM SWAKELOLA', styles: { halign: 'center', fillColor: [17, 94, 89], textColor: 255 } },
-                        { content: 'TOTAL PAGU SIRUP TERUMUMKAN / TAYANG', styles: { halign: 'center', fillColor: [15, 118, 110], textColor: 255 } }
-                    ],
-                    [
-                        { content: '1', styles: { halign: 'center', fillColor: [226, 232, 240], fontStyle: 'bold' } },
-                        { content: '2', styles: { halign: 'center', fillColor: [226, 232, 240], fontStyle: 'bold' } },
-                        { content: '3', styles: { halign: 'center', fillColor: [226, 232, 240], fontStyle: 'bold' } },
-                        { content: '4', styles: { halign: 'center', fillColor: [226, 232, 240], fontStyle: 'bold' } },
-                        { content: '5', styles: { halign: 'center', fillColor: [226, 232, 240], fontStyle: 'bold' } },
-                        { content: '6 = (3-4-5)', styles: { halign: 'center', fillColor: [224, 231, 255], fontStyle: 'bold' } },
-                        { content: '7', styles: { halign: 'center', fillColor: [219, 234, 254], fontStyle: 'bold' } },
-                        { content: '8', styles: { halign: 'center', fillColor: [209, 250, 229], fontStyle: 'bold' } },
-                        { content: '9', styles: { halign: 'center', fillColor: [204, 251, 241], fontStyle: 'bold' } },
-                        { content: '10 = (7+8+9)', styles: { halign: 'center', fillColor: [204, 251, 241], fontStyle: 'bold' } },
-                        { content: '11 = (6-10)', styles: { halign: 'center', fillColor: [226, 232, 240], fontStyle: 'bold' } },
-                        { content: '12', styles: { halign: 'center', fillColor: [226, 232, 240], fontStyle: 'bold' } },
-                        { content: '13', styles: { halign: 'center', fillColor: [226, 232, 240], fontStyle: 'bold' } }
-                    ]
-                ],
-                body: bodyRows,
-                columnStyles: {
-                    0: { halign: 'center', cellWidth: 8 },
-                    1: { halign: 'left', cellWidth: 42, fontStyle: 'bold' },
-                    2: { halign: 'right', cellWidth: 21 },
-                    3: { halign: 'right', cellWidth: 21 },
-                    4: { halign: 'right', cellWidth: 18 },
-                    5: { halign: 'right', cellWidth: 22, fillColor: [238, 242, 255], fontStyle: 'bold' },
-                    6: { halign: 'right', cellWidth: 21, fillColor: [239, 246, 255] },
-                    7: { halign: 'right', cellWidth: 21, fillColor: [236, 253, 245] },
-                    8: { halign: 'right', cellWidth: 18 },
-                    9: { halign: 'right', cellWidth: 22, fillColor: [240, 253, 250], fontStyle: 'bold' },
-                    10: { halign: 'right', cellWidth: 20, fontStyle: 'bold' },
-                    11: { halign: 'center', cellWidth: 24, fontStyle: 'bold' },
-                    12: { halign: 'center', cellWidth: 19 }
-                },
-                didParseCell: function (data) {
-                    if (data.section === 'body') {
-                        const isTotalRow = data.row.index === bodyRows.length - 1;
-                        if (isTotalRow) {
-                            data.cell.styles.fillColor = [15, 23, 42];
-                            data.cell.styles.textColor = [255, 255, 255];
-                            data.cell.styles.fontStyle = 'bold';
-                            if (data.column.index === 1) data.cell.styles.halign = 'left';
-                            else if (data.column.index >= 2 && data.column.index <= 10) data.cell.styles.halign = 'right';
-                            else data.cell.styles.halign = 'center';
-                            return;
-                        }
-                        if (data.column.index === 11) {
-                            const txt = String(data.cell.raw || '');
-                            if (txt === 'TIDAK ADA SELISIH') {
-                                data.cell.styles.fillColor = [220, 252, 231];
-                                data.cell.styles.textColor = [22, 101, 52];
-                            } else if (txt === 'SELISIH KURANG INPUT') {
-                                data.cell.styles.fillColor = [255, 237, 213];
-                                data.cell.styles.textColor = [154, 52, 18];
-                            } else {
-                                data.cell.styles.fillColor = [254, 249, 195];
-                                data.cell.styles.textColor = [133, 77, 14];
-                            }
-                        }
-                    }
-                }
-            });
-
-            doc.save(`REKAP_SIRUP_BATOLA_${dateStr.replace(/\s+/g, '_')}.pdf`);
-            showToast('File PDF berhasil diunduh with kop & judul tunggal di bagian atas.');
         }
 
         function renderTable() {
@@ -1196,11 +805,11 @@
                         ${formatNum(m.paguPengadaan)}
                     </td>
                     <td class="px-1.5 py-2 border-r border-slate-200 bg-blue-50/40">
-                        <input type="text" data-row="${idx}" data-field="penyedia" value="${formatNum(row.penyedia)}" onfocus="handleNumberFocus(this)" onblur="handleNumberBlur(${idx}, 'penyedia', this)" onchange="updateCell(${idx}, 'penyedia', this.value)"
+                        <input type="text" value="${formatNum(row.penyedia)}" onfocus="handleNumberFocus(this)" onblur="handleNumberBlur(${idx}, 'penyedia', this)" onchange="updateCell(${idx}, 'penyedia', this.value)"
                             class="cell-input font-mono font-semibold text-blue-950">
                     </td>
                     <td class="px-1.5 py-2 border-r border-slate-200 bg-emerald-50/40">
-                        <input type="text" data-row="${idx}" data-field="swakelola" value="${formatNum(row.swakelola)}" onfocus="handleNumberFocus(this)" onblur="handleNumberBlur(${idx}, 'swakelola', this)" onchange="updateCell(${idx}, 'swakelola', this.value)"
+                        <input type="text" value="${formatNum(row.swakelola)}" onfocus="handleNumberFocus(this)" onblur="handleNumberBlur(${idx}, 'swakelola', this)" onchange="updateCell(${idx}, 'swakelola', this.value)"
                             class="cell-input font-mono font-semibold text-emerald-950">
                     </td>
                     <td class="px-1.5 py-2 border-r border-slate-200">
@@ -1225,16 +834,16 @@
                     <td class="px-2 py-2 text-center">
                         <div class="flex flex-col gap-1 items-center">
                             <div class="flex gap-1">
-                                <button type="button" onclick="openScanModal(${idx}, 'PENYEDIA')" title="Upload Screenshot Penyedia"
+                                <button type="button" onclick="openScanModal(${idx}, 'PENYEDIA')"
                                     class="px-2 py-1 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-bold">
                                     Penyedia
                                 </button>
-                                <button type="button" onclick="openScanModal(${idx}, 'SWAKELOLA')" title="Upload Screenshot Swakelola"
+                                <button type="button" onclick="openScanModal(${idx}, 'SWAKELOLA')"
                                     class="px-2 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold">
                                     Swakelola
                                 </button>
                             </div>
-                            <button type="button" onclick="deleteSkpd(${idx})" title="Hapus Baris SKPD"
+                            <button type="button" onclick="deleteSkpd(${idx})"
                                 class="text-[10px] text-rose-600 hover:text-rose-800 font-semibold">
                                 <i class="fa-solid fa-trash-can"></i> Hapus
                             </button>
@@ -1306,21 +915,10 @@
             showToast(`SKPD "${removed.name}" dihapus.`);
         }
 
-        function deleteAllSkpd() {
-            skpdRows = [];
-            saveState();
-            renderTable();
-            showToast('Semua data SKPD telah dihapus.');
-        }
-
-        function resetDefaultData() {
-            skpdRows = DEFAULT_SKPD_DATA.map(r => ({ ...r }));
-            saveState();
-            renderTable();
-            showToast('Data awal dikosongkan. Silakan Tambah SKPD, Import Excel, atau muat arsip.');
-        }
-
         function openScanModal(rowIdx = null, focusType = 'BOTH') {
+            if (!skpdRows.length) {
+                loadSampleSkpdData();
+            }
             const modal = document.getElementById('scanModal');
             const select = document.getElementById('scanSkpdSelect');
             if (!modal || !select) return;
@@ -1331,19 +929,10 @@
 
             currentScanRowIndex = (rowIdx !== null && skpdRows[rowIdx]) ? rowIdx : 0;
             select.value = String(currentScanRowIndex);
-
-            if (focusType === 'PENYEDIA' || focusType === 'SWAKELOLA') {
-                lastActivePasteTarget = focusType;
-            }
+            lastActivePasteTarget = focusType === 'SWAKELOLA' ? 'SWAKELOLA' : 'PENYEDIA';
 
             onScanSkpdChange();
             modal.classList.remove('hidden');
-
-            if (focusType === 'PENYEDIA') {
-                document.getElementById('sectionPenyedia')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            } else if (focusType === 'SWAKELOLA') {
-                document.getElementById('sectionSwakelola')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
         }
 
         function closeScanModal() {
@@ -1365,6 +954,47 @@
             if (swakelolaInput) swakelolaInput.value = String(Math.round(Number(row.swakelola) || 0));
 
             updateScanPreviewSummary();
+        }
+
+        function extractRupiahListFromText(rawText) {
+            if (!rawText) return [];
+            const cleaned = String(rawText).replace(/Rp\.?/gi, ' ');
+            const tokens = cleaned.match(/-?\d[\d.,]*/g) || [];
+            const values = [];
+            for (const tok of tokens) {
+                if (!tok.replace(/\D/g, '')) continue;
+                const val = parseNum(tok);
+                if (val > 0) values.push(val);
+            }
+            return values;
+        }
+
+        function previewManualSum(targetType) {
+            const isPenyedia = targetType === 'PENYEDIA';
+            const ta = document.getElementById(isPenyedia ? 'manualListPenyedia' : 'manualListSwakelola');
+            const infoEl = document.getElementById(isPenyedia ? 'manualSumInfoPenyedia' : 'manualSumInfoSwakelola');
+            if (!ta || !infoEl) return;
+            const list = extractRupiahListFromText(ta.value);
+            const total = list.reduce((a, b) => a + b, 0);
+            infoEl.textContent = `${list.length} angka terdeteksi • Total: ${formatRp(total)}`;
+        }
+
+        function applyManualSum(targetType) {
+            const isPenyedia = targetType === 'PENYEDIA';
+            const ta = document.getElementById(isPenyedia ? 'manualListPenyedia' : 'manualListSwakelola');
+            const targetInput = document.getElementById(isPenyedia ? 'ocrPenyediaInput' : 'ocrSwakelolaInput');
+            const statusEl = document.getElementById(isPenyedia ? 'statusPenyedia' : 'statusSwakelola');
+            if (!ta || !targetInput) return;
+
+            const list = extractRupiahListFromText(ta.value);
+            const total = list.reduce((a, b) => a + b, 0);
+            targetInput.value = String(total);
+            previewManualSum(targetType);
+            updateScanPreviewSummary();
+
+            if (statusEl) {
+                statusEl.innerHTML = `<span class="${isPenyedia ? 'text-blue-700' : 'text-emerald-700'}"><i class="fa-solid fa-calculator"></i> Total akurat dari <strong>${list.length} nominal</strong>: <strong>${formatRp(total)}</strong>.</span>`;
+            }
         }
 
         function updateScanPreviewSummary() {
@@ -1414,361 +1044,22 @@
         function handleImageUpload(event, targetType) {
             const file = event.target?.files?.[0];
             if (!file) return;
-            lastActivePasteTarget = targetType;
-            processScreenshotFile(file, targetType);
-            event.target.value = '';
-        }
-
-        function clearScanPreview(targetType) {
-            const isPenyedia = targetType === 'PENYEDIA';
-            const statusEl = document.getElementById(isPenyedia ? 'statusPenyedia' : 'statusSwakelola');
-            const imgEl = document.getElementById(isPenyedia ? 'previewPenyedia' : 'previewSwakelola');
-            const itemsBoxEl = document.getElementById(isPenyedia ? 'itemsPenyediaBox' : 'itemsSwakelolaBox');
-            const debugBoxEl = !isPenyedia ? document.getElementById('debugSwakelolaBox') : null;
-            const metaEl = document.getElementById(isPenyedia ? 'metaPenyediaInfo' : 'metaSwakelolaInfo');
-
-            if (imgEl) {
-                imgEl.src = '';
-                imgEl.classList.add('hidden');
-            }
-            if (itemsBoxEl) {
-                itemsBoxEl.innerHTML = '';
-                itemsBoxEl.classList.add('hidden');
-            }
-            if (debugBoxEl) {
-                debugBoxEl.innerHTML = '';
-                debugBoxEl.classList.add('hidden');
-            }
-            if (metaEl) {
-                metaEl.textContent = '0 paket terdeteksi';
-            }
-            if (statusEl) {
-                statusEl.textContent = `Menunggu upload atau input nominal Paket ${isPenyedia ? 'Penyedia' : 'Swakelola'}.`;
-            }
-        }
-
-        function cleanOcrMoneyText(rawStr) {
-            return String(rawStr || '')
-                .replace(/\bRp\.?\s*/gi, '')
-                // Perbaiki kesalahan OCR umum pada pemisah ribuan/desimal
-                .replace(/(?<=\d)[Oo](?=\d{3}\b)/g, '0')
-                .replace(/(?<=\d)\s+(?=\d{3}\b)/g, '.')
-                .trim();
-        }
-
-        function pickBestMoneyCandidate(line) {
-            const cleanedLine = cleanOcrMoneyText(line);
-            const matches = [...cleanedLine.matchAll(/(?:Rp\.?\s*)?\d{1,3}(?:[.,]\d{3})+(?:,\d{1,2})?/gi)];
-            if (!matches.length) return null;
-
-            // Prioritaskan nominal yang memiliki pemisah ribuan >= 3 digit (misal 60.000.000 atau 125.000)
-            let best = null;
-            for (const m of matches) {
-                const token = m[0];
-                const parsed = parseNum(token);
-                if (parsed >= 1000 && (!best || parsed > best.value)) {
-                    best = { raw: token, value: parsed };
-                }
-            }
-            return best;
-        }
-
-        // ==================== LOCAL TESSERACT OCR FALLBACK ENGINE ====================
-        async function runLocalTesseractOcr(dataUrl, statusEl, isPenyedia) {
-            if (typeof Tesseract === 'undefined') return null;
-
-            return new Promise((resolve) => {
-                const img = new Image();
-                img.onload = async () => {
-                    try {
-                        // Bagi gambar panjang (full-page screenshot) menjadi potongan horizontal agar teks tabel terbaca tajam
-                        const sliceHeight = 1400;
-                        const overlap = 140;
-                        const numSlices = Math.max(1, Math.ceil(img.height / (sliceHeight - overlap)));
-                        const extractedItems = [];
-                        const seenKeys = new Set();
-                        let detectedSatker = '';
-
-                        for (let s = 0; s < numSlices; s++) {
-                            if (statusEl) {
-                                statusEl.innerHTML = `<span class="text-indigo-700"><i class="fa-solid fa-spinner fa-spin"></i> OCR Lokal memindai bagian ${s + 1} dari ${numSlices} (${isPenyedia ? 'Penyedia' : 'Swakelola'})...</span>`;
-                            }
-
-                            const startY = Math.max(0, s * (sliceHeight - overlap));
-                            const h = Math.min(sliceHeight, img.height - startY);
-                            if (h <= 20) continue;
-
-                            const scale = img.width < 1400 ? 2 : 1.5;
-                            const canvas = document.createElement('canvas');
-                            canvas.width = Math.round(img.width * scale);
-                            canvas.height = Math.round(h * scale);
-                            const ctx = canvas.getContext('2d');
-                            ctx.filter = 'grayscale(100%) contrast(155%)';
-                            ctx.drawImage(img, 0, startY, img.width, h, 0, 0, canvas.width, canvas.height);
-
-                            const { data: { text } } = await Tesseract.recognize(canvas, 'ind+eng');
-                            const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
-
-                            lines.forEach(line => {
-                                // Deteksi nama SKPD jika muncul di bagian atas
-                                if (!detectedSatker && /(DINAS|BADAN|KECAMATAN|SEKRETARIAT|INSPEKTORAT|RUMAH SAKIT|SATUAN POLISI)/i.test(line)) {
-                                    detectedSatker = line.replace(/[^A-Z0-9\s.,-]/gi, '').trim();
-                                }
-
-                                // Abaikan baris header, tanggal cetak, atau total footer agar tidak double-count
-                                if (/^(NO\.?|KEGIATAN|PAKET|PAGU|SUMBER|KODE|WAKTU|TOTAL|JUMLAH|HALAMAN|TANGGAL|CETAK)/i.test(line)) return;
-                                if (/\b(JANUARI|FEBRUARI|MARET|APRIL|MEI|JUNI|JULI|AGUSTUS|SEPTEMBER|OKTOBER|NOVEMBER|DESEMBER)\b/i.test(line) && !/\d{1,3}(?:\.\d{3}){2,}/.test(line)) return;
-
-                                const moneyPick = pickBestMoneyCandidate(line);
-                                if (moneyPick && moneyPick.value >= 1000) {
-                                    const cleanLabel = line
-                                        .replace(moneyPick.raw, '')
-                                        .replace(/\b\d{7,10}\b/g, '')
-                                        .replace(/^\d{1,3}[\s.)-]+/, '')
-                                        .trim()
-                                        .slice(0, 65) || `Paket #${extractedItems.length + 1}`;
-
-                                    // Cegah duplikasi akibat area overlap antar potongan gambar
-                                    const dedupKey = `${cleanLabel.toLowerCase().replace(/\W+/g, '').slice(0, 25)}_${moneyPick.value}`;
-                                    if (seenKeys.has(dedupKey)) return;
-                                    seenKeys.add(dedupKey);
-
-                                    extractedItems.push({
-                                        no: String(extractedItems.length + 1),
-                                        kegiatan: '',
-                                        paket: cleanLabel,
-                                        paguRawText: moneyPick.raw,
-                                        pagu: moneyPick.value
-                                    });
-                                }
-                            });
-                        }
-
-                        const totalAmount = extractedItems.reduce((acc, it) => acc + it.pagu, 0);
-                        resolve({ satkerName: detectedSatker, items: extractedItems, totalAmount });
-                    } catch (err) {
-                        console.warn('OCR lokal error:', err);
-                        resolve(null);
-                    }
-                };
-                img.onerror = () => resolve(null);
-                img.src = dataUrl;
-            });
-        }
-
-        function processScreenshotFile(file, targetType) {
             const reader = new FileReader();
-            reader.onload = async (e) => {
-                const dataUrl = e.target.result;
+            reader.onload = (e) => {
                 const isPenyedia = targetType === 'PENYEDIA';
-                const statusEl = document.getElementById(isPenyedia ? 'statusPenyedia' : 'statusSwakelola');
                 const imgEl = document.getElementById(isPenyedia ? 'previewPenyedia' : 'previewSwakelola');
-                const inputEl = document.getElementById(isPenyedia ? 'ocrPenyediaInput' : 'ocrSwakelolaInput');
-                const itemsBoxEl = document.getElementById(isPenyedia ? 'itemsPenyediaBox' : 'itemsSwakelolaBox');
-                const debugBoxEl = !isPenyedia ? document.getElementById('debugSwakelolaBox') : null;
-
+                const statusEl = document.getElementById(isPenyedia ? 'statusPenyedia' : 'statusSwakelola');
                 if (imgEl) {
-                    imgEl.src = dataUrl;
+                    imgEl.src = e.target.result;
                     imgEl.classList.remove('hidden');
                 }
-                if (itemsBoxEl) {
-                    itemsBoxEl.classList.add('hidden');
-                    itemsBoxEl.innerHTML = '';
-                }
-                if (debugBoxEl) {
-                    debugBoxEl.classList.add('hidden');
-                    debugBoxEl.innerHTML = '';
-                }
                 if (statusEl) {
-                    statusEl.innerHTML = `<span class="text-amber-700"><i class="fa-solid fa-spinner fa-spin"></i> Membaca seluruh baris paket &amp; menjumlahkan Pagu (Rp.) ${isPenyedia ? 'Penyedia' : 'Swakelola'}...</span>`;
-                }
-
-                let parsedResult = null;
-                const apiKey = getSavedGeminiApiKey();
-
-                // 1. Jika Gemini API Key tersedia, gunakan Gemini Vision AI
-                if (apiKey) {
-                    try {
-                        const base64Data = dataUrl.split(',')[1];
-                        const mimeType = file.type || 'image/png';
-                        const promptText = isPenyedia
-                            ? `Ini adalah screenshot tabel RUP PENYEDIA pada SIRUP LKPP.
-1. Baca nama Satuan Kerja (jika tertulis di judul atas).
-2. Ekstrak SELURUH baris paket dari baris pertama sampai baris terakhir pada tabel, ambil nomor baris, nama paket, dan nominal angka bulat "Pagu (Rp.)" tiap baris. Titik (.) adalah pemisah ribuan. Jangan ambil angka dari kolom "Kode RUP" atau "No".
-3. Hitung "totalAmount" = penjumlahan seluruh nilai "Pagu (Rp.)" dari semua baris yang terlihat.
-Balas HANYA JSON valid sesuai schema.`
-                            : `Ini adalah screenshot tabel RUP SWAKELOLA pada SIRUP LKPP.
-1. Baca nama Satuan Kerja jika ada.
-2. Ekstrak SELURUH baris data dari baris No 1 sampai baris terakhir pada tabel Swakelola. Titik (.) adalah pemisah ribuan. Jangan pernah mengambil angka dari kolom "Kode RUP" atau kolom "No".
-3. Hitung "totalAmount" = jumlahkan seluruh "pagu" dari semua baris Swakelola pada gambar.
-Balas HANYA JSON valid sesuai schema.`;
-
-                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
-                        const payload = {
-                            contents: [{
-                                role: "user",
-                                parts: [
-                                    { text: promptText },
-                                    { inlineData: { mimeType, data: base64Data } }
-                                ]
-                            }],
-                            generationConfig: {
-                                responseMimeType: "application/json",
-                                responseSchema: {
-                                    type: "OBJECT",
-                                    properties: {
-                                        satkerName: { type: "STRING" },
-                                        items: {
-                                            type: "ARRAY",
-                                            items: {
-                                                type: "OBJECT",
-                                                properties: {
-                                                    no: { type: "STRING" },
-                                                    kegiatan: { type: "STRING" },
-                                                    paket: { type: "STRING" },
-                                                    paguRawText: { type: "STRING" },
-                                                    pagu: { type: "NUMBER" }
-                                                },
-                                                required: ["paket", "pagu"]
-                                            }
-                                        },
-                                        totalAmount: { type: "NUMBER" }
-                                    },
-                                    required: ["items", "totalAmount"]
-                                }
-                            }
-                        };
-
-                        const response = await fetch(apiUrl, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-
-                        if (response.ok) {
-                            const result = await response.json();
-                            const rawJson = result?.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
-                            parsedResult = JSON.parse(rawJson);
-                        }
-                    } catch (err) {
-                        console.warn('Gemini API gagal, beralih ke OCR lokal:', err);
-                    }
-                }
-
-                // 2. Jika tanpa API Key atau Gemini gagal, jalankan OCR Lokal Tesseract.js otomatis
-                if (!parsedResult || !Array.isArray(parsedResult.items) || parsedResult.items.length === 0) {
-                    parsedResult = await runLocalTesseractOcr(dataUrl, statusEl, isPenyedia);
-                }
-
-                if (parsedResult) {
-                    const rawItems = Array.isArray(parsedResult.items) ? parsedResult.items : [];
-                    const normalizedItems = rawItems.map((it, idx) => {
-                        const parsedFromRaw = it.paguRawText ? parseNum(it.paguRawText) : 0;
-                        const parsedFromNum = Math.round(Number(it.pagu) || 0);
-                        const cleanPagu = parsedFromRaw > 0 ? parsedFromRaw : parsedFromNum;
-                        return {
-                            no: it.no || String(idx + 1),
-                            kegiatan: it.kegiatan || '',
-                            paket: it.paket || '-',
-                            paguRawText: it.paguRawText || formatNum(cleanPagu),
-                            pagu: cleanPagu
-                        };
-                    });
-
-                    const sumFromItems = normalizedItems.reduce((acc, it) => acc + (Number(it.pagu) || 0), 0);
-                    const reportedTotal = parseNum(parsedResult.totalAmount);
-                    const finalTotal = sumFromItems > 0 ? sumFromItems : reportedTotal;
-
-                    const metaEl = document.getElementById(isPenyedia ? 'metaPenyediaInfo' : 'metaSwakelolaInfo');
-                    if (metaEl) {
-                        metaEl.textContent = `${normalizedItems.length} paket terdeteksi • ${apiKey ? 'Gemini AI' : 'OCR Lokal'}`;
-                    }
-
-                    if (parsedResult.satkerName) {
-                        const cleanSatker = String(parsedResult.satkerName).trim().toUpperCase();
-                        const matchedIdx = skpdRows.findIndex(r =>
-                            r.name.toUpperCase().includes(cleanSatker) || cleanSatker.includes(r.name.toUpperCase())
-                        );
-                        if (matchedIdx !== -1 && matchedIdx !== currentScanRowIndex) {
-                            currentScanRowIndex = matchedIdx;
-                            const sel = document.getElementById('scanSkpdSelect');
-                            if (sel) sel.value = String(matchedIdx);
-                            const curRow = skpdRows[matchedIdx];
-                            if (curRow) {
-                                document.getElementById('oldPenyediaVal').textContent = formatRp(curRow.penyedia);
-                                document.getElementById('oldSwakelolaVal').textContent = formatRp(curRow.swakelola);
-                            }
-                        }
-                    }
-
-                    if (finalTotal > 0 && inputEl) {
-                        inputEl.value = finalTotal;
-                        updateScanPreviewSummary();
-
-                        if (itemsBoxEl && normalizedItems.length > 0) {
-                            itemsBoxEl.innerHTML = `
-                                <div class="font-extrabold ${isPenyedia ? 'text-blue-900' : 'text-emerald-900'} border-b pb-1 mb-1 flex justify-between">
-                                    <span>Rincian ${normalizedItems.length} Baris ${isPenyedia ? 'Penyedia' : 'Swakelola'}:</span>
-                                    <span class="text-[10px] font-semibold text-slate-500">${apiKey ? 'Gemini AI' : 'OCR Lokal'}</span>
-                                </div>
-                                ${normalizedItems.map((it, idx) => `
-                                    <div class="flex justify-between items-start gap-2 text-slate-700 py-0.5 border-b border-slate-100 last:border-0">
-                                        <div class="min-w-0">
-                                            <div class="truncate font-semibold">${it.no || (idx + 1)}. ${it.paket}</div>
-                                            ${!isPenyedia && it.kegiatan ? `<div class="truncate text-[10px] text-slate-500">${it.kegiatan}</div>` : ''}
-                                        </div>
-                                        <div class="text-right shrink-0">
-                                            <div class="font-mono font-bold text-slate-900">${formatNum(it.pagu)}</div>
-                                            <div class="font-mono text-[9px] text-slate-400">teks: ${it.paguRawText}</div>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                                <div class="flex justify-between gap-2 border-t border-slate-300 pt-1.5 mt-1 font-extrabold ${isPenyedia ? 'text-blue-950' : 'text-emerald-950'}">
-                                    <span>TOTAL (${normalizedItems.length} PAKET)</span>
-                                    <span class="font-mono">${formatRp(finalTotal)}</span>
-                                </div>
-                            `;
-                            itemsBoxEl.classList.remove('hidden');
-                        }
-
-                        if (!isPenyedia && debugBoxEl && normalizedItems.length > 0) {
-                            const exprText = normalizedItems.map(it => formatNum(it.pagu)).join(' + ');
-                            debugBoxEl.innerHTML = `
-                                <div class="font-bold">Verifikasi Hitung Manual Swakelola (${normalizedItems.length} paket):</div>
-                                <div class="font-mono break-all">${exprText} = <strong>${formatNum(finalTotal)}</strong></div>
-                            `;
-                            debugBoxEl.classList.remove('hidden');
-                        }
-
-                        if (statusEl) {
-                            statusEl.innerHTML = `<span class="${isPenyedia ? 'text-blue-700' : 'text-emerald-700'}"><i class="fa-solid fa-circle-check"></i> Otomatis terbaca <strong>${normalizedItems.length} baris</strong> dengan total: <strong>${formatRp(finalTotal)}</strong>. Klik <strong>Terapkan</strong> untuk memasukkan ke tabel.</span>`;
-                        }
-                        return;
-                    }
-                }
-
-                if (statusEl) {
-                    statusEl.innerHTML = `<span class="text-amber-700"><i class="fa-solid fa-triangle-exclamation"></i> Nominal belum terbaca otomatis. Periksa potongan gambar atau ketik total angka di kolom bawah lalu klik <strong>Terapkan</strong>.</span>`;
+                    statusEl.innerHTML = `<span class="${isPenyedia ? 'text-blue-700' : 'text-emerald-700'}"><i class="fa-solid fa-image"></i> Screenshot tampil. Masukkan daftar pagu di kolom hitung persis atau angka total lalu klik <strong>Terapkan</strong>.</span>`;
                 }
             };
             reader.readAsDataURL(file);
+            event.target.value = '';
         }
-
-        document.addEventListener('paste', (event) => {
-            const modal = document.getElementById('scanModal');
-            if (!modal || modal.classList.contains('hidden')) return;
-            const items = event.clipboardData?.items || [];
-            for (const item of items) {
-                if (item.type.startsWith('image/')) {
-                    const file = item.getAsFile();
-                    if (file) {
-                        processScreenshotFile(file, lastActivePasteTarget);
-                        showToast(`Screenshot ditempel ke tabel ${lastActivePasteTarget}.`);
-                    }
-                    break;
-                }
-            }
-        });
 
         function simulateScan(targetType) {
             const row = skpdRows[currentScanRowIndex];
@@ -1789,59 +1080,19 @@ Balas HANYA JSON valid sesuai schema.`;
         }
 
         function applyScanResult(mode) {
-            const selectEl = document.getElementById('scanSkpdSelect');
-            const selectedIdx = parseInt(selectEl?.value ?? String(currentScanRowIndex), 10);
-            const targetIdx = (!isNaN(selectedIdx) && skpdRows[selectedIdx]) ? selectedIdx : currentScanRowIndex;
-            currentScanRowIndex = targetIdx;
+            const row = skpdRows[currentScanRowIndex];
+            if (!row) return;
+            const nextPenyedia = parseNum(document.getElementById('ocrPenyediaInput')?.value);
+            const nextSwakelola = parseNum(document.getElementById('ocrSwakelolaInput')?.value);
 
-            const row = skpdRows[targetIdx];
-            if (!row) {
-                showToast('Pilih SKPD terlebih dahulu sebelum menerapkan data.');
-                return;
-            }
-
-            const rawPenyediaVal = document.getElementById('ocrPenyediaInput')?.value ?? row.penyedia;
-            const rawSwakelolaVal = document.getElementById('ocrSwakelolaInput')?.value ?? row.swakelola;
-            const nextPenyedia = parseNum(rawPenyediaVal);
-            const nextSwakelola = parseNum(rawSwakelolaVal);
-
-            if (mode === 'PENYEDIA' || mode === 'BOTH') {
-                row.penyedia = nextPenyedia;
-            }
-            if (mode === 'SWAKELOLA' || mode === 'BOTH') {
-                row.swakelola = nextSwakelola;
-            }
-
-            const searchEl = document.getElementById('searchInput');
-            if (searchEl && searchEl.value.trim() !== '') {
-                searchEl.value = '';
-            }
-            const statusFilterEl = document.getElementById('statusFilter');
-            if (statusFilterEl && statusFilterEl.value !== 'ALL') {
-                statusFilterEl.value = 'ALL';
-            }
+            if (mode === 'PENYEDIA' || mode === 'BOTH') row.penyedia = nextPenyedia;
+            if (mode === 'SWAKELOLA' || mode === 'BOTH') row.swakelola = nextSwakelola;
 
             saveState();
             renderTable();
             onScanSkpdChange();
-
-            const labelMode = mode === 'BOTH'
-                ? `Penyedia (${formatRp(row.penyedia)}) & Swakelola (${formatRp(row.swakelola)})`
-                : (mode === 'PENYEDIA' ? `Penyedia (${formatRp(row.penyedia)})` : `Swakelola (${formatRp(row.swakelola)})`);
-            showToast(`Diterapkan ${labelMode} ke ${row.name}.`);
-
-            if (mode === 'BOTH') {
-                closeScanModal();
-            }
-
-            setTimeout(() => {
-                const targetRowEl = document.getElementById(`skpd-row-${targetIdx}`);
-                if (targetRowEl) {
-                    targetRowEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    targetRowEl.classList.add('bg-amber-100');
-                    setTimeout(() => targetRowEl.classList.remove('bg-amber-100'), 2500);
-                }
-            }, 120);
+            showToast(`Data ${mode} diterapkan ke ${row.name}.`);
+            if (mode === 'BOTH') closeScanModal();
         }
 
         function openAddSkpdModal() {
@@ -1858,9 +1109,12 @@ Balas HANYA JSON valid sesuai schema.`;
         function submitNewSkpd(e) {
             e.preventDefault();
             const dateStr = (document.getElementById('docDateInput')?.value || '25 November 2026').trim();
-            const newRow = {
+            const nameVal = (document.getElementById('newSkpdName').value || '').trim().toUpperCase();
+            if (!nameVal) return;
+
+            skpdRows.push({
                 no: parseNum(document.getElementById('newSkpdNo').value) || (skpdRows.length + 1),
-                name: (document.getElementById('newSkpdName').value || '').trim().toUpperCase(),
+                name: nameVal,
                 sipd: parseNum(document.getElementById('newSkpdSipd').value),
                 pegawai: parseNum(document.getElementById('newSkpdPegawai').value),
                 transfer: parseNum(document.getElementById('newSkpdTransfer').value),
@@ -1868,13 +1122,11 @@ Balas HANYA JSON valid sesuai schema.`;
                 swakelola: parseNum(document.getElementById('newSkpdSwakelola').value),
                 penyediaSwakelola: parseNum(document.getElementById('newSkpdPenyediaSwakelola').value),
                 aktif: `TIDAK/ ${dateStr}`
-            };
-            if (!newRow.name) return;
-            skpdRows.push(newRow);
+            });
             saveState();
             renderTable();
             closeAddSkpdModal();
-            showToast(`SKPD "${newRow.name}" berhasil ditambahkan.`);
+            showToast(`SKPD "${nameVal}" ditambahkan.`);
         }
 
         function openImportModal() {
@@ -1917,9 +1169,9 @@ Balas HANYA JSON valid sesuai schema.`;
                         saveState();
                         renderTable();
                         closeImportModal();
-                        showToast(`Berhasil mengimpor ${imported.length} data SKPD dari Excel.`);
+                        showToast(`Berhasil mengimpor ${imported.length} data SKPD.`);
                     } else {
-                        showToast('Tidak ditemukan baris data SKPD yang sesuai format.');
+                        showToast('Tidak ditemukan baris data SKPD yang sesuai.');
                     }
                 } catch (err) {
                     console.error(err);
@@ -1930,537 +1182,56 @@ Balas HANYA JSON valid sesuai schema.`;
         }
 
         function exportToExcel() {
-            if (!window.XLSX) {
-                showToast('Pustaka Excel belum termuat.');
-                return;
-            }
-            const rawTitle = (document.getElementById('docTitleInput')?.value || 'REKAPITULASI SISTEM INFORMASI RENCANA UMUM PENGADAAN/ SIRUP APBD KAB. BARITO KUALA').trim();
+            if (!window.XLSX) return;
             const dateStr = (document.getElementById('docDateInput')?.value || '25 November 2026').trim();
-            const yearMatch = dateStr.match(/\b(20\d{2})\b/);
-            const activeYear = yearMatch ? yearMatch[1] : '2026';
-
-            const borderThin = {
-                top: { style: 'thin', color: { rgb: '64748B' } },
-                bottom: { style: 'thin', color: { rgb: '64748B' } },
-                left: { style: 'thin', color: { rgb: '64748B' } },
-                right: { style: 'thin', color: { rgb: '64748B' } }
-            };
-
-            const borderHeader = {
-                top: { style: 'thin', color: { rgb: 'CBD5E1' } },
-                bottom: { style: 'thin', color: { rgb: 'CBD5E1' } },
-                left: { style: 'thin', color: { rgb: 'CBD5E1' } },
-                right: { style: 'thin', color: { rgb: 'CBD5E1' } }
-            };
-
-            const styleKopLine1 = {
-                font: { name: 'Arial', sz: 12, bold: true, color: { rgb: '0F172A' } },
-                alignment: { horizontal: 'center', vertical: 'center' }
-            };
-            const styleKopLine2 = {
-                font: { name: 'Arial', sz: 14, bold: true, color: { rgb: '0F172A' } },
-                alignment: { horizontal: 'center', vertical: 'center' }
-            };
-            const styleKopAddr = {
-                font: { name: 'Arial', sz: 9, italic: false, color: { rgb: '334155' } },
-                alignment: { horizontal: 'center', vertical: 'center' }
-            };
-            const styleKopPhone = {
-                font: { name: 'Arial', sz: 9, color: { rgb: '334155' } },
-                alignment: { horizontal: 'center', vertical: 'center' },
-                border: { bottom: { style: 'double', color: { rgb: '0F172A' } } }
-            };
-            const styleDocTitle = {
-                font: { name: 'Arial', sz: 11, bold: true, color: { rgb: '0F172A' } },
-                alignment: { horizontal: 'center', vertical: 'center' }
-            };
-
-            const makeHeadStyle = (bgHex, fgHex = 'FFFFFF', sz = 9) => ({
-                font: { name: 'Arial', sz, bold: true, color: { rgb: fgHex } },
-                fill: { fgColor: { rgb: bgHex } },
-                alignment: { horizontal: 'center', vertical: 'center', wrapText: true },
-                border: borderHeader
-            });
-
-            const aoa = [
-                [{ v: 'PEMERINTAH KABUPATEN BARITO KUALA', s: styleKopLine1 }],
-                [{ v: 'SEKRETARIAT DAERAH', s: styleKopLine2 }],
-                [{ v: 'Jalan Pangeran Antasari No.1 Marabahan 70511 Kalimantan Selatan', s: styleKopAddr }],
-                [{ v: 'Telp. (0511) 4799041 Fax. (0511) 4799039', s: styleKopPhone }],
-                [],
-                [{ v: `${rawTitle} ${dateStr.toUpperCase()}`, s: styleDocTitle }],
-                [],
-                [
-                    { v: 'NO.', s: makeHeadStyle('1E293B') },
-                    { v: 'SATUAN KERJA', s: makeHeadStyle('1E293B') },
-                    { v: `SIPD (SESUAI DPA REKAPITULASI SKPD TA ${activeYear})`, s: makeHeadStyle('334155') },
-                    { v: '', s: makeHeadStyle('334155') },
-                    { v: '', s: makeHeadStyle('334155') },
-                    { v: 'TOTAL PAGU PENGADAAN\n(SIPD - Pegawai - Transfer)', s: makeHeadStyle('312E81') },
-                    { v: 'SIRUP (SESUAI ISI REKAP)', s: makeHeadStyle('134E4A') },
-                    { v: '', s: makeHeadStyle('134E4A') },
-                    { v: '', s: makeHeadStyle('134E4A') },
-                    { v: '', s: makeHeadStyle('134E4A') },
-                    { v: 'SELISIH\n(Pagu Pengadaan - SIRUP)', s: makeHeadStyle('1E293B') },
-                    { v: 'STATUS', s: makeHeadStyle('1E293B') },
-                    { v: 'PENGAKTIFAN PENGISIAN RUP', s: makeHeadStyle('1E293B') }
-                ],
-                [
-                    { v: '', s: makeHeadStyle('1E293B') },
-                    { v: '', s: makeHeadStyle('1E293B') },
-                    { v: `TOTAL PAGU SIPD / JUMLAH BELANJA (TA ${activeYear})`, s: makeHeadStyle('475569', 'FFFFFF', 8) },
-                    { v: 'TOTAL PAGU BELANJA PEGAWAI / NON PENGADAAN', s: makeHeadStyle('475569', 'FFFFFF', 8) },
-                    { v: 'TOTAL PAGU BELANJA TRANSFER / NON PENGADAAN', s: makeHeadStyle('475569', 'FFFFFF', 8) },
-                    { v: '', s: makeHeadStyle('312E81', 'FFFFFF', 8) },
-                    { v: 'TOTAL PAGU PAKET PENYEDIA PADA SIRUP', s: makeHeadStyle('1E3A8A', 'FFFFFF', 8) },
-                    { v: 'TOTAL PAGU PAKET SWAKELOLA PADA SIRUP', s: makeHeadStyle('065F46', 'FFFFFF', 8) },
-                    { v: 'TOTAL PAGU PAKET PENYEDIA DALAM SWAKELOLA', s: makeHeadStyle('115E59', 'FFFFFF', 8) },
-                    { v: 'TOTAL PAGU SIRUP TERUMUMKAN / TAYANG', s: makeHeadStyle('0F766E', 'FFFFFF', 8) },
-                    { v: '', s: makeHeadStyle('1E293B', 'FFFFFF', 8) },
-                    { v: '', s: makeHeadStyle('1E293B', 'FFFFFF', 8) },
-                    { v: '', s: makeHeadStyle('1E293B', 'FFFFFF', 8) }
-                ],
-                [
-                    { v: 1, s: makeHeadStyle('E2E8F0', '0F172A', 8) },
-                    { v: 2, s: makeHeadStyle('E2E8F0', '0F172A', 8) },
-                    { v: 3, s: makeHeadStyle('E2E8F0', '0F172A', 8) },
-                    { v: 4, s: makeHeadStyle('E2E8F0', '0F172A', 8) },
-                    { v: 5, s: makeHeadStyle('E2E8F0', '0F172A', 8) },
-                    { v: '6 = (3-4-5)', s: makeHeadStyle('E0E7FF', '1E1B4B', 8) },
-                    { v: 7, s: makeHeadStyle('DBEAFE', '1E3A8A', 8) },
-                    { v: 8, s: makeHeadStyle('D1FAE5', '064E3B', 8) },
-                    { v: 9, s: makeHeadStyle('CCFBF1', '134E4A', 8) },
-                    { v: '10 = (7+8+9)', s: makeHeadStyle('CCFBF1', '134E4A', 8) },
-                    { v: '11 = (6-10)', s: makeHeadStyle('E2E8F0', '0F172A', 8) },
-                    { v: 12, s: makeHeadStyle('E2E8F0', '0F172A', 8) },
-                    { v: 13, s: makeHeadStyle('E2E8F0', '0F172A', 8) }
-                ]
-            ];
-
-            skpdRows.forEach((r, i) => {
-                const excelRow = 11 + i;
+            const rowsData = skpdRows.map(r => {
                 const m = computeMetrics(r);
-
-                let statusBg = 'DCFCE7';
-                let statusFg = '166534';
-                let selisihFg = '166534';
-                if (m.status === 'SELISIH KURANG INPUT') {
-                    statusBg = 'FFEDD5';
-                    statusFg = '9A3412';
-                    selisihFg = 'C2410C';
-                } else if (m.status === 'SELISIH KELEBIHAN INPUT SIRUP') {
-                    statusBg = 'FEF9C3';
-                    statusFg = '854D0E';
-                    selisihFg = 'A16207';
-                }
-
-                const numStyle = (bgHex = 'FFFFFF', fgHex = '0F172A', isBold = false) => ({
-                    font: { name: 'Arial', sz: 9, bold: isBold, color: { rgb: fgHex } },
-                    fill: { fgColor: { rgb: bgHex } },
-                    alignment: { horizontal: 'right', vertical: 'center' },
-                    border: borderThin,
-                    numFmt: '#,##0'
-                });
-
-                aoa.push([
-                    {
-                        v: Number(r.no) || (i + 1),
-                        t: 'n',
-                        s: {
-                            font: { name: 'Arial', sz: 9, bold: true, color: { rgb: '0F172A' } },
-                            alignment: { horizontal: 'center', vertical: 'center' },
-                            border: borderThin
-                        }
-                    },
-                    {
-                        v: r.name,
-                        t: 's',
-                        s: {
-                            font: { name: 'Arial', sz: 9, bold: true, color: { rgb: '0F172A' } },
-                            alignment: { horizontal: 'left', vertical: 'center', wrapText: true },
-                            border: borderThin
-                        }
-                    },
-                    { v: Number(r.sipd) || 0, t: 'n', s: numStyle('FFFFFF', '0F172A', false) },
-                    { v: Number(r.pegawai) || 0, t: 'n', s: numStyle('FFFFFF', '0F172A', false) },
-                    { v: Number(r.transfer) || 0, t: 'n', s: numStyle('FFFFFF', '0F172A', false) },
-                    { t: 'n', f: `C${excelRow}-D${excelRow}-E${excelRow}`, v: m.paguPengadaan, s: numStyle('EEF2FF', '1E1B4B', true) },
-                    { v: Number(r.penyedia) || 0, t: 'n', s: numStyle('EFF6FF', '1E3A8A', false) },
-                    { v: Number(r.swakelola) || 0, t: 'n', s: numStyle('ECFDF5', '064E3B', false) },
-                    { v: Number(r.penyediaSwakelola) || 0, t: 'n', s: numStyle('FFFFFF', '0F172A', false) },
-                    { t: 'n', f: `SUM(G${excelRow}:I${excelRow})`, v: m.totalSirup, s: numStyle('F0FDFA', '134E4A', true) },
-                    { t: 'n', f: `F${excelRow}-J${excelRow}`, v: m.selisih, s: numStyle('FFFFFF', selisihFg, true) },
-                    {
-                        t: 's',
-                        f: `IF(K${excelRow}=0,"TIDAK ADA SELISIH",IF(K${excelRow}>0,"SELISIH KURANG INPUT","SELISIH KELEBIHAN INPUT SIRUP"))`,
-                        v: m.status,
-                        s: {
-                            font: { name: 'Arial', sz: 8, bold: true, color: { rgb: statusFg } },
-                            fill: { fgColor: { rgb: statusBg } },
-                            alignment: { horizontal: 'center', vertical: 'center', wrapText: true },
-                            border: borderThin
-                        }
-                    },
-                    {
-                        v: r.aktif || `TIDAK/ ${dateStr}`,
-                        t: 's',
-                        s: {
-                            font: { name: 'Arial', sz: 8, color: { rgb: '334155' } },
-                            alignment: { horizontal: 'center', vertical: 'center', wrapText: true },
-                            border: borderThin
-                        }
-                    }
-                ]);
+                return {
+                    'NO.': r.no,
+                    'SATUAN KERJA': r.name,
+                    'TOTAL PAGU SIPD': Number(r.sipd) || 0,
+                    'BELANJA PEGAWAI': Number(r.pegawai) || 0,
+                    'BELANJA TRANSFER': Number(r.transfer) || 0,
+                    'TOTAL PAGU PENGADAAN': m.paguPengadaan,
+                    'PENYEDIA SIRUP': Number(r.penyedia) || 0,
+                    'SWAKELOLA SIRUP': Number(r.swakelola) || 0,
+                    'PENYEDIA DLM SWAKELOLA': Number(r.penyediaSwakelola) || 0,
+                    'TOTAL PAGU SIRUP': m.totalSirup,
+                    'SELISIH': m.selisih,
+                    'STATUS': m.status
+                };
             });
-
-            const startDataRow = 11;
-            const endDataRow = 10 + skpdRows.length;
-            if (skpdRows.length > 0) {
-                const totalRowIdx = endDataRow + 1;
-                const totalNumStyle = (bgHex = '0F172A', fgHex = 'FFFFFF') => ({
-                    font: { name: 'Arial', sz: 9, bold: true, color: { rgb: fgHex } },
-                    fill: { fgColor: { rgb: bgHex } },
-                    alignment: { horizontal: 'right', vertical: 'center' },
-                    border: borderThin,
-                    numFmt: '#,##0'
-                });
-                const totalTextStyle = (align = 'center') => ({
-                    font: { name: 'Arial', sz: 9, bold: true, color: { rgb: 'FFFFFF' } },
-                    fill: { fgColor: { rgb: '0F172A' } },
-                    alignment: { horizontal: align, vertical: 'center' },
-                    border: borderThin
-                });
-
-                aoa.push([
-                    { v: '', s: totalTextStyle('center') },
-                    { v: 'TOTAL KESELURUHAN', t: 's', s: totalTextStyle('left') },
-                    { t: 'n', f: `SUM(C${startDataRow}:C${endDataRow})`, s: totalNumStyle() },
-                    { t: 'n', f: `SUM(D${startDataRow}:D${endDataRow})`, s: totalNumStyle() },
-                    { t: 'n', f: `SUM(E${startDataRow}:E${endDataRow})`, s: totalNumStyle() },
-                    { t: 'n', f: `SUM(F${startDataRow}:F${endDataRow})`, s: totalNumStyle('312E81', 'E0E7FF') },
-                    { t: 'n', f: `SUM(G${startDataRow}:G${endDataRow})`, s: totalNumStyle('1E3A8A', 'DBEAFE') },
-                    { t: 'n', f: `SUM(H${startDataRow}:H${endDataRow})`, s: totalNumStyle('065F46', 'D1FAE5') },
-                    { t: 'n', f: `SUM(I${startDataRow}:I${endDataRow})`, s: totalNumStyle() },
-                    { t: 'n', f: `SUM(J${startDataRow}:J${endDataRow})`, s: totalNumStyle('134E4A', 'CCFBF1') },
-                    { t: 'n', f: `SUM(K${startDataRow}:K${endDataRow})`, s: totalNumStyle() },
-                    {
-                        t: 's',
-                        f: `IF(K${totalRowIdx}=0,"TIDAK ADA SELISIH",IF(K${totalRowIdx}>0,"SELISIH KURANG INPUT","SELISIH KELEBIHAN INPUT SIRUP"))`,
-                        s: totalTextStyle('center')
-                    },
-                    { v: '', s: totalTextStyle('center') }
-                ]);
-            }
-
-            const signStartRow = aoa.length + 2;
-            const signStyleNormal = { font: { name: 'Arial', sz: 9, color: { rgb: '0F172A' } }, alignment: { horizontal: 'left', vertical: 'center' } };
-            const signStyleBold = { font: { name: 'Arial', sz: 9, bold: true, color: { rgb: '0F172A' } }, alignment: { horizontal: 'left', vertical: 'center' } };
-            aoa.push([]);
-            aoa.push([]);
-            aoa.push(['', '', '', '', '', '', '', '', '', '', { v: `Marabahan, ${dateStr}`, s: signStyleNormal }]);
-            aoa.push(['', '', '', '', '', '', '', '', '', '', { v: 'KEPALA BAGIAN PENGADAAN BARANG DAN JASA', s: signStyleBold }]);
-            aoa.push(['', '', '', '', '', '', '', '', '', '', { v: 'SETDA KABUPATEN BARITO KUALA,', s: signStyleBold }]);
-            aoa.push([]);
-            aoa.push([]);
-            aoa.push(['', '', '', '', '', '', '', '', '', '', { v: '______________________________', s: signStyleBold }]);
-
+            const ws = XLSX.utils.json_to_sheet(rowsData);
             const wb = XLSX.utils.book_new();
-            const ws = XLSX.utils.aoa_to_sheet(aoa);
-
-            for (let c = 0; c <= 12; c++) {
-                const ref = XLSX.utils.encode_cell({ r: 3, c });
-                if (!ws[ref]) ws[ref] = { v: '', t: 's' };
-                ws[ref].s = styleKopPhone;
-            }
-
-            ws['!cols'] = [
-                { wch: 6 },
-                { wch: 44 },
-                { wch: 21 },
-                { wch: 21 },
-                { wch: 19 },
-                { wch: 22 },
-                { wch: 21 },
-                { wch: 21 },
-                { wch: 19 },
-                { wch: 22 },
-                { wch: 21 },
-                { wch: 28 },
-                { wch: 24 }
-            ];
-
-            ws['!rows'] = [
-                { hpt: 20 },
-                { hpt: 22 },
-                { hpt: 16 },
-                { hpt: 17 },
-                { hpt: 10 },
-                { hpt: 20 },
-                { hpt: 10 },
-                { hpt: 28 },
-                { hpt: 32 },
-                { hpt: 18 }
-            ];
-
-            ws['!merges'] = [
-                { s: { r: 0, c: 0 }, e: { r: 0, c: 12 } },
-                { s: { r: 1, c: 0 }, e: { r: 1, c: 12 } },
-                { s: { r: 2, c: 0 }, e: { r: 2, c: 12 } },
-                { s: { r: 3, c: 0 }, e: { r: 3, c: 12 } },
-                { s: { r: 5, c: 0 }, e: { r: 5, c: 12 } },
-                { s: { r: 7, c: 0 }, e: { r: 8, c: 0 } },
-                { s: { r: 7, c: 1 }, e: { r: 8, c: 1 } },
-                { s: { r: 7, c: 2 }, e: { r: 7, c: 4 } },
-                { s: { r: 7, c: 5 }, e: { r: 8, c: 5 } },
-                { s: { r: 7, c: 6 }, e: { r: 7, c: 9 } },
-                { s: { r: 7, c: 10 }, e: { r: 8, c: 10 } },
-                { s: { r: 7, c: 11 }, e: { r: 8, c: 11 } },
-                { s: { r: 7, c: 12 }, e: { r: 8, c: 12 } },
-                { s: { r: signStartRow, c: 10 }, e: { r: signStartRow, c: 12 } },
-                { s: { r: signStartRow + 1, c: 10 }, e: { r: signStartRow + 1, c: 12 } },
-                { s: { r: signStartRow + 2, c: 10 }, e: { r: signStartRow + 2, c: 12 } },
-                { s: { r: signStartRow + 5, c: 10 }, e: { r: signStartRow + 5, c: 12 } }
-            ];
-
-            XLSX.utils.book_append_sheet(wb, ws, 'TRN RIZKY NEW');
+            XLSX.utils.book_append_sheet(wb, ws, 'REKAP SIRUP');
             XLSX.writeFile(wb, `REKAP_SIRUP_BATOLA_${dateStr.replace(/\s+/g, '_')}.xlsx`);
-            showToast('File Excel (.xlsx) lengkap dengan Kop Surat, Tabel Berwarna, dan Rumus Aktif berhasil diunduh!');
+            showToast('File Excel (.xlsx) berhasil diunduh.');
+        }
+
+        function exportToPdf() {
+            if (!window.jspdf || !window.jspdf.jsPDF) return;
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+            const titleStr = (document.getElementById('docTitleInput')?.value || 'REKAPITULASI SIRUP KAB. BARITO KUALA').trim();
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(11);
+            doc.text(titleStr, 14, 14);
+            doc.autoTable({
+                startY: 20,
+                head: [['No', 'Satuan Kerja', 'Pagu SIPD', 'Pagu Pengadaan', 'Penyedia', 'Swakelola', 'Total SIRUP', 'Selisih', 'Status']],
+                body: skpdRows.map(r => {
+                    const m = computeMetrics(r);
+                    return [r.no, r.name, formatNum(r.sipd), formatNum(m.paguPengadaan), formatNum(r.penyedia), formatNum(r.swakelola), formatNum(m.totalSirup), formatNum(m.selisih), m.status];
+                })
+            });
+            doc.save('REKAP_SIRUP_BATOLA.pdf');
+            showToast('File PDF berhasil diunduh.');
         }
 
         window.addEventListener('DOMContentLoaded', () => {
             loadState();
-            loadArchives();
             renderTable();
-            initCloud();
         });
-
-        function getActiveYear() {
-            const dateStr = (document.getElementById('docDateInput')?.value || '').trim();
-            const match = dateStr.match(/\b(20\d{2})\b/);
-            return match ? match[1] : '2026';
-        }
-
-        function switchActiveYear(yearStr) {
-            const year = String(yearStr || '2026');
-            const dateInput = document.getElementById('docDateInput');
-            if (dateInput) {
-                const currentVal = dateInput.value.trim();
-                if (/\b20\d{2}\b/.test(currentVal)) {
-                    dateInput.value = currentVal.replace(/\b20\d{2}\b/, year);
-                } else {
-                    dateInput.value = currentVal ? `${currentVal} ${year}` : `25 November ${year}`;
-                }
-            }
-            saveState();
-            renderTable();
-            renderYearlyArchiveList();
-            showToast(`Tahun rekap aktif diubah ke TA ${year}.`);
-        }
-
-        function loadArchives() {
-            try {
-                const raw = localStorage.getItem(ARCHIVE_STORAGE_KEY);
-                if (raw) {
-                    const parsed = JSON.parse(raw);
-                    if (Array.isArray(parsed)) {
-                        yearlyArchives = parsed;
-                        return;
-                    }
-                }
-            } catch (err) {
-                console.warn('Gagal memuat arsip tahunan:', err);
-            }
-            yearlyArchives = [];
-        }
-
-        function saveArchives() {
-            try {
-                localStorage.setItem(ARCHIVE_STORAGE_KEY, JSON.stringify(yearlyArchives));
-                queueCloud();
-            } catch (err) {
-                console.warn('Gagal menyimpan arsip tahunan:', err);
-            }
-        }
-
-        function openYearlyArchiveModal() {
-            const year = getActiveYear();
-            const sel = document.getElementById('archiveYearSelect');
-            if (sel) {
-                const exists = Array.from(sel.options).some(opt => opt.value === year);
-                if (!exists) {
-                    const opt = document.createElement('option');
-                    opt.value = year;
-                    opt.textContent = `TA ${year}`;
-                    sel.appendChild(opt);
-                }
-                sel.value = year;
-            }
-            renderYearlyArchiveList();
-            document.getElementById('yearlyArchiveModal')?.classList.remove('hidden');
-        }
-
-        function closeYearlyArchiveModal() {
-            document.getElementById('yearlyArchiveModal')?.classList.add('hidden');
-        }
-
-        function computeOverallTotals(rows) {
-            let sumSipd = 0, sumPegawai = 0, sumTransfer = 0, sumPengadaan = 0;
-            let sumPenyedia = 0, sumSwakelola = 0, sumPenyediaSwakelola = 0, sumSirup = 0, sumSelisih = 0;
-            rows.forEach(r => {
-                const m = computeMetrics(r);
-                sumSipd += Number(r.sipd) || 0;
-                sumPegawai += Number(r.pegawai) || 0;
-                sumTransfer += Number(r.transfer) || 0;
-                sumPengadaan += m.paguPengadaan;
-                sumPenyedia += Number(r.penyedia) || 0;
-                sumSwakelola += Number(r.swakelola) || 0;
-                sumPenyediaSwakelola += Number(r.penyediaSwakelola) || 0;
-                sumSirup += m.totalSirup;
-                sumSelisih += m.selisih;
-            });
-            return { sumSipd, sumPegawai, sumTransfer, sumPengadaan, sumPenyedia, sumSwakelola, sumPenyediaSwakelola, sumSirup, sumSelisih };
-        }
-
-        function saveCurrentYearArchive() {
-            const year = document.getElementById('archiveYearSelect')?.value || getActiveYear();
-            const labelInput = document.getElementById('archiveLabelInput');
-            const customLabel = (labelInput?.value || '').trim();
-            const dateStr = (document.getElementById('docDateInput')?.value || `25 November ${year}`).trim();
-            const titleStr = (document.getElementById('docTitleInput')?.value || '').trim();
-            const totals = computeOverallTotals(skpdRows);
-
-            const entry = {
-                id: `ARCH_${year}_${Date.now()}`,
-                year: String(year),
-                label: customLabel || `Arsip Rekap TA ${year} (${dateStr})`,
-                savedAt: new Date().toLocaleString('id-ID'),
-                dateStr,
-                titleStr,
-                skpdCount: skpdRows.length,
-                totals,
-                rows: skpdRows.map(r => ({ ...r }))
-            };
-
-            yearlyArchives.unshift(entry);
-            saveArchives();
-            if (labelInput) labelInput.value = '';
-            renderYearlyArchiveList();
-            showToast(`Arsip rekap TA ${year} (${skpdRows.length} SKPD) berhasil disimpan!`);
-        }
-
-        function restoreArchive(archiveId) {
-            const found = yearlyArchives.find(a => a.id === archiveId);
-            if (!found || !Array.isArray(found.rows)) return;
-
-            skpdRows = found.rows.map(r => ({ ...r }));
-            if (found.titleStr && document.getElementById('docTitleInput')) {
-                document.getElementById('docTitleInput').value = found.titleStr;
-            }
-            if (found.dateStr && document.getElementById('docDateInput')) {
-                document.getElementById('docDateInput').value = found.dateStr;
-            }
-            saveState();
-            renderTable();
-            closeYearlyArchiveModal();
-            showToast(`Arsip "${found.label}" (TA ${found.year}) dimuat ke tabel utama.`);
-        }
-
-        function deleteArchive(archiveId) {
-            yearlyArchives = yearlyArchives.filter(a => a.id !== archiveId);
-            saveArchives();
-            renderYearlyArchiveList();
-            showToast('Arsip tahunan dihapus.');
-        }
-
-        function exportArchiveBundleJson() {
-            const payload = {
-                exportedAt: new Date().toISOString(),
-                activeYear: getActiveYear(),
-                currentRows: skpdRows,
-                archives: yearlyArchives
-            };
-            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `ARSIP_REKAP_SIRUP_BATOLA_${getActiveYear()}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-            showToast('File backup arsip (.json) berhasil diunduh!');
-        }
-
-        function renderYearlyArchiveList() {
-            const container = document.getElementById('yearlyArchiveList');
-            const badge = document.getElementById('archiveCountBadge');
-            if (!container) return;
-
-            if (badge) {
-                badge.textContent = `${yearlyArchives.length} Arsip`;
-            }
-
-            if (yearlyArchives.length === 0) {
-                container.innerHTML = `
-                    <div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-slate-500">
-                        Belum ada arsip tahunan tersimpan. Pilih <strong>Tahun Anggaran</strong> di atas lalu klik <strong>Simpan Arsip Tahun Ini</strong> agar mudah terarsip.
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = yearlyArchives.map(item => {
-                const t = item.totals || computeOverallTotals(item.rows || []);
-                return `
-                    <div class="rounded-2xl border border-slate-200 bg-white p-3.5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 shadow-xs">
-                        <div class="space-y-1">
-                            <div class="flex flex-wrap items-center gap-2">
-                                <span class="px-2.5 py-0.5 rounded-lg bg-indigo-100 text-indigo-900 font-extrabold text-[11px]">
-                                    TA ${item.year}
-                                </span>
-                                <span class="font-bold text-slate-900 text-sm">${item.label}</span>
-                                <span class="text-[11px] text-slate-400">• Disimpan ${item.savedAt}</span>
-                            </div>
-                            <div class="flex flex-wrap gap-3 text-[11px] text-slate-600">
-                                <span>SKPD: <strong class="font-mono text-slate-900">${item.skpdCount}</strong></span>
-                                <span>Pagu Pengadaan: <strong class="font-mono text-indigo-800">${formatRp(t.sumPengadaan)}</strong></span>
-                                <span>SIRUP Tayang: <strong class="font-mono text-teal-800">${formatRp(t.sumSirup)}</strong></span>
-                                <span>Selisih: <strong class="font-mono ${t.sumSelisih === 0 ? 'text-emerald-700' : 'text-amber-700'}">${formatRp(t.sumSelisih)}</strong></span>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap items-center gap-2 shrink-0">
-                            <button type="button" onclick="restoreArchive('${item.id}')"
-                                class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition">
-                                <i class="fa-solid fa-folder-open"></i> Buka / Muat
-                            </button>
-                            <button type="button" onclick="deleteArchive('${item.id}')"
-                                class="px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold transition">
-                                <i class="fa-solid fa-trash-can"></i> Hapus
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-    </script>
-
-    <script>
-        const cloud = window.supabase?.createClient('https://exuxwgcnhuwsokyuoefk.supabase.co','sb_publishable_8Yi4u1GURXdl8CyoSNKK7A_0LC7UjH9');
-        let cloudReady=false, timer, dirty=false, busy=false, revision=null;
-        const statusCloud = t => document.getElementById('cloudStatus').textContent=t;
-        function lockCloud(lock){ for(const el of document.body.children){if(el.id!=='cloudPanel' && el.tagName!=='SCRIPT') el.inert=lock;} }
-        function snapshotCloud(){return {state:{title:document.getElementById('docTitleInput').value,date:document.getElementById('docDateInput').value,logo:customLogoDataUrl||'',rows:skpdRows},archives:yearlyArchives};}
-        async function pullCloud(){
-         const {data,error}=await cloud.from('rup_data').select('data,updated_at').eq('id','main').maybeSingle(); if(error) throw error;
-         revision=data?.updated_at||null;
-         if(data){if(!Array.isArray(data.data?.state?.rows))throw Error('Format data online tidak sesuai');localStorage.setItem(STORAGE_KEY,JSON.stringify(data.data.state));localStorage.setItem(ARCHIVE_STORAGE_KEY,JSON.stringify(data.data.archives||[]));loadState();loadArchives();renderTable();}
-         else {if(!confirm('Database masih kosong. Unggah data lokal dari perangkat ini sebagai data awal?'))throw Error('Inisialisasi dibatalkan'); const r=await cloud.from('rup_data').insert({id:'main',data:snapshotCloud()}).select('updated_at').single();if(r.error)throw r.error;revision=r.data.updated_at;}
-        }
-        async function initCloud(){lockCloud(true);if(!cloud){statusCloud('SDK gagal dimuat. Muat ulang halaman.');return;}try{const {data}=await cloud.auth.getSession();if(data.session)await startCloud();else statusCloud('Silakan login admin');}catch(e){statusCloud(e.message);}}
-        async function startCloud(){cloudReady=false;lockCloud(true);await pullCloud();cloudReady=true;lockCloud(false);document.getElementById('cloudLogin').hidden=true;document.getElementById('cloudLogout').hidden=false;statusCloud('Online • data tersinkron');}
-        async function loginCloud(e){e.preventDefault();try{statusCloud('Menghubungkan...');const {error}=await cloud.auth.signInWithPassword({email:document.getElementById('cloudEmail').value,password:document.getElementById('cloudPassword').value});document.getElementById('cloudPassword').value='';if(error)throw error;await startCloud();}catch(e){statusCloud(e.message);}}
-        function queueCloud(){if(!cloudReady)return;dirty=true;statusCloud('Perubahan belum tersimpan');clearTimeout(timer);timer=setTimeout(pushCloud,700);}
-        async function pushCloud(){if(!cloudReady||busy||!dirty)return;busy=true;dirty=false;try{const next=new Date().toISOString();const r=await cloud.from('rup_data').update({data:snapshotCloud(),updated_at:next}).eq('id','main').eq('updated_at',revision).select('updated_at').maybeSingle();if(r.error)throw r.error;if(!r.data)throw Error('Data berubah di perangkat lain. Cadangkan data lokal sebelum memuat ulang.');revision=r.data.updated_at;statusCloud('Online • tersimpan');}catch(e){dirty=true;statusCloud('Gagal simpan: '+e.message);return;}finally{busy=false;}if(dirty)queueCloud();}
-        async function logoutCloud(){if(dirty||busy){alert('Tunggu penyimpanan selesai atau cadangkan data.');return;}cloudReady=false;await cloud.auth.signOut();location.reload();}
-        window.addEventListener('beforeunload',e=>{if(dirty||busy){e.preventDefault();e.returnValue='';}});
     </script>
 </body>
 </html>
