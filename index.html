@@ -68,221 +68,238 @@
             border: 1px solid #fde047;
         }
     </style>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
 </head>
-<body class="min-h-screen flex flex-col"><section id="cloudPanel" style="position:sticky;top:0;z-index:99999;background:#fff;padding:12px;border-bottom:1px solid #ccc;color:#172033"><strong>Database RUP</strong> — <span id="cloudStatus">Memeriksa koneksi...</span><form id="cloudLogin" onsubmit="loginCloud(event)" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><input id="cloudEmail" type="email" required placeholder="Email admin" style="border:1px solid #aaa;padding:6px"><input id="cloudPassword" type="password" required placeholder="Password admin" style="border:1px solid #aaa;padding:6px"><button style="background:#166534;color:white;padding:6px 16px">Login</button></form><button id="cloudLogout" hidden onclick="logoutCloud()" style="padding:6px 12px;border:1px solid #aaa">Logout</button></section>
+<body class="min-h-screen flex flex-col">
+    <section id="cloudPanel" style="position:sticky;top:0;z-index:99999;background:#fff;padding:12px;border-bottom:1px solid #ccc;color:#172033">
+        <div class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-2">
+            <div>
+                <strong>Database RUP</strong> — <span id="cloudStatus">Memeriksa koneksi...</span>
+            </div>
+            <button id="cloudLogout" type="button" hidden onclick="logoutCloud()" style="padding:6px 14px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;font-weight:700;font-size:12px;cursor:pointer">
+                <i class="fa-solid fa-right-from-bracket mr-1"></i> Logout
+            </button>
+        </div>
+        <form id="cloudLogin" onsubmit="loginCloud(event)" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px" class="max-w-[1600px] mx-auto">
+            <input id="cloudEmail" type="email" required placeholder="Email admin" style="border:1px solid #aaa;border-radius:8px;padding:6px 10px;font-size:13px">
+            <input id="cloudPassword" type="password" required placeholder="Password admin" style="border:1px solid #aaa;border-radius:8px;padding:6px 10px;font-size:13px">
+            <button type="submit" style="background:#166534;color:white;border-radius:8px;padding:6px 16px;font-weight:700;font-size:13px;cursor:pointer">Login</button>
+        </form>
+    </section>
 
-    <!-- KOP SURAT & HEADER APLIKASI -->
-    <header class="bg-slate-900 text-white border-b border-slate-800 shadow-lg">
-        <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-4">
-            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-800 pb-4">
-                <div class="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-2">
-                    <div class="relative group shrink-0">
-                        <div id="headerLogoContainer" class="w-12 h-14 rounded-xl bg-white p-1 border border-slate-300 shadow-md flex items-center justify-center overflow-hidden">
-                            <svg id="defaultSelidahSvg" viewBox="0 0 220 240" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                                <polygon points="110,8 212,84 176,226 44,226 8,84" fill="#ffffff" stroke="#1e1b6b" stroke-width="9" stroke-linejoin="round"/>
-                                <polygon points="110,16 203,87 170,219 50,219 17,87" fill="#ffffff" stroke="#facc15" stroke-width="4" stroke-linejoin="round"/>
-                                <path d="M92,175 C62,145 58,92 84,54" fill="none" stroke="#15803d" stroke-width="3.5" stroke-linecap="round"/>
-                                <path d="M84,174 C50,148 44,102 64,66" fill="none" stroke="#15803d" stroke-width="3.2" stroke-linecap="round"/>
-                                <path d="M76,173 C38,152 30,115 44,82" fill="none" stroke="#15803d" stroke-width="3" stroke-linecap="round"/>
-                                <ellipse cx="76" cy="72" rx="4" ry="9" transform="rotate(-20 76 72)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
-                                <circle cx="80" cy="64" r="3.5" fill="#dc2626"/>
-                                <ellipse cx="64" cy="96" rx="4.5" ry="10" transform="rotate(-18 64 96)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
-                                <circle cx="71" cy="92" r="3.5" fill="#dc2626"/>
-                                <ellipse cx="52" cy="112" rx="4.5" ry="10" transform="rotate(-15 52 112)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
-                                <circle cx="62" cy="122" r="3.5" fill="#dc2626"/>
-                                <ellipse cx="42" cy="134" rx="4.5" ry="9.5" transform="rotate(-12 42 134)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
-                                <circle cx="55" cy="144" r="3.5" fill="#dc2626"/>
-                                <circle cx="66" cy="154" r="3.5" fill="#dc2626"/>
-                                <path d="M128,175 C162,152 174,105 144,46" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
-                                <g fill="#facc15" stroke="#1e293b" stroke-width="1.4">
-                                    <ellipse cx="144" cy="52" rx="4" ry="8" transform="rotate(-25 144 52)"/>
-                                    <ellipse cx="151" cy="64" rx="4.5" ry="8.5" transform="rotate(20 151 64)"/>
-                                    <ellipse cx="146" cy="74" rx="4.5" ry="8.5" transform="rotate(-25 146 74)"/>
-                                    <ellipse cx="156" cy="86" rx="4.5" ry="9" transform="rotate(22 156 86)"/>
-                                    <ellipse cx="150" cy="97" rx="4.5" ry="9" transform="rotate(-25 150 97)"/>
-                                    <ellipse cx="160" cy="110" rx="4.5" ry="9" transform="rotate(22 160 110)"/>
-                                    <ellipse cx="153" cy="121" rx="4.5" ry="9" transform="rotate(-25 153 121)"/>
-                                    <ellipse cx="160" cy="133" rx="4.5" ry="9" transform="rotate(22 160 133)"/>
-                                    <ellipse cx="152" cy="144" rx="4.5" ry="8.5" transform="rotate(-25 152 144)"/>
-                                    <ellipse cx="154" cy="155" rx="4.5" ry="8.5" transform="rotate(20 154 155)"/>
-                                    <ellipse cx="144" cy="164" rx="4.5" ry="8" transform="rotate(-22 144 164)"/>
-                                </g>
-                                <path d="M110,58 L138,76 L133,156 L110,174 L87,156 L82,76 Z" fill="#18181b" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
-                                <path d="M110,74 C115,92 115,118 111,134 L109,134 C105,118 105,92 110,74 Z" fill="#ffffff"/>
-                                <path d="M106,134 L115,134 L114,148 C113,156 104,160 95,158 L98,149 C103,150 106,147 106,142 Z" fill="#facc15"/>
-                                <path d="M46,166 L76,174 L76,204 L46,196 L56,181 Z" fill="#b91c1c" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
-                                <path d="M174,166 L144,174 L144,204 L174,196 L164,181 Z" fill="#b91c1c" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
-                                <path d="M74,172 Q110,164 146,172 L146,202 Q110,194 74,202 Z" fill="#dc2626" stroke="#18181b" stroke-width="2.2" stroke-linejoin="round"/>
-                                <text x="110" y="191" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="18" letter-spacing="1" fill="#ffffff">SELIDAH</text>
-                            </svg>
-                            <img id="customLogoImg" alt="Logo Selidah" class="hidden w-full h-full object-contain">
+    <div id="appWorkspace" class="flex-1 flex flex-col hidden">
+        <!-- KOP SURAT & HEADER APLIKASI -->
+        <header class="bg-slate-900 text-white border-b border-slate-800 shadow-lg">
+            <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-4">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div class="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-2">
+                        <div class="relative group shrink-0">
+                            <div id="headerLogoContainer" class="w-12 h-14 rounded-xl bg-white p-1 border border-slate-300 shadow-md flex items-center justify-center overflow-hidden">
+                                <svg id="defaultSelidahSvg" viewBox="0 0 220 240" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                    <polygon points="110,8 212,84 176,226 44,226 8,84" fill="#ffffff" stroke="#1e1b6b" stroke-width="9" stroke-linejoin="round"/>
+                                    <polygon points="110,16 203,87 170,219 50,219 17,87" fill="#ffffff" stroke="#facc15" stroke-width="4" stroke-linejoin="round"/>
+                                    <path d="M92,175 C62,145 58,92 84,54" fill="none" stroke="#15803d" stroke-width="3.5" stroke-linecap="round"/>
+                                    <path d="M84,174 C50,148 44,102 64,66" fill="none" stroke="#15803d" stroke-width="3.2" stroke-linecap="round"/>
+                                    <path d="M76,173 C38,152 30,115 44,82" fill="none" stroke="#15803d" stroke-width="3" stroke-linecap="round"/>
+                                    <ellipse cx="76" cy="72" rx="4" ry="9" transform="rotate(-20 76 72)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
+                                    <circle cx="80" cy="64" r="3.5" fill="#dc2626"/>
+                                    <ellipse cx="64" cy="96" rx="4.5" ry="10" transform="rotate(-18 64 96)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
+                                    <circle cx="71" cy="92" r="3.5" fill="#dc2626"/>
+                                    <ellipse cx="52" cy="112" rx="4.5" ry="10" transform="rotate(-15 52 112)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
+                                    <circle cx="62" cy="122" r="3.5" fill="#dc2626"/>
+                                    <ellipse cx="42" cy="134" rx="4.5" ry="9.5" transform="rotate(-12 42 134)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
+                                    <circle cx="55" cy="144" r="3.5" fill="#dc2626"/>
+                                    <circle cx="66" cy="154" r="3.5" fill="#dc2626"/>
+                                    <path d="M128,175 C162,152 174,105 144,46" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+                                    <g fill="#facc15" stroke="#1e293b" stroke-width="1.4">
+                                        <ellipse cx="144" cy="52" rx="4" ry="8" transform="rotate(-25 144 52)"/>
+                                        <ellipse cx="151" cy="64" rx="4.5" ry="8.5" transform="rotate(20 151 64)"/>
+                                        <ellipse cx="146" cy="74" rx="4.5" ry="8.5" transform="rotate(-25 146 74)"/>
+                                        <ellipse cx="156" cy="86" rx="4.5" ry="9" transform="rotate(22 156 86)"/>
+                                        <ellipse cx="150" cy="97" rx="4.5" ry="9" transform="rotate(-25 150 97)"/>
+                                        <ellipse cx="160" cy="110" rx="4.5" ry="9" transform="rotate(22 160 110)"/>
+                                        <ellipse cx="153" cy="121" rx="4.5" ry="9" transform="rotate(-25 153 121)"/>
+                                        <ellipse cx="160" cy="133" rx="4.5" ry="9" transform="rotate(22 160 133)"/>
+                                        <ellipse cx="152" cy="144" rx="4.5" ry="8.5" transform="rotate(-25 152 144)"/>
+                                        <ellipse cx="154" cy="155" rx="4.5" ry="8.5" transform="rotate(20 154 155)"/>
+                                        <ellipse cx="144" cy="164" rx="4.5" ry="8" transform="rotate(-22 144 164)"/>
+                                    </g>
+                                    <path d="M110,58 L138,76 L133,156 L110,174 L87,156 L82,76 Z" fill="#18181b" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
+                                    <path d="M110,74 C115,92 115,118 111,134 L109,134 C105,118 105,92 110,74 Z" fill="#ffffff"/>
+                                    <path d="M106,134 L115,134 L114,148 C113,156 104,160 95,158 L98,149 C103,150 106,147 106,142 Z" fill="#facc15"/>
+                                    <path d="M46,166 L76,174 L76,204 L46,196 L56,181 Z" fill="#b91c1c" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
+                                    <path d="M174,166 L144,174 L144,204 L174,196 L164,181 Z" fill="#b91c1c" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
+                                    <path d="M74,172 Q110,164 146,172 L146,202 Q110,194 74,202 Z" fill="#dc2626" stroke="#18181b" stroke-width="2.2" stroke-linejoin="round"/>
+                                    <text x="110" y="191" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="18" letter-spacing="1" fill="#ffffff">SELIDAH</text>
+                                </svg>
+                                <img id="customLogoImg" alt="Logo Selidah" class="hidden w-full h-full object-contain">
+                            </div>
+                            <label title="Ganti Logo Selidah (Opsional)" class="cursor-pointer mt-0.5 block text-center text-[9px] font-bold text-emerald-300 hover:text-emerald-200 underline">
+                                Ganti Logo
+                                <input type="file" accept="image/*" class="hidden" onchange="handleLogoUpload(event)">
+                            </label>
                         </div>
-                        <label title="Ganti Logo Selidah (Opsional)" class="cursor-pointer mt-0.5 block text-center text-[9px] font-bold text-emerald-300 hover:text-emerald-200 underline">
-                            Ganti Logo
-                            <input type="file" accept="image/*" class="hidden" onchange="handleLogoUpload(event)">
-                        </label>
-                    </div>
-                    <div class="text-center sm:text-left">
-                        <div class="text-[11px] font-bold uppercase tracking-widest text-emerald-400">
-                            PEMERINTAH KABUPATEN BARITO KUALA • SEKRETARIAT DAERAH
+                        <div class="text-center sm:text-left">
+                            <div class="text-[11px] font-bold uppercase tracking-widest text-emerald-400">
+                                PEMERINTAH KABUPATEN BARITO KUALA • SEKRETARIAT DAERAH
+                            </div>
+                            <h1 class="text-base sm:text-xl font-extrabold tracking-tight text-white mt-0.5">
+                                REKAP OTOMATIS DATA RUP &amp; MONITORING SIRUP
+                            </h1>
+                            <p class="text-xs text-slate-400 mt-0.5">
+                                Jalan Pangeran Antasari No.1 Marabahan 70511 Kalimantan Selatan • Telp (0511) 4799041
+                            </p>
                         </div>
-                        <h1 class="text-base sm:text-xl font-extrabold tracking-tight text-white mt-0.5">
-                            REKAP OTOMATIS DATA RUP &amp; MONITORING SIRUP
-                        </h1>
-                        <p class="text-xs text-slate-400 mt-0.5">
-                            Jalan Pangeran Antasari No.1 Marabahan 70511 Kalimantan Selatan • Telp (0511) 4799041
-                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 lg:w-[460px]">
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                                Judul Rekapitulasi
+                            </label>
+                            <input id="docTitleInput" type="text" onchange="saveState()"
+                                value="REKAPITULASI SISTEM INFORMASI RENCANA UMUM PENGADAAN/ SIRUP APBD KAB. BARITO KUALA"
+                                class="w-full rounded-xl bg-slate-800 border border-slate-700 px-3 py-1.5 text-xs font-semibold text-white focus:outline-none focus:border-emerald-400">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                                Tanggal Rekap
+                            </label>
+                            <input id="docDateInput" type="text" onchange="saveState()"
+                                value="25 November 2026"
+                                class="w-full rounded-xl bg-slate-800 border border-slate-700 px-3 py-1.5 text-xs font-semibold text-white focus:outline-none focus:border-emerald-400">
+                        </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 lg:w-[460px]">
-                    <div>
-                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-                            Judul Rekapitulasi
-                        </label>
-                        <input id="docTitleInput" type="text" onchange="saveState()"
-                            value="REKAPITULASI SISTEM INFORMASI RENCANA UMUM PENGADAAN/ SIRUP APBD KAB. BARITO KUALA"
-                            class="w-full rounded-xl bg-slate-800 border border-slate-700 px-3 py-1.5 text-xs font-semibold text-white focus:outline-none focus:border-emerald-400">
+                <!-- KARTU KPI RINGKASAN -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3 pt-4">
+                    <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-3.5">
+                        <div class="text-[11px] font-semibold text-slate-400">Total Pagu SIPD (Kol 3)</div>
+                        <div id="kpiTotalSipd" class="text-base sm:text-lg font-extrabold font-mono text-white mt-1 truncate">Rp 0</div>
+                        <div class="text-[10px] text-slate-400 mt-0.5">Sesuai DPA Rekapitulasi SKPD</div>
                     </div>
-                    <div>
-                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-                            Tanggal Rekap
-                        </label>
-                        <input id="docDateInput" type="text" onchange="saveState()"
-                            value="25 November 2026"
-                            class="w-full rounded-xl bg-slate-800 border border-slate-700 px-3 py-1.5 text-xs font-semibold text-white focus:outline-none focus:border-emerald-400">
+
+                    <div class="bg-indigo-950/60 border border-indigo-700/60 rounded-2xl p-3.5">
+                        <div class="text-[11px] font-semibold text-indigo-300">Total Pagu Pengadaan (Kol 6)</div>
+                        <div id="kpiTotalPengadaan" class="text-base sm:text-lg font-extrabold font-mono text-indigo-200 mt-1 truncate">Rp 0</div>
+                        <div class="text-[10px] text-indigo-300/80 mt-0.5">SIPD − Pegawai − Transfer</div>
+                    </div>
+
+                    <div class="bg-teal-950/60 border border-teal-700/60 rounded-2xl p-3.5">
+                        <div class="text-[11px] font-semibold text-teal-300">Terumumkan SIRUP (Kol 10)</div>
+                        <div id="kpiTotalTerumumkan" class="text-base sm:text-lg font-extrabold font-mono text-teal-200 mt-1 truncate">Rp 0</div>
+                        <div id="kpiPersentaseTayang" class="text-[10px] text-teal-300/80 mt-0.5">0.0% dari pagu pengadaan</div>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-2xl p-3.5">
+                        <div class="text-[11px] font-semibold text-slate-500">Selisih Neto (Kol 11)</div>
+                        <div id="kpiTotalSelisih" class="text-base sm:text-lg font-extrabold font-mono text-slate-900 mt-1 truncate">Rp 0</div>
+                        <div class="text-[10px] text-slate-500 mt-0.5">Pagu Pengadaan − Terumumkan</div>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-2xl p-3.5 sm:col-span-2 xl:col-span-1">
+                        <div class="text-[11px] font-semibold text-slate-500">Rekap Status SKPD</div>
+                        <div id="kpiStatusBreakdown" class="text-xs sm:text-sm font-extrabold text-slate-800 mt-1.5">0 Pas • 0 Kurang • 0 Lebih</div>
+                        <div class="text-[10px] text-slate-500 mt-0.5">Monitoring selisih input SIRUP</div>
                     </div>
                 </div>
             </div>
+        </header>
 
-            <!-- KARTU KPI RINGKASAN -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3 pt-4">
-                <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-3.5">
-                    <div class="text-[11px] font-semibold text-slate-400">Total Pagu SIPD (Kol 3)</div>
-                    <div id="kpiTotalSipd" class="text-base sm:text-lg font-extrabold font-mono text-white mt-1 truncate">Rp 0</div>
-                    <div class="text-[10px] text-slate-400 mt-0.5">Sesuai DPA Rekapitulasi SKPD</div>
+        <!-- KONTEN UTAMA -->
+        <main class="flex-1 max-w-[1600px] w-full mx-auto px-2.5 sm:px-6 py-3 sm:py-4 space-y-3 sm:space-y-4 overflow-x-hidden">
+            <!-- TOOLBAR AKSI & FILTER -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-3 sm:p-3.5 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
+                <div class="grid grid-cols-1 xs:grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 w-full xl:w-auto">
+                    <button type="button" onclick="openScanModal(null, 'BOTH')"
+                        class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                        <i class="fa-solid fa-camera"></i> Upload Screenshot SIRUP (Penyedia &amp; Swakelola)
+                    </button>
+                    <button type="button" onclick="openAddSkpdModal()"
+                        class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                        <i class="fa-solid fa-plus"></i> Tambah SKPD
+                    </button>
+                    <button type="button" onclick="openImportModal()"
+                        class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                        <i class="fa-solid fa-file-import"></i> Import Excel
+                    </button>
+                    <button type="button" onclick="exportToExcel()"
+                        class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                        <i class="fa-solid fa-file-excel text-emerald-400"></i> Export Excel (.xlsx)
+                    </button>
+                    <button type="button" onclick="exportToPdf()"
+                        class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                        <i class="fa-solid fa-file-pdf"></i> Export PDF
+                    </button>
+                    <button type="button" onclick="resetDefaultData()"
+                        class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition flex items-center justify-center sm:justify-start gap-1.5">
+                        <i class="fa-solid fa-rotate-left"></i> Reset Awal
+                    </button>
+                    <button type="button" onclick="deleteAllSkpd()"
+                        class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                        <i class="fa-solid fa-trash-can"></i> Hapus Semua SKPD
+                    </button>
+                    <button type="button" onclick="openYearlyArchiveModal()"
+                        class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                        <i class="fa-solid fa-calendar-days"></i> Rekap Pertahun &amp; Arsip
+                    </button>
                 </div>
 
-                <div class="bg-indigo-950/60 border border-indigo-700/60 rounded-2xl p-3.5">
-                    <div class="text-[11px] font-semibold text-indigo-300">Total Pagu Pengadaan (Kol 6)</div>
-                    <div id="kpiTotalPengadaan" class="text-base sm:text-lg font-extrabold font-mono text-indigo-200 mt-1 truncate">Rp 0</div>
-                    <div class="text-[10px] text-indigo-300/80 mt-0.5">SIPD − Pegawai − Transfer</div>
-                </div>
-
-                <div class="bg-teal-950/60 border border-teal-700/60 rounded-2xl p-3.5">
-                    <div class="text-[11px] font-semibold text-teal-300">Terumumkan SIRUP (Kol 10)</div>
-                    <div id="kpiTotalTerumumkan" class="text-base sm:text-lg font-extrabold font-mono text-teal-200 mt-1 truncate">Rp 0</div>
-                    <div id="kpiPersentaseTayang" class="text-[10px] text-teal-300/80 mt-0.5">0.0% dari pagu pengadaan</div>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-2xl p-3.5">
-                    <div class="text-[11px] font-semibold text-slate-500">Selisih Neto (Kol 11)</div>
-                    <div id="kpiTotalSelisih" class="text-base sm:text-lg font-extrabold font-mono text-slate-900 mt-1 truncate">Rp 0</div>
-                    <div class="text-[10px] text-slate-500 mt-0.5">Pagu Pengadaan − Terumumkan</div>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-2xl p-3.5 sm:col-span-2 xl:col-span-1">
-                    <div class="text-[11px] font-semibold text-slate-500">Rekap Status SKPD</div>
-                    <div id="kpiStatusBreakdown" class="text-xs sm:text-sm font-extrabold text-slate-800 mt-1.5">0 Pas • 0 Kurang • 0 Lebih</div>
-                    <div class="text-[10px] text-slate-500 mt-0.5">Monitoring selisih input SIRUP</div>
+                <div class="flex flex-col sm:flex-row gap-2 w-full xl:w-auto">
+                    <div class="relative flex-1 sm:w-64">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input id="searchInput" type="text" oninput="renderTable()" placeholder="Cari nama SKPD / no..."
+                            class="w-full min-h-[40px] pl-8 pr-3 py-2 rounded-xl border border-slate-300 text-xs font-medium text-slate-800 focus:outline-none focus:border-blue-600">
+                    </div>
+                    <select id="statusFilter" onchange="renderTable()"
+                        class="w-full sm:w-auto min-h-[40px] rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:border-blue-600">
+                        <option value="ALL">Semua Status Selisih</option>
+                        <option value="TIDAK ADA SELISIH">TIDAK ADA SELISIH</option>
+                        <option value="SELISIH KURANG INPUT">SELISIH KURANG INPUT</option>
+                        <option value="SELISIH KELEBIHAN INPUT SIRUP">SELISIH KELEBIHAN INPUT SIRUP</option>
+                    </select>
                 </div>
             </div>
-        </div>
-    </header>
 
-    <!-- KONTEN UTAMA -->
-    <main class="flex-1 max-w-[1600px] w-full mx-auto px-2.5 sm:px-6 py-3 sm:py-4 space-y-3 sm:space-y-4 overflow-x-hidden">
-        <!-- TOOLBAR AKSI & FILTER -->
-        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-3 sm:p-3.5 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
-            <div class="grid grid-cols-1 xs:grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 w-full xl:w-auto">
-                <button type="button" onclick="openScanModal(null, 'BOTH')"
-                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
-                    <i class="fa-solid fa-camera"></i> Upload Screenshot SIRUP (Penyedia &amp; Swakelola)
-                </button>
-                <button type="button" onclick="openAddSkpdModal()"
-                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
-                    <i class="fa-solid fa-plus"></i> Tambah SKPD
-                </button>
-                <button type="button" onclick="openImportModal()"
-                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
-                    <i class="fa-solid fa-file-import"></i> Import Excel
-                </button>
-                <button type="button" onclick="exportToExcel()"
-                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
-                    <i class="fa-solid fa-file-excel text-emerald-400"></i> Export Excel (.xlsx)
-                </button>
-                <button type="button" onclick="exportToPdf()"
-                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
-                    <i class="fa-solid fa-file-pdf"></i> Export PDF
-                </button>
-                <button type="button" onclick="resetDefaultData()"
-                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition flex items-center justify-center sm:justify-start gap-1.5">
-                    <i class="fa-solid fa-rotate-left"></i> Reset Awal
-                </button>
-                <button type="button" onclick="deleteAllSkpd()"
-                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
-                    <i class="fa-solid fa-trash-can"></i> Hapus Semua SKPD
-                </button>
-                <button type="button" onclick="openYearlyArchiveModal()"
-                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
-                    <i class="fa-solid fa-calendar-days"></i> Rekap Pertahun &amp; Arsip
-                </button>
-            </div>
-
-            <div class="flex flex-col sm:flex-row gap-2 w-full xl:w-auto">
-                <div class="relative flex-1 sm:w-64">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                    <input id="searchInput" type="text" oninput="renderTable()" placeholder="Cari nama SKPD / no..."
-                        class="w-full min-h-[40px] pl-8 pr-3 py-2 rounded-xl border border-slate-300 text-xs font-medium text-slate-800 focus:outline-none focus:border-blue-600">
+            <!-- TABEL REKAPITULASI 13 KOLOM -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-900 text-white text-[10px] uppercase tracking-wider">
+                                <th rowspan="2" class="px-2 py-2.5 border-r border-slate-700 text-center w-14">NO.</th>
+                                <th rowspan="2" class="sticky-col-skpd bg-slate-900 px-3 py-2.5 border-r border-slate-700 text-left">SATUAN KERJA</th>
+                                <th colspan="3" class="px-2 py-2 border-r border-slate-700 text-center bg-slate-800">SIPD (SESUAI DPA REKAPITULASI SKPD)</th>
+                                <th rowspan="2" class="px-2.5 py-2 border-r border-slate-700 text-center bg-indigo-950 min-w-[140px]">TOTAL PAGU PENGADAAN<br><span class="text-[9px] font-normal text-indigo-200">(SIPD − Pegawai − Transfer)</span></th>
+                                <th colspan="4" class="px-2 py-2 border-r border-slate-700 text-center bg-teal-950">SIRUP (SESUAI ISI REKAP)</th>
+                                <th rowspan="2" class="px-2.5 py-2 border-r border-slate-700 text-center min-w-[130px]">SELISIH<br><span class="text-[9px] font-normal text-slate-300">(Pagu Pengadaan − SIRUP)</span></th>
+                                <th rowspan="2" class="px-2.5 py-2 border-r border-slate-700 text-center min-w-[165px]">STATUS</th>
+                                <th rowspan="2" class="px-2.5 py-2 border-r border-slate-700 text-center min-w-[145px]">PENGAKTIFAN PENGISIAN RUP</th>
+                                <th rowspan="2" class="px-2.5 py-2 text-center min-w-[125px]">AKSI</th>
+                            </tr>
+                            <tr class="bg-slate-800 text-slate-100 text-[10px] leading-tight">
+                                <th class="px-2 py-2 border-r border-slate-700 text-center min-w-[130px]">3. TOTAL PAGU SIPD / JUMLAH BELANJA</th>
+                                <th class="px-2 py-2 border-r border-slate-700 text-center min-w-[130px]">4. TOTAL PAGU BELANJA PEGAWAI / NON PENGADAAN</th>
+                                <th class="px-2 py-2 border-r border-slate-700 text-center min-w-[125px]">5. TOTAL PAGU BELANJA TRANSFER / NON PENGADAAN</th>
+                                <th class="px-2 py-2 border-r border-slate-700 text-center bg-blue-950 text-blue-200 min-w-[130px]">7. TOTAL PAGU PAKET PENYEDIA PADA SIRUP</th>
+                                <th class="px-2 py-2 border-r border-slate-700 text-center bg-emerald-950 text-emerald-200 min-w-[130px]">8. TOTAL PAGU PAKET SWAKELOLA PADA SIRUP</th>
+                                <th class="px-2 py-2 border-r border-slate-700 text-center min-w-[125px]">9. TOTAL PAGU PAKET PENYEDIA DALAM SWAKELOLA</th>
+                                <th class="px-2 py-2 border-r border-slate-700 text-center bg-teal-900 text-teal-100 min-w-[135px]">10. TOTAL PAGU SIRUP TERUMUMKAN / TAYANG</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rekapTableBody" class="divide-y divide-slate-200"></tbody>
+                        <tfoot id="rekapTableFooter"></tfoot>
+                    </table>
                 </div>
-                <select id="statusFilter" onchange="renderTable()"
-                    class="w-full sm:w-auto min-h-[40px] rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:border-blue-600">
-                    <option value="ALL">Semua Status Selisih</option>
-                    <option value="TIDAK ADA SELISIH">TIDAK ADA SELISIH</option>
-                    <option value="SELISIH KURANG INPUT">SELISIH KURANG INPUT</option>
-                    <option value="SELISIH KELEBIHAN INPUT SIRUP">SELISIH KELEBIHAN INPUT SIRUP</option>
-                </select>
             </div>
-        </div>
+        </main>
 
-        <!-- TABEL REKAPITULASI 13 KOLOM -->
-        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="w-full border-collapse text-xs">
-                    <thead>
-                        <tr class="bg-slate-900 text-white text-[10px] uppercase tracking-wider">
-                            <th rowspan="2" class="px-2 py-2.5 border-r border-slate-700 text-center w-14">NO.</th>
-                            <th rowspan="2" class="sticky-col-skpd bg-slate-900 px-3 py-2.5 border-r border-slate-700 text-left">SATUAN KERJA</th>
-                            <th colspan="3" class="px-2 py-2 border-r border-slate-700 text-center bg-slate-800">SIPD (SESUAI DPA REKAPITULASI SKPD)</th>
-                            <th rowspan="2" class="px-2.5 py-2 border-r border-slate-700 text-center bg-indigo-950 min-w-[140px]">TOTAL PAGU PENGADAAN<br><span class="text-[9px] font-normal text-indigo-200">(SIPD − Pegawai − Transfer)</span></th>
-                            <th colspan="4" class="px-2 py-2 border-r border-slate-700 text-center bg-teal-950">SIRUP (SESUAI ISI REKAP)</th>
-                            <th rowspan="2" class="px-2.5 py-2 border-r border-slate-700 text-center min-w-[130px]">SELISIH<br><span class="text-[9px] font-normal text-slate-300">(Pagu Pengadaan − SIRUP)</span></th>
-                            <th rowspan="2" class="px-2.5 py-2 border-r border-slate-700 text-center min-w-[165px]">STATUS</th>
-                            <th rowspan="2" class="px-2.5 py-2 border-r border-slate-700 text-center min-w-[145px]">PENGAKTIFAN PENGISIAN RUP</th>
-                            <th rowspan="2" class="px-2.5 py-2 text-center min-w-[125px]">AKSI</th>
-                        </tr>
-                        <tr class="bg-slate-800 text-slate-100 text-[10px] leading-tight">
-                            <th class="px-2 py-2 border-r border-slate-700 text-center min-w-[130px]">3. TOTAL PAGU SIPD / JUMLAH BELANJA</th>
-                            <th class="px-2 py-2 border-r border-slate-700 text-center min-w-[130px]">4. TOTAL PAGU BELANJA PEGAWAI / NON PENGADAAN</th>
-                            <th class="px-2 py-2 border-r border-slate-700 text-center min-w-[125px]">5. TOTAL PAGU BELANJA TRANSFER / NON PENGADAAN</th>
-                            <th class="px-2 py-2 border-r border-slate-700 text-center bg-blue-950 text-blue-200 min-w-[130px]">7. TOTAL PAGU PAKET PENYEDIA PADA SIRUP</th>
-                            <th class="px-2 py-2 border-r border-slate-700 text-center bg-emerald-950 text-emerald-200 min-w-[130px]">8. TOTAL PAGU PAKET SWAKELOLA PADA SIRUP</th>
-                            <th class="px-2 py-2 border-r border-slate-700 text-center min-w-[125px]">9. TOTAL PAGU PAKET PENYEDIA DALAM SWAKELOLA</th>
-                            <th class="px-2 py-2 border-r border-slate-700 text-center bg-teal-900 text-teal-100 min-w-[135px]">10. TOTAL PAGU SIRUP TERUMUMKAN / TAYANG</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rekapTableBody" class="divide-y divide-slate-200"></tbody>
-                    <tfoot id="rekapTableFooter"></tfoot>
-                </table>
-            </div>
-        </div>
-    </main>
-
-    <!-- FOOTER COPYRIGHT -->
-    <footer class="max-w-[1600px] w-full mx-auto px-4 sm:px-6 py-3 text-center text-[11px] font-semibold text-slate-500">
-        Copyright &copy; REEZZ 2026
-    </footer>
+        <!-- FOOTER COPYRIGHT -->
+        <footer class="max-w-[1600px] w-full mx-auto px-4 sm:px-6 py-3 text-center text-[11px] font-semibold text-slate-500">
+            Copyright &copy; REEZZ 2026
+        </footer>
+    </div>
 
     <!-- MODAL UPLOAD SCREENSHOT PENYEDIA & SWAKELOLA -->
     <div id="scanModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
@@ -355,7 +372,6 @@
                         <div id="statusPenyedia" class="text-[11px] font-semibold text-slate-600 bg-white rounded-xl px-3 py-2 border border-blue-100">
                             Menunggu upload atau input nominal Paket Penyedia.
                         </div>
-                        <div id="itemsPenyediaBox" class="hidden rounded-xl border border-blue-200 bg-white p-2.5 text-[11px] max-h-36 overflow-y-auto space-y-1"></div>
 
                         <img id="previewPenyedia" alt="Preview Screenshot Penyedia" class="hidden w-full max-h-40 object-contain rounded-xl border border-blue-200 bg-white">
 
@@ -415,8 +431,6 @@
                         <div id="statusSwakelola" class="text-[11px] font-semibold text-slate-600 bg-white rounded-xl px-3 py-2 border border-emerald-100">
                             Menunggu upload atau input nominal Paket Swakelola.
                         </div>
-                        <div id="itemsSwakelolaBox" class="hidden rounded-xl border border-emerald-200 bg-white p-2.5 text-[11px] max-h-40 overflow-y-auto space-y-1"></div>
-                        <div id="debugSwakelolaBox" class="hidden rounded-xl border border-amber-300 bg-amber-50/70 p-2.5 text-[10px] text-amber-950 space-y-1"></div>
 
                         <img id="previewSwakelola" alt="Preview Screenshot Swakelola" class="hidden w-full max-h-40 object-contain rounded-xl border border-emerald-200 bg-white">
 
@@ -615,10 +629,7 @@
         let currentScanRowIndex = null;
         let lastActivePasteTarget = 'PENYEDIA';
         let yearlyArchives = [];
-
-        // Data awal dikosongkan; tampilan KPI, tabel, dan total akan otomatis menyesuaikan saat data ditambahkan/diimpor/dimuat
         const DEFAULT_SKPD_DATA = [];
-
         let skpdRows = [];
 
         function formatNum(val) {
@@ -784,6 +795,22 @@
                 console.warn('Gagal memuat state:', err);
             }
             skpdRows = DEFAULT_SKPD_DATA.map(r => ({ ...r }));
+        }
+
+        function clearSessionData() {
+            skpdRows = [];
+            yearlyArchives = [];
+            customLogoDataUrl = '';
+            const img = document.getElementById('customLogoImg');
+            const svg = document.getElementById('defaultSelidahSvg');
+            if (img && svg) {
+                img.removeAttribute('src');
+                img.classList.add('hidden');
+                svg.classList.remove('hidden');
+            }
+            localStorage.removeItem(STORAGE_KEY);
+            localStorage.removeItem(ARCHIVE_STORAGE_KEY);
+            renderTable();
         }
 
         function applyCustomLogo(dataUrl) {
@@ -1043,7 +1070,7 @@
             });
 
             doc.save(`REKAP_SIRUP_BATOLA_${dateStr.replace(/\s+/g, '_')}.pdf`);
-            showToast('File PDF berhasil diunduh dengan kop & judul tunggal di bagian atas.');
+            showToast('File PDF berhasil diunduh.');
         }
 
         function renderTable() {
@@ -1257,6 +1284,10 @@
         }
 
         function openScanModal(rowIdx = null, focusType = 'BOTH') {
+            if (skpdRows.length === 0) {
+                showToast('Tambahkan atau muat data SKPD terlebih dahulu.');
+                return;
+            }
             const modal = document.getElementById('scanModal');
             const select = document.getElementById('scanSkpdSelect');
             if (!modal || !select) return;
@@ -1286,11 +1317,23 @@
             document.getElementById('scanModal')?.classList.add('hidden');
         }
 
-        var scanJobs = {PENYEDIA:0,SWAKELOLA:0};
-        var scanBusy = {PENYEDIA:false,SWAKELOLA:false};
-        var scanInvalid = {PENYEDIA:false,SWAKELOLA:false};
+        var scanJobs = { PENYEDIA: 0, SWAKELOLA: 0 };
+        var scanBusy = { PENYEDIA: false, SWAKELOLA: false };
+
         function onScanSkpdChange() {
-            for(const t of ['PENYEDIA','SWAKELOLA']){scanJobs[t]++;scanBusy[t]=false;scanInvalid[t]=false;const k=t==='PENYEDIA'?'Penyedia':'Swakelola';const im=document.getElementById('preview'+k);if(im.src.startsWith('blob:'))URL.revokeObjectURL(im.src);im.removeAttribute('src');im.classList.add('hidden');document.getElementById('status'+k).textContent='Menunggu upload atau input nominal.';}
+            for (const t of ['PENYEDIA', 'SWAKELOLA']) {
+                scanJobs[t]++;
+                scanBusy[t] = false;
+                const k = t === 'PENYEDIA' ? 'Penyedia' : 'Swakelola';
+                const im = document.getElementById('preview' + k);
+                if (im && im.src && im.src.startsWith('blob:')) URL.revokeObjectURL(im.src);
+                if (im) {
+                    im.removeAttribute('src');
+                    im.classList.add('hidden');
+                }
+                const st = document.getElementById('status' + k);
+                if (st) st.textContent = 'Menunggu upload atau input nominal.';
+            }
 
             const select = document.getElementById('scanSkpdSelect');
             const idx = parseInt(select?.value || '0', 10);
@@ -1314,8 +1357,10 @@
 
             const oldPenyedia = Number(row.penyedia) || 0;
             const oldSwakelola = Number(row.swakelola) || 0;
-            const newPenyedia = document.getElementById('ocrPenyediaInput').value === "" ? oldPenyedia : parseNum(document.getElementById('ocrPenyediaInput').value);
-            const newSwakelola = document.getElementById('ocrSwakelolaInput').value === "" ? oldSwakelola : parseNum(document.getElementById('ocrSwakelolaInput').value);
+            const pRaw = document.getElementById('ocrPenyediaInput')?.value ?? '';
+            const sRaw = document.getElementById('ocrSwakelolaInput')?.value ?? '';
+            const newPenyedia = pRaw === '' ? oldPenyedia : parseNum(pRaw);
+            const newSwakelola = sRaw === '' ? oldSwakelola : parseNum(sRaw);
 
             const diffP = newPenyedia - oldPenyedia;
             const diffS = newSwakelola - oldSwakelola;
@@ -1352,63 +1397,106 @@
             `;
         }
 
+        function extractRupiahValuesFromOcrText(fullText) {
+            const lines = String(fullText || '').split(/\r?\n/);
+            const values = [];
+
+            for (const line of lines) {
+                // Abaikan baris info pagination seperti "Menampilkan 1 sampai 10 dari 25 entri"
+                if (/menampilkan\s+\d+\s+sampai\s+\d+/i.test(line)) continue;
+
+                // Cari nominal berformat ribuan (contoh: 25.720.347.697 atau Rp 1.950.000 atau 150.000,00)
+                const matches = line.match(/(?:rp\.?\s*)?\d{1,3}(?:[.,]\d{3})+(?:,\d{1,2})?/gi) || [];
+                for (const m of matches) {
+                    // Jangan ambil kode RUP (biasanya angka panjang tanpa pemisah ribuan, atau kode paket)
+                    const val = parseNum(m);
+                    if (val >= 1000 && Number.isSafeInteger(val)) {
+                        values.push(val);
+                    }
+                }
+            }
+            return values;
+        }
 
         function handleImageUpload(event, type) {
-            const file = event.target.files[0]; event.target.value='';
-            if(file) {lastActivePasteTarget=type; processScreenshotFile(file,type);}
+            const file = event.target?.files?.[0];
+            if (event.target) event.target.value = '';
+            if (file) {
+                lastActivePasteTarget = type;
+                processScreenshotFile(file, type);
+            }
         }
-        async function processScreenshotFile(file,type) {
-            const suffix=type==='PENYEDIA'?'Penyedia':'Swakelola';
-            const el=id=>document.getElementById(id+suffix);
-            const input=document.getElementById('ocr'+suffix+'Input');
-            const status=el('status'), preview=el('preview');
-            const job=++scanJobs[type]; const rowIndex=currentScanRowIndex;
-            const active=()=>scanJobs[type]===job && currentScanRowIndex===rowIndex;
-            scanBusy[type]=true; scanInvalid[type]=true; input.value=''; updateScanPreviewSummary();
-            status.textContent='Memuat OCR lokal...';
-            let worker, url=URL.createObjectURL(file);
+
+        async function processScreenshotFile(file, type) {
+            const suffix = type === 'PENYEDIA' ? 'Penyedia' : 'Swakelola';
+            const status = document.getElementById('status' + suffix);
+            const preview = document.getElementById('preview' + suffix);
+            const input = document.getElementById('ocr' + suffix + 'Input');
+
+            const job = ++scanJobs[type];
+            const rowIndex = currentScanRowIndex;
+            const active = () => scanJobs[type] === job && currentScanRowIndex === rowIndex;
+
+            scanBusy[type] = true;
+            status.textContent = 'Memuat gambar & menjalankan OCR...';
+
+            let worker = null;
+            const url = URL.createObjectURL(file);
+
             try {
-                const img=new Image(); img.src=url; await img.decode();
-                if(!active())return;
-                preview.src=img.src; preview.classList.remove('hidden');
-                if(!window.Tesseract) throw Error('Library OCR belum dimuat. Periksa internet.');
-                worker=await Tesseract.createWorker('eng');
-                const crop=async(x,y,w,h,scale=2)=>{
-                    const c=document.createElement('canvas'); c.width=Math.ceil(w*scale); c.height=Math.ceil(h*scale);
-                    const ctx=c.getContext('2d');ctx.fillStyle='white';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,x,y,w,h,0,0,c.width,c.height);
-                    return (await worker.recognize(c)).data.text;
-                };
-                const W=img.naturalWidth,H=img.naturalHeight;
-                const head=await crop(0,0,W,Math.min(H,Math.round(W*.26)));
-                if(!new RegExp('RUP\\s+'+type,'i').test(head))throw Error('Judul jenis paket tidak cocok atau tidak terbaca.');
-                const foot=await crop(0,Math.max(0,H-Math.round(W*.55)),W,Math.min(H,Math.round(W*.55)));
-                const m=foot.match(/Menampilkan\s+([\d.,]+)\s+sampai\s+([\d.,]+)\s+dari\s+([\d.,]+)\s+entri/i);
-                if(!m)throw Error('Jumlah entri tidak terbaca. Gunakan screenshot asli lengkap.');
-                const nums=m.slice(1).map(v=>Number(v.replace(/[.,]/g,'')));
-                if(nums[0]!==1||nums[1]!==nums[2])throw Error('Screenshot belum memuat semua halaman. Jangan simpan total parsial.');
-                const expected=nums[2];
-                const p=type==='PENYEDIA';
-                // Layout berdasarkan contoh SIRUP: kolom pagu saja, tanpa kode RUP.
-                const x=Math.round(W*(p?.445:.58)), w=Math.round(W*(p?.126:.17));
-                const top=Math.round(W*(p?.225:.247));
-                await worker.setParameters({tessedit_char_whitelist:'0123456789.',tessedit_pageseg_mode:'6'});
-                const read=async(scale)=>{
-                    const vals=[]; const step=Math.round(W*.8);
-                    for(let y=top;y<H;y+=step){
-                        if(!active())throw Error('Dibatalkan');
-                        status.textContent=`Membaca gambar ${Math.min(100,Math.round(y/H*100))}% (${vals.length}/${expected} nominal)`;
-                        const t=await crop(x,y,w,Math.min(step,H-y),scale);
-                        for(const line of t.split(/\n/)){const v=line.trim();if(/^\d{1,3}(?:\.\d{3})+$/.test(v))vals.push(Number(v.replace(/\./g,'')));}
-                    }return vals;
-                };
-                const first=await read(3), second=await read(4);
-                if(first.length!==expected||second.length!==expected||first.some((v,i)=>v!==second[i]))throw Error(`Validasi gagal: ${first.length}/${second.length} dari ${expected} paket. Gunakan gambar lebih tajam atau koreksi manual.`);
-                const total=first.reduce((a,b)=>a+b,0);if(!Number.isSafeInteger(total))throw Error('Total di luar batas angka aman.');
-                if(!active())return;
-                input.value=String(total);scanInvalid[type]=false;
-                status.textContent=`${expected} paket terbaca dua kali dengan hasil sama. Total ${formatRp(total)}. Periksa sebelum Terapkan.`;
-            }catch(e){if(active())status.textContent='OCR: '+e.message;}
-            finally{if(worker)await worker.terminate();if(active()){scanBusy[type]=false;updateScanPreviewSummary();} }
+                const img = new Image();
+                img.src = url;
+                await img.decode();
+                if (!active()) return;
+
+                preview.src = img.src;
+                preview.classList.remove('hidden');
+
+                if (!window.Tesseract) {
+                    throw new Error('Pustaka Tesseract.js belum termuat. Periksa koneksi internet lalu coba lagi.');
+                }
+
+                worker = await Tesseract.createWorker('ind+eng').catch(() => Tesseract.createWorker('eng'));
+                await worker.setParameters({ tessedit_pageseg_mode: '6' });
+
+                const W = img.naturalWidth;
+                const H = img.naturalHeight;
+                const canvas = document.createElement('canvas');
+                const scale = W < 1200 ? 2 : 1.5;
+                canvas.width = Math.round(W * scale);
+                canvas.height = Math.round(H * scale);
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                status.textContent = 'Membaca teks & nominal pada screenshot...';
+                const ocrRes = await worker.recognize(canvas);
+                if (!active()) return;
+
+                const text = ocrRes?.data?.text || '';
+                const vals = extractRupiahValuesFromOcrText(text);
+
+                if (vals.length === 0) {
+                    status.textContent = 'Tidak ada nominal ribuan yang terbaca otomatis. Silakan isi/koreksi nominal secara manual di kolom di bawah.';
+                } else {
+                    const total = vals.reduce((acc, v) => acc + v, 0);
+                    input.value = String(total);
+                    status.textContent = `Terbaca ${vals.length} nominal (Total: ${formatRp(total)}). Silakan periksa angka sebelum klik Terapkan.`;
+                }
+            } catch (err) {
+                if (active()) {
+                    status.textContent = 'OCR gagal otomatis: ' + (err?.message || err) + ' — Anda tetap bisa mengisi nominal manual di kolom di bawah.';
+                }
+            } finally {
+                if (worker) {
+                    try { await worker.terminate(); } catch (_) {}
+                }
+                if (active()) {
+                    scanBusy[type] = false;
+                    updateScanPreviewSummary();
+                }
+            }
         }
 
         document.addEventListener('paste', (event) => {
@@ -1446,10 +1534,16 @@
         }
 
         function applyScanResult(mode) {
-            for(const t of (mode==='BOTH'?['PENYEDIA','SWAKELOLA']:[mode])) {
-                const v=document.getElementById(t==='PENYEDIA'?'ocrPenyediaInput':'ocrSwakelolaInput').value;
-                if(scanBusy[t] || v.trim()==='' || !Number.isSafeInteger(Number(v)) || Number(v)<0){showToast('Nominal belum valid atau OCR masih berjalan.');return;}
-                if(scanInvalid[t] && !confirm('OCR belum tervalidasi. Apakah nominal manual sudah diperiksa?'))return;
+            for (const t of (mode === 'BOTH' ? ['PENYEDIA', 'SWAKELOLA'] : [mode])) {
+                if (scanBusy[t]) {
+                    showToast('Proses OCR masih berjalan, tunggu sebentar.');
+                    return;
+                }
+                const v = document.getElementById(t === 'PENYEDIA' ? 'ocrPenyediaInput' : 'ocrSwakelolaInput')?.value ?? '';
+                if (v.trim() === '' || !Number.isSafeInteger(parseNum(v)) || parseNum(v) < 0) {
+                    showToast('Nominal belum valid.');
+                    return;
+                }
             }
 
             const selectEl = document.getElementById('scanSkpdSelect');
@@ -1463,26 +1557,16 @@
                 return;
             }
 
-            const rawPenyediaVal = document.getElementById('ocrPenyediaInput')?.value ?? row.penyedia;
-            const rawSwakelolaVal = document.getElementById('ocrSwakelolaInput')?.value ?? row.swakelola;
-            const nextPenyedia = parseNum(rawPenyediaVal);
-            const nextSwakelola = parseNum(rawSwakelolaVal);
+            const nextPenyedia = parseNum(document.getElementById('ocrPenyediaInput')?.value ?? row.penyedia);
+            const nextSwakelola = parseNum(document.getElementById('ocrSwakelolaInput')?.value ?? row.swakelola);
 
-            if (mode === 'PENYEDIA' || mode === 'BOTH') {
-                row.penyedia = nextPenyedia;
-            }
-            if (mode === 'SWAKELOLA' || mode === 'BOTH') {
-                row.swakelola = nextSwakelola;
-            }
+            if (mode === 'PENYEDIA' || mode === 'BOTH') row.penyedia = nextPenyedia;
+            if (mode === 'SWAKELOLA' || mode === 'BOTH') row.swakelola = nextSwakelola;
 
             const searchEl = document.getElementById('searchInput');
-            if (searchEl && searchEl.value.trim() !== '') {
-                searchEl.value = '';
-            }
+            if (searchEl && searchEl.value.trim() !== '') searchEl.value = '';
             const statusFilterEl = document.getElementById('statusFilter');
-            if (statusFilterEl && statusFilterEl.value !== 'ALL') {
-                statusFilterEl.value = 'ALL';
-            }
+            if (statusFilterEl && statusFilterEl.value !== 'ALL') statusFilterEl.value = 'ALL';
 
             saveState();
             renderTable();
@@ -1493,18 +1577,7 @@
                 : (mode === 'PENYEDIA' ? `Penyedia (${formatRp(row.penyedia)})` : `Swakelola (${formatRp(row.swakelola)})`);
             showToast(`Diterapkan ${labelMode} ke ${row.name}.`);
 
-            if (mode === 'BOTH') {
-                closeScanModal();
-            }
-
-            setTimeout(() => {
-                const targetRowEl = document.getElementById(`skpd-row-${targetIdx}`);
-                if (targetRowEl) {
-                    targetRowEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    targetRowEl.classList.add('bg-amber-100');
-                    setTimeout(() => targetRowEl.classList.remove('bg-amber-100'), 2500);
-                }
-            }, 120);
+            if (mode === 'BOTH') closeScanModal();
         }
 
         function openAddSkpdModal() {
@@ -1616,27 +1689,11 @@
                 right: { style: 'thin', color: { rgb: 'CBD5E1' } }
             };
 
-            const styleKopLine1 = {
-                font: { name: 'Arial', sz: 12, bold: true, color: { rgb: '0F172A' } },
-                alignment: { horizontal: 'center', vertical: 'center' }
-            };
-            const styleKopLine2 = {
-                font: { name: 'Arial', sz: 14, bold: true, color: { rgb: '0F172A' } },
-                alignment: { horizontal: 'center', vertical: 'center' }
-            };
-            const styleKopAddr = {
-                font: { name: 'Arial', sz: 9, italic: false, color: { rgb: '334155' } },
-                alignment: { horizontal: 'center', vertical: 'center' }
-            };
-            const styleKopPhone = {
-                font: { name: 'Arial', sz: 9, color: { rgb: '334155' } },
-                alignment: { horizontal: 'center', vertical: 'center' },
-                border: { bottom: { style: 'double', color: { rgb: '0F172A' } } }
-            };
-            const styleDocTitle = {
-                font: { name: 'Arial', sz: 11, bold: true, color: { rgb: '0F172A' } },
-                alignment: { horizontal: 'center', vertical: 'center' }
-            };
+            const styleKopLine1 = { font: { name: 'Arial', sz: 12, bold: true, color: { rgb: '0F172A' } }, alignment: { horizontal: 'center', vertical: 'center' } };
+            const styleKopLine2 = { font: { name: 'Arial', sz: 14, bold: true, color: { rgb: '0F172A' } }, alignment: { horizontal: 'center', vertical: 'center' } };
+            const styleKopAddr = { font: { name: 'Arial', sz: 9, color: { rgb: '334155' } }, alignment: { horizontal: 'center', vertical: 'center' } };
+            const styleKopPhone = { font: { name: 'Arial', sz: 9, color: { rgb: '334155' } }, alignment: { horizontal: 'center', vertical: 'center' }, border: { bottom: { style: 'double', color: { rgb: '0F172A' } } } };
+            const styleDocTitle = { font: { name: 'Arial', sz: 11, bold: true, color: { rgb: '0F172A' } }, alignment: { horizontal: 'center', vertical: 'center' } };
 
             const makeHeadStyle = (bgHex, fgHex = 'FFFFFF', sz = 9) => ({
                 font: { name: 'Arial', sz, bold: true, color: { rgb: fgHex } },
@@ -1704,17 +1761,11 @@
                 const excelRow = 11 + i;
                 const m = computeMetrics(r);
 
-                let statusBg = 'DCFCE7';
-                let statusFg = '166534';
-                let selisihFg = '166534';
+                let statusBg = 'DCFCE7', statusFg = '166534', selisihFg = '166534';
                 if (m.status === 'SELISIH KURANG INPUT') {
-                    statusBg = 'FFEDD5';
-                    statusFg = '9A3412';
-                    selisihFg = 'C2410C';
+                    statusBg = 'FFEDD5'; statusFg = '9A3412'; selisihFg = 'C2410C';
                 } else if (m.status === 'SELISIH KELEBIHAN INPUT SIRUP') {
-                    statusBg = 'FEF9C3';
-                    statusFg = '854D0E';
-                    selisihFg = 'A16207';
+                    statusBg = 'FEF9C3'; statusFg = '854D0E'; selisihFg = 'A16207';
                 }
 
                 const numStyle = (bgHex = 'FFFFFF', fgHex = '0F172A', isBold = false) => ({
@@ -1726,24 +1777,8 @@
                 });
 
                 aoa.push([
-                    {
-                        v: Number(r.no) || (i + 1),
-                        t: 'n',
-                        s: {
-                            font: { name: 'Arial', sz: 9, bold: true, color: { rgb: '0F172A' } },
-                            alignment: { horizontal: 'center', vertical: 'center' },
-                            border: borderThin
-                        }
-                    },
-                    {
-                        v: r.name,
-                        t: 's',
-                        s: {
-                            font: { name: 'Arial', sz: 9, bold: true, color: { rgb: '0F172A' } },
-                            alignment: { horizontal: 'left', vertical: 'center', wrapText: true },
-                            border: borderThin
-                        }
-                    },
+                    { v: Number(r.no) || (i + 1), t: 'n', s: { font: { name: 'Arial', sz: 9, bold: true, color: { rgb: '0F172A' } }, alignment: { horizontal: 'center', vertical: 'center' }, border: borderThin } },
+                    { v: r.name, t: 's', s: { font: { name: 'Arial', sz: 9, bold: true, color: { rgb: '0F172A' } }, alignment: { horizontal: 'left', vertical: 'center', wrapText: true }, border: borderThin } },
                     { v: Number(r.sipd) || 0, t: 'n', s: numStyle('FFFFFF', '0F172A', false) },
                     { v: Number(r.pegawai) || 0, t: 'n', s: numStyle('FFFFFF', '0F172A', false) },
                     { v: Number(r.transfer) || 0, t: 'n', s: numStyle('FFFFFF', '0F172A', false) },
@@ -1753,26 +1788,8 @@
                     { v: Number(r.penyediaSwakelola) || 0, t: 'n', s: numStyle('FFFFFF', '0F172A', false) },
                     { t: 'n', f: `SUM(G${excelRow}:I${excelRow})`, v: m.totalSirup, s: numStyle('F0FDFA', '134E4A', true) },
                     { t: 'n', f: `F${excelRow}-J${excelRow}`, v: m.selisih, s: numStyle('FFFFFF', selisihFg, true) },
-                    {
-                        t: 's',
-                        f: `IF(K${excelRow}=0,"TIDAK ADA SELISIH",IF(K${excelRow}>0,"SELISIH KURANG INPUT","SELISIH KELEBIHAN INPUT SIRUP"))`,
-                        v: m.status,
-                        s: {
-                            font: { name: 'Arial', sz: 8, bold: true, color: { rgb: statusFg } },
-                            fill: { fgColor: { rgb: statusBg } },
-                            alignment: { horizontal: 'center', vertical: 'center', wrapText: true },
-                            border: borderThin
-                        }
-                    },
-                    {
-                        v: r.aktif || `TIDAK/ ${dateStr}`,
-                        t: 's',
-                        s: {
-                            font: { name: 'Arial', sz: 8, color: { rgb: '334155' } },
-                            alignment: { horizontal: 'center', vertical: 'center', wrapText: true },
-                            border: borderThin
-                        }
-                    }
+                    { t: 's', f: `IF(K${excelRow}=0,"TIDAK ADA SELISIH",IF(K${excelRow}>0,"SELISIH KURANG INPUT","SELISIH KELEBIHAN INPUT SIRUP"))`, v: m.status, s: { font: { name: 'Arial', sz: 8, bold: true, color: { rgb: statusFg } }, fill: { fgColor: { rgb: statusBg } }, alignment: { horizontal: 'center', vertical: 'center', wrapText: true }, border: borderThin } },
+                    { v: r.aktif || `TIDAK/ ${dateStr}`, t: 's', s: { font: { name: 'Arial', sz: 8, color: { rgb: '334155' } }, alignment: { horizontal: 'center', vertical: 'center', wrapText: true }, border: borderThin } }
                 ]);
             });
 
@@ -1806,93 +1823,19 @@
                     { t: 'n', f: `SUM(I${startDataRow}:I${endDataRow})`, s: totalNumStyle() },
                     { t: 'n', f: `SUM(J${startDataRow}:J${endDataRow})`, s: totalNumStyle('134E4A', 'CCFBF1') },
                     { t: 'n', f: `SUM(K${startDataRow}:K${endDataRow})`, s: totalNumStyle() },
-                    {
-                        t: 's',
-                        f: `IF(K${totalRowIdx}=0,"TIDAK ADA SELISIH",IF(K${totalRowIdx}>0,"SELISIH KURANG INPUT","SELISIH KELEBIHAN INPUT SIRUP"))`,
-                        s: totalTextStyle('center')
-                    },
+                    { t: 's', f: `IF(K${totalRowIdx}=0,"TIDAK ADA SELISIH",IF(K${totalRowIdx}>0,"SELISIH KURANG INPUT","SELISIH KELEBIHAN INPUT SIRUP"))`, s: totalTextStyle('center') },
                     { v: '', s: totalTextStyle('center') }
                 ]);
             }
 
-            const signStartRow = aoa.length + 2;
-            const signStyleNormal = { font: { name: 'Arial', sz: 9, color: { rgb: '0F172A' } }, alignment: { horizontal: 'left', vertical: 'center' } };
-            const signStyleBold = { font: { name: 'Arial', sz: 9, bold: true, color: { rgb: '0F172A' } }, alignment: { horizontal: 'left', vertical: 'center' } };
-            aoa.push([]);
-            aoa.push([]);
-            aoa.push(['', '', '', '', '', '', '', '', '', '', { v: `Marabahan, ${dateStr}`, s: signStyleNormal }]);
-            aoa.push(['', '', '', '', '', '', '', '', '', '', { v: 'KEPALA BAGIAN PENGADAAN BARANG DAN JASA', s: signStyleBold }]);
-            aoa.push(['', '', '', '', '', '', '', '', '', '', { v: 'SETDA KABUPATEN BARITO KUALA,', s: signStyleBold }]);
-            aoa.push([]);
-            aoa.push([]);
-            aoa.push(['', '', '', '', '', '', '', '', '', '', { v: '______________________________', s: signStyleBold }]);
-
             const wb = XLSX.utils.book_new();
             const ws = XLSX.utils.aoa_to_sheet(aoa);
-
-            for (let c = 0; c <= 12; c++) {
-                const ref = XLSX.utils.encode_cell({ r: 3, c });
-                if (!ws[ref]) ws[ref] = { v: '', t: 's' };
-                ws[ref].s = styleKopPhone;
-            }
-
-            ws['!cols'] = [
-                { wch: 6 },
-                { wch: 44 },
-                { wch: 21 },
-                { wch: 21 },
-                { wch: 19 },
-                { wch: 22 },
-                { wch: 21 },
-                { wch: 21 },
-                { wch: 19 },
-                { wch: 22 },
-                { wch: 21 },
-                { wch: 28 },
-                { wch: 24 }
-            ];
-
-            ws['!rows'] = [
-                { hpt: 20 },
-                { hpt: 22 },
-                { hpt: 16 },
-                { hpt: 17 },
-                { hpt: 10 },
-                { hpt: 20 },
-                { hpt: 10 },
-                { hpt: 28 },
-                { hpt: 32 },
-                { hpt: 18 }
-            ];
-
-            ws['!merges'] = [
-                { s: { r: 0, c: 0 }, e: { r: 0, c: 12 } },
-                { s: { r: 1, c: 0 }, e: { r: 1, c: 12 } },
-                { s: { r: 2, c: 0 }, e: { r: 2, c: 12 } },
-                { s: { r: 3, c: 0 }, e: { r: 3, c: 12 } },
-                { s: { r: 5, c: 0 }, e: { r: 5, c: 12 } },
-                { s: { r: 7, c: 0 }, e: { r: 8, c: 0 } },
-                { s: { r: 7, c: 1 }, e: { r: 8, c: 1 } },
-                { s: { r: 7, c: 2 }, e: { r: 7, c: 4 } },
-                { s: { r: 7, c: 5 }, e: { r: 8, c: 5 } },
-                { s: { r: 7, c: 6 }, e: { r: 7, c: 9 } },
-                { s: { r: 7, c: 10 }, e: { r: 8, c: 10 } },
-                { s: { r: 7, c: 11 }, e: { r: 8, c: 11 } },
-                { s: { r: 7, c: 12 }, e: { r: 8, c: 12 } },
-                { s: { r: signStartRow, c: 10 }, e: { r: signStartRow, c: 12 } },
-                { s: { r: signStartRow + 1, c: 10 }, e: { r: signStartRow + 1, c: 12 } },
-                { s: { r: signStartRow + 2, c: 10 }, e: { r: signStartRow + 2, c: 12 } },
-                { s: { r: signStartRow + 5, c: 10 }, e: { r: signStartRow + 5, c: 12 } }
-            ];
-
             XLSX.utils.book_append_sheet(wb, ws, 'TRN RIZKY NEW');
             XLSX.writeFile(wb, `REKAP_SIRUP_BATOLA_${dateStr.replace(/\s+/g, '_')}.xlsx`);
-            showToast('File Excel (.xlsx) lengkap dengan Kop Surat, Tabel Berwarna, dan Rumus Aktif berhasil diunduh!');
+            showToast('File Excel (.xlsx) berhasil diunduh.');
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            loadState();
-            loadArchives();
             renderTable();
             initCloud();
         });
@@ -2105,25 +2048,162 @@
         }
     </script>
 
-<script>
-const cloud = window.supabase?.createClient('https://exuxwgcnhuwsokyuoefk.supabase.co','sb_publishable_8Yi4u1GURXdl8CyoSNKK7A_0LC7UjH9');
-let cloudReady=false, timer, dirty=false, busy=false, revision=null;
-const statusCloud = t => document.getElementById('cloudStatus').textContent=t;
-function lockCloud(lock){ for(const el of document.body.children){if(el.id!=='cloudPanel' && el.tagName!=='SCRIPT') el.inert=lock;} }
-function snapshotCloud(){return {state:{title:document.getElementById('docTitleInput').value,date:document.getElementById('docDateInput').value,logo:customLogoDataUrl||'',rows:skpdRows},archives:yearlyArchives};}
-async function pullCloud(){
- const {data,error}=await cloud.from('rup_data').select('data,updated_at').eq('id','main').maybeSingle(); if(error) throw error;
- revision=data?.updated_at||null;
- if(data){if(!Array.isArray(data.data?.state?.rows))throw Error('Format data online tidak sesuai');localStorage.setItem(STORAGE_KEY,JSON.stringify(data.data.state));localStorage.setItem(ARCHIVE_STORAGE_KEY,JSON.stringify(data.data.archives||[]));loadState();loadArchives();renderTable();}
- else {if(!confirm('Database masih kosong. Unggah data lokal dari perangkat ini sebagai data awal?'))throw Error('Inisialisasi dibatalkan'); const r=await cloud.from('rup_data').insert({id:'main',data:snapshotCloud()}).select('updated_at').single();if(r.error)throw r.error;revision=r.data.updated_at;}
-}
-async function initCloud(){lockCloud(true);if(!cloud){statusCloud('SDK gagal dimuat. Muat ulang halaman.');return;}try{const {data}=await cloud.auth.getSession();if(data.session)await startCloud();else statusCloud('Silakan login admin');}catch(e){statusCloud(e.message);}}
-async function startCloud(){cloudReady=false;lockCloud(true);await pullCloud();cloudReady=true;lockCloud(false);document.getElementById('cloudLogin').hidden=true;document.getElementById('cloudLogout').hidden=false;statusCloud('Online • data tersinkron');}
-async function loginCloud(e){e.preventDefault();try{statusCloud('Menghubungkan...');const {error}=await cloud.auth.signInWithPassword({email:document.getElementById('cloudEmail').value,password:document.getElementById('cloudPassword').value});document.getElementById('cloudPassword').value='';if(error)throw error;await startCloud();}catch(e){statusCloud(e.message);}}
-function queueCloud(){if(!cloudReady)return;dirty=true;statusCloud('Perubahan belum tersimpan');clearTimeout(timer);timer=setTimeout(pushCloud,700);}
-async function pushCloud(){if(!cloudReady||busy||!dirty)return;busy=true;dirty=false;try{const next=new Date().toISOString();const r=await cloud.from('rup_data').update({data:snapshotCloud(),updated_at:next}).eq('id','main').eq('updated_at',revision).select('updated_at').maybeSingle();if(r.error)throw r.error;if(!r.data)throw Error('Data berubah di perangkat lain. Cadangkan data lokal sebelum memuat ulang.');revision=r.data.updated_at;statusCloud('Online • tersimpan');}catch(e){dirty=true;statusCloud('Gagal simpan: '+e.message);return;}finally{busy=false;}if(dirty)queueCloud();}
-async function logoutCloud(){if(dirty||busy){alert('Tunggu penyimpanan selesai atau cadangkan data.');return;}cloudReady=false;await cloud.auth.signOut();location.reload();}
-window.addEventListener('beforeunload',e=>{if(dirty||busy){e.preventDefault();e.returnValue='';}});
-</script>
+    <script>
+        const cloud = window.supabase?.createClient('https://exuxwgcnhuwsokyuoefk.supabase.co', 'sb_publishable_8Yi4u1GURXdl8CyoSNKK7A_0LC7UjH9');
+        let cloudReady = false, timer, dirty = false, busy = false, revision = null;
+        const statusCloud = t => {
+            const el = document.getElementById('cloudStatus');
+            if (el) el.textContent = t;
+        };
+
+        function setWorkspaceLocked(locked) {
+            const ws = document.getElementById('appWorkspace');
+            if (!ws) return;
+            ws.inert = locked;
+            ws.classList.toggle('hidden', locked);
+        }
+
+        function snapshotCloud() {
+            return {
+                state: {
+                    title: document.getElementById('docTitleInput').value,
+                    date: document.getElementById('docDateInput').value,
+                    logo: customLogoDataUrl || '',
+                    rows: skpdRows
+                },
+                archives: yearlyArchives
+            };
+        }
+
+        async function pullCloud() {
+            const { data, error } = await cloud.from('rup_data').select('data,updated_at').eq('id', 'main').maybeSingle();
+            if (error) throw error;
+            revision = data?.updated_at || null;
+            if (data) {
+                if (!Array.isArray(data.data?.state?.rows)) throw new Error('Format data online tidak sesuai');
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data.data.state));
+                localStorage.setItem(ARCHIVE_STORAGE_KEY, JSON.stringify(data.data.archives || []));
+                loadState();
+                loadArchives();
+                renderTable();
+            } else {
+                if (!confirm('Database masih kosong. Unggah data lokal dari perangkat ini sebagai data awal?')) {
+                    throw new Error('Inisialisasi dibatalkan');
+                }
+                const r = await cloud.from('rup_data').insert({ id: 'main', data: snapshotCloud() }).select('updated_at').single();
+                if (r.error) throw r.error;
+                revision = r.data.updated_at;
+                loadState();
+                loadArchives();
+                renderTable();
+            }
+        }
+
+        async function initCloud() {
+            setWorkspaceLocked(true);
+            document.getElementById('cloudLogin').hidden = false;
+            document.getElementById('cloudLogout').hidden = true;
+            if (!cloud) {
+                statusCloud('SDK gagal dimuat. Muat ulang halaman.');
+                return;
+            }
+            try {
+                const { data } = await cloud.auth.getSession();
+                if (data.session) {
+                    await startCloud();
+                } else {
+                    clearSessionData();
+                    statusCloud('Silakan login admin');
+                }
+            } catch (e) {
+                clearSessionData();
+                statusCloud(e.message);
+            }
+        }
+
+        async function startCloud() {
+            cloudReady = false;
+            setWorkspaceLocked(true);
+            await pullCloud();
+            cloudReady = true;
+            setWorkspaceLocked(false);
+            document.getElementById('cloudLogin').hidden = true;
+            document.getElementById('cloudLogout').hidden = false;
+            statusCloud('Online • data tersinkron');
+        }
+
+        async function loginCloud(e) {
+            e.preventDefault();
+            try {
+                statusCloud('Menghubungkan...');
+                const { error } = await cloud.auth.signInWithPassword({
+                    email: document.getElementById('cloudEmail').value,
+                    password: document.getElementById('cloudPassword').value
+                });
+                document.getElementById('cloudPassword').value = '';
+                if (error) throw error;
+                await startCloud();
+            } catch (e) {
+                statusCloud(e.message);
+            }
+        }
+
+        function queueCloud() {
+            if (!cloudReady) return;
+            dirty = true;
+            statusCloud('Perubahan belum tersimpan');
+            clearTimeout(timer);
+            timer = setTimeout(pushCloud, 700);
+        }
+
+        async function pushCloud() {
+            if (!cloudReady || busy || !dirty) return;
+            busy = true;
+            dirty = false;
+            try {
+                const next = new Date().toISOString();
+                const r = await cloud.from('rup_data')
+                    .update({ data: snapshotCloud(), updated_at: next })
+                    .eq('id', 'main')
+                    .eq('updated_at', revision)
+                    .select('updated_at')
+                    .maybeSingle();
+                if (r.error) throw r.error;
+                if (!r.data) throw new Error('Data berubah di perangkat lain. Cadangkan data lokal sebelum memuat ulang.');
+                revision = r.data.updated_at;
+                statusCloud('Online • tersimpan');
+            } catch (e) {
+                dirty = true;
+                statusCloud('Gagal simpan: ' + e.message);
+            } finally {
+                busy = false;
+            }
+            if (dirty) queueCloud();
+        }
+
+        async function logoutCloud() {
+            if (dirty || busy) {
+                alert('Tunggu penyimpanan selesai atau cadangkan data.');
+                return;
+            }
+            cloudReady = false;
+            clearTimeout(timer);
+            try {
+                if (cloud) await cloud.auth.signOut();
+            } catch (_) {}
+            clearSessionData();
+            setWorkspaceLocked(true);
+            document.getElementById('cloudLogin').hidden = false;
+            document.getElementById('cloudLogout').hidden = true;
+            statusCloud('Silakan login admin');
+        }
+
+        window.addEventListener('beforeunload', e => {
+            if (dirty || busy) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+    </script>
 </body>
 </html>
