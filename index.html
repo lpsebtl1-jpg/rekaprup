@@ -43,13 +43,13 @@
             position: sticky;
             left: 0;
             z-index: 15;
-            min-width: 165px;
-            max-width: 195px;
+            min-width: 175px;
+            max-width: 210px;
         }
         @media (min-width: 640px) {
             .sticky-col-skpd {
-                min-width: 220px;
-                max-width: 260px;
+                min-width: 230px;
+                max-width: 270px;
             }
         }
         .badge-aman {
@@ -68,15 +68,13 @@
             border: 1px solid #fde047;
         }
     </style>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
 </head>
-<body class="min-h-screen flex flex-col"><section id="cloudPanel" style="position:sticky;top:0;z-index:99999;background:#fff;padding:12px;border-bottom:1px solid #ccc;color:#172033"><strong>Database RUP</strong> — <span id="cloudStatus">Memeriksa koneksi...</span><form id="cloudLogin" onsubmit="loginCloud(event)" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><input id="cloudEmail" type="email" required placeholder="Email admin" style="border:1px solid #aaa;padding:6px"><input id="cloudPassword" type="password" required placeholder="Password admin" style="border:1px solid #aaa;padding:6px"><button style="background:#166534;color:white;padding:6px 16px">Login</button></form><button id="cloudLogout" hidden onclick="logoutCloud()" style="padding:6px 12px;border:1px solid #aaa">Logout</button></section>
-
+<body class="min-h-screen flex flex-col">
     <!-- KOP SURAT & HEADER APLIKASI -->
     <header class="bg-slate-900 text-white border-b border-slate-800 shadow-lg">
         <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-4">
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-800 pb-4">
-                <div class="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-2">
+                <div class="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-3">
                     <div class="relative group shrink-0">
                         <div id="headerLogoContainer" class="w-12 h-14 rounded-xl bg-white p-1 border border-slate-300 shadow-md flex items-center justify-center overflow-hidden">
                             <svg id="defaultSelidahSvg" viewBox="0 0 220 240" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -85,33 +83,1155 @@
                                 <path d="M92,175 C62,145 58,92 84,54" fill="none" stroke="#15803d" stroke-width="3.5" stroke-linecap="round"/>
                                 <path d="M84,174 C50,148 44,102 64,66" fill="none" stroke="#15803d" stroke-width="3.2" stroke-linecap="round"/>
                                 <path d="M76,173 C38,152 30,115 44,82" fill="none" stroke="#15803d" stroke-width="3" stroke-linecap="round"/>
-                                <ellipse cx="76" cy="72" rx="4" ry="9" transform="rotate(-20 76 72)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
-                                <circle cx="80" cy="64" r="3.5" fill="#dc2626"/>
-                                <ellipse cx="64" cy="96" rx="4.5" ry="10" transform="rotate(-18 64 96)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
-                                <circle cx="71" cy="92" r="3.5" fill="#dc2626"/>
-                                <ellipse cx="52" cy="112" rx="4.5" ry="10" transform="rotate(-15 52 112)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
-                                <circle cx="62" cy="122" r="3.5" fill="#dc2626"/>
-                                <ellipse cx="42" cy="134" rx="4.5" ry="9.5" transform="rotate(-12 42 134)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
-                                <circle cx="55" cy="144" r="3.5" fill="#dc2626"/>
-                                <circle cx="66" cy="154" r="3.5" fill="#dc2626"/>
                                 <path d="M128,175 C162,152 174,105 144,46" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
-                                <g fill="#facc15" stroke="#1e293b" stroke-width="1.4">
-                                    <ellipse cx="144" cy="52" rx="4" ry="8" transform="rotate(-25 144 52)"/>
-                                    <ellipse cx="151" cy="64" rx="4.5" ry="8.5" transform="rotate(20 151 64)"/>
-                                    <ellipse cx="146" cy="74" rx="4.5" ry="8.5" transform="rotate(-25 146 74)"/>
-                                    <ellipse cx="156" cy="86" rx="4.5" ry="9" transform="rotate(22 156 86)"/>
-                                    <ellipse cx="150" cy="97" rx="4.5" ry="9" transform="rotate(-25 150 97)"/>
-                                    <ellipse cx="160" cy="110" rx="4.5" ry="9" transform="rotate(22 160 110)"/>
-                                    <ellipse cx="153" cy="121" rx="4.5" ry="9" transform="rotate(-25 153 121)"/>
-                                    <ellipse cx="160" cy="133" rx="4.5" ry="9" transform="rotate(22 160 133)"/>
-                                    <ellipse cx="152" cy="144" rx="4.5" ry="8.5" transform="rotate(-25 152 144)"/>
-                                    <ellipse cx="154" cy="155" rx="4.5" ry="8.5" transform="rotate(20 154 155)"/>
-                                    <ellipse cx="144" cy="164" rx="4.5" ry="8" transform="rotate(-22 144 164)"/>
-                                </g>
                                 <path d="M110,58 L138,76 L133,156 L110,174 L87,156 L82,76 Z" fill="#18181b" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
-                                <path d="M110,74 C115,92 115,118 111,134 L109,134 C105,118 105,92 110,74 Z" fill="#ffffff"/>
-                                <path d="M106,134 L115,134 L114,148 C113,156 104,160 95,158 L98,149 C103,150 106,147 106,142 Z" fill="#facc15"/>
-                                <path d="M46,166 L76,174 L76,204 L46,196 L56,181 Z" fill="#b91c1c" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
-                                <path d="M174,166 L144,174 L144,204 L174,196 L164,181 Z" fill="#b91c1c" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
                                 <path d="M74,172 Q110,164 146,172 L146,202 Q110,194 74,202 Z" fill="#dc2626" stroke="#18181b" stroke-width="2.2" stroke-linejoin="round"/>
-                                <text x="110" y="191" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="18" letter-spacing="1" fill="#ffffff">SELIDAH</
+                                <text x="110" y="191" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="18" letter-spacing="1" fill="#ffffff">SELIDAH</text>
+                            </svg>
+                            <img id="customLogoImg" alt="Logo Selidah" class="hidden w-full h-full object-contain">
+                        </div>
+                        <label title="Ganti Logo Selidah (Opsional)" class="cursor-pointer mt-0.5 block text-center text-[9px] font-bold text-emerald-300 hover:text-emerald-200 underline">
+                            Ganti Logo
+                            <input type="file" accept="image/*" class="hidden" onchange="handleLogoUpload(event)">
+                        </label>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <div class="text-[11px] font-bold uppercase tracking-widest text-emerald-400">
+                            PEMERINTAH KABUPATEN BARITO KUALA • SEKRETARIAT DAERAH
+                        </div>
+                        <h1 class="text-base sm:text-xl font-extrabold tracking-tight text-white mt-0.5">
+                            REKAP OTOMATIS DATA RUP &amp; MONITORING SIRUP
+                        </h1>
+                        <p class="text-xs text-slate-400 mt-0.5">
+                            Jalan Pangeran Antasari No.1 Marabahan 70511 Kalimantan Selatan • Telp (0511) 4799041
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 lg:w-[460px]">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                            Judul Rekapitulasi
+                        </label>
+                        <input id="docTitleInput" type="text" onchange="saveState()"
+                            value="REKAPITULASI SISTEM INFORMASI RENCANA UMUM PENGADAAN/ SIRUP APBD KAB. BARITO KUALA"
+                            class="w-full rounded-xl bg-slate-800 border border-slate-700 px-3 py-1.5 text-xs font-semibold text-white focus:outline-none focus:border-emerald-400">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                            Tanggal Rekap
+                        </label>
+                        <input id="docDateInput" type="text" onchange="saveState()"
+                            value="25 November 2026"
+                            class="w-full rounded-xl bg-slate-800 border border-slate-700 px-3 py-1.5 text-xs font-semibold text-white focus:outline-none focus:border-emerald-400">
+                    </div>
+                </div>
+            </div>
+
+            <!-- KARTU KPI RINGKASAN -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3 pt-4">
+                <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-3.5">
+                    <div class="text-[11px] font-semibold text-slate-400">Total Pagu SIPD (Kol 3)</div>
+                    <div id="kpiTotalSipd" class="text-base sm:text-lg font-extrabold font-mono text-white mt-1 truncate">Rp 0</div>
+                    <div class="text-[10px] text-slate-400 mt-0.5">Sesuai DPA Rekapitulasi SKPD</div>
+                </div>
+
+                <div class="bg-indigo-950/60 border border-indigo-700/60 rounded-2xl p-3.5">
+                    <div class="text-[11px] font-semibold text-indigo-300">Total Pagu Pengadaan (Kol 6)</div>
+                    <div id="kpiTotalPengadaan" class="text-base sm:text-lg font-extrabold font-mono text-indigo-200 mt-1 truncate">Rp 0</div>
+                    <div class="text-[10px] text-indigo-300/80 mt-0.5">SIPD − Pegawai − Transfer</div>
+                </div>
+
+                <div class="bg-teal-950/60 border border-teal-700/60 rounded-2xl p-3.5">
+                    <div class="text-[11px] font-semibold text-teal-300">Terumumkan SIRUP (Kol 10)</div>
+                    <div id="kpiTotalTerumumkan" class="text-base sm:text-lg font-extrabold font-mono text-teal-200 mt-1 truncate">Rp 0</div>
+                    <div id="kpiPersentaseTayang" class="text-[10px] text-teal-300/80 mt-0.5">0.0% dari pagu pengadaan</div>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-2xl p-3.5">
+                    <div class="text-[11px] font-semibold text-slate-500">Selisih Neto (Kol 11)</div>
+                    <div id="kpiTotalSelisih" class="text-base sm:text-lg font-extrabold font-mono text-slate-900 mt-1 truncate">Rp 0</div>
+                    <div class="text-[10px] text-slate-500 mt-0.5">Pagu Pengadaan − Terumumkan</div>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-2xl p-3.5 sm:col-span-2 xl:col-span-1">
+                    <div class="text-[11px] font-semibold text-slate-500">Rekap Status SKPD</div>
+                    <div id="kpiStatusBreakdown" class="text-xs sm:text-sm font-extrabold text-slate-800 mt-1.5">0 Pas • 0 Kurang • 0 Lebih</div>
+                    <div class="text-[10px] text-slate-500 mt-0.5">Monitoring selisih input SIRUP</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- KONTEN UTAMA -->
+    <main class="flex-1 max-w-[1600px] w-full mx-auto px-2.5 sm:px-6 py-3 sm:py-4 space-y-3 sm:space-y-4 overflow-x-hidden">
+        <!-- TOOLBAR AKSI & FILTER -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-3 sm:p-3.5 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
+            <div class="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2 w-full xl:w-auto">
+                <button type="button" onclick="openScanModal(null, 'BOTH')"
+                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                    <i class="fa-solid fa-camera"></i> Upload Screenshot SIRUP (Penyedia &amp; Swakelola)
+                </button>
+                <button type="button" onclick="openAddSkpdModal()"
+                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                    <i class="fa-solid fa-plus"></i> Tambah SKPD
+                </button>
+                <button type="button" onclick="openImportModal()"
+                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                    <i class="fa-solid fa-file-import"></i> Import Excel
+                </button>
+                <button type="button" onclick="exportToExcel()"
+                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                    <i class="fa-solid fa-file-excel text-emerald-400"></i> Export Excel (.xlsx)
+                </button>
+                <button type="button" onclick="exportToPdf()"
+                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                    <i class="fa-solid fa-file-pdf"></i> Export PDF
+                </button>
+                <button type="button" onclick="loadSampleSkpdData()"
+                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-sm transition flex items-center justify-center sm:justify-start gap-1.5">
+                    <i class="fa-solid fa-table-list"></i> Muat Contoh SKPD
+                </button>
+                <button type="button" onclick="resetDefaultData()"
+                    class="w-full sm:w-auto min-h-[40px] px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition flex items-center justify-center sm:justify-start gap-1.5">
+                    <i class="fa-solid fa-rotate-left"></i> Kosongkan Tabel
+                </button>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-2 w-full xl:w-auto">
+                <div class="relative flex-1 sm:w-64">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input id="searchInput" type="text" oninput="renderTable()" placeholder="Cari nama SKPD / no..."
+                        class="w-full min-h-[40px] pl-8 pr-3 py-2 rounded-xl border border-slate-300 text-xs font-medium text-slate-800 focus:outline-none focus:border-blue-600">
+                </div>
+                <select id="statusFilter" onchange="renderTable()"
+                    class="w-full sm:w-auto min-h-[40px] rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:border-blue-600">
+                    <option value="ALL">Semua Status Selisih</option>
+                    <option value="TIDAK ADA SELISIH">TIDAK ADA SELISIH</option>
+                    <option value="SELISIH KURANG INPUT">SELISIH KURANG INPUT</option>
+                    <option value="SELISIH KELEBIHAN INPUT SIRUP">SELISIH KELEBIHAN INPUT SIRUP</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- TABEL REKAPITULASI 13 KOLOM -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-slate-900 text-white text-[10px] uppercase tracking-wider">
+                            <th rowspan="2" class="px-2 py-2.5 border-r border-slate-700 text-center w-14">NO.</th>
+                            <th rowspan="2" class="sticky-col-skpd bg-slate-900 px-3 py-2.5 border-r border-slate-700 text-left">SATUAN KERJA</th>
+                            <th colspan="3" class="px-2 py-2 border-r border-slate-700 text-center bg-slate-800">SIPD (SESUAI DPA REKAPITULASI SKPD)</th>
+                            <th rowspan="2" class="px-2.5 py-2 border-r border-slate-700 text-center bg-indigo-950 min-w-[140px]">TOTAL PAGU PENGADAAN<br><span class="text-[9px] font-normal text-indigo-200">(SIPD − Pegawai − Transfer)</span></th>
+                            <th colspan="4" class="px-2 py-2 border-r border-slate-700 text-center bg-teal-950">SIRUP (SESUAI ISI REKAP)</th>
+                            <th rowspan="2" class="px-2.5 py-2 border-r border-slate-700 text-center min-w-[130px]">SELISIH<br><span class="text-[9px] font-normal text-slate-300">(Pagu Pengadaan − SIRUP)</span></th>
+                            <th rowspan="2" class="px-2.5 py-2 border-r border-slate-700 text-center min-w-[165px]">STATUS</th>
+                            <th rowspan="2" class="px-2.5 py-2 border-r border-slate-700 text-center min-w-[145px]">PENGAKTIFAN PENGISIAN RUP</th>
+                            <th rowspan="2" class="px-2.5 py-2 text-center min-w-[125px]">AKSI</th>
+                        </tr>
+                        <tr class="bg-slate-800 text-slate-100 text-[10px] leading-tight">
+                            <th class="px-2 py-2 border-r border-slate-700 text-center min-w-[130px]">3. TOTAL PAGU SIPD / JUMLAH BELANJA</th>
+                            <th class="px-2 py-2 border-r border-slate-700 text-center min-w-[130px]">4. TOTAL PAGU BELANJA PEGAWAI / NON PENGADAAN</th>
+                            <th class="px-2 py-2 border-r border-slate-700 text-center min-w-[125px]">5. TOTAL PAGU BELANJA TRANSFER / NON PENGADAAN</th>
+                            <th class="px-2 py-2 border-r border-slate-700 text-center bg-blue-950 text-blue-200 min-w-[130px]">7. TOTAL PAGU PAKET PENYEDIA PADA SIRUP</th>
+                            <th class="px-2 py-2 border-r border-slate-700 text-center bg-emerald-950 text-emerald-200 min-w-[130px]">8. TOTAL PAGU PAKET SWAKELOLA PADA SIRUP</th>
+                            <th class="px-2 py-2 border-r border-slate-700 text-center min-w-[125px]">9. TOTAL PAGU PAKET PENYEDIA DALAM SWAKELOLA</th>
+                            <th class="px-2 py-2 border-r border-slate-700 text-center bg-teal-900 text-teal-100 min-w-[135px]">10. TOTAL PAGU SIRUP TERUMUMKAN / TAYANG</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rekapTableBody" class="divide-y divide-slate-200"></tbody>
+                    <tfoot id="rekapTableFooter"></tfoot>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER COPYRIGHT -->
+    <footer class="max-w-[1600px] w-full mx-auto px-4 sm:px-6 py-3 text-center text-[11px] font-semibold text-slate-500">
+        Copyright &copy; REEZZ 2026
+    </footer>
+
+    <!-- MODAL UPLOAD SCREENSHOT PENYEDIA & SWAKELOLA -->
+    <div id="scanModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+        <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 w-full max-w-5xl overflow-hidden my-auto">
+            <div class="bg-slate-900 text-white px-5 py-3.5 flex items-center justify-between">
+                <h3 class="font-bold text-sm sm:text-base flex items-center gap-2">
+                    <i class="fa-solid fa-camera-retro text-blue-400"></i>
+                    <span>Upload Screenshot Rekap SIRUP — Paket Penyedia &amp; Paket Swakelola</span>
+                </h3>
+                <button type="button" onclick="closeScanModal()" class="text-slate-300 hover:text-white text-lg p-1">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-5 space-y-5 max-h-[82vh] overflow-y-auto">
+                <div class="rounded-2xl bg-slate-50 border border-slate-200 p-4 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+                    <div class="lg:col-span-5">
+                        <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">
+                            Pilih Satuan Kerja (SKPD)
+                        </label>
+                        <select id="scanSkpdSelect" onchange="onScanSkpdChange()"
+                            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:border-blue-600">
+                        </select>
+                        <div id="scanSkpdSubSummary" class="mt-2 text-[11px] text-slate-600 bg-white border border-slate-200 rounded-xl px-3 py-2">
+                            Silakan pilih SKPD untuk melihat nilai awal dan hasil screenshot.
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 flex flex-wrap gap-2 justify-start lg:justify-end">
+                        <button type="button" onclick="simulateScan('PENYEDIA')"
+                            class="px-3 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-bold transition">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Simulasi Screenshot Penyedia
+                        </button>
+                        <button type="button" onclick="simulateScan('SWAKELOLA')"
+                            class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-bold transition">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Simulasi Screenshot Swakelola
+                        </button>
+                        <button type="button" onclick="applyScanResult('BOTH')"
+                            class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-sm transition">
+                            <i class="fa-solid fa-check-double"></i> Terapkan Keduanya ke SKPD
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div id="sectionPenyedia" class="rounded-2xl border-2 border-blue-200 bg-blue-50/30 p-4 space-y-3">
+                        <div class="flex items-center justify-between border-b border-blue-200 pb-2">
+                            <div>
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-600 text-white">
+                                    Tabel &amp; Upload 1
+                                </span>
+                                <h4 class="text-sm font-extrabold text-blue-950 mt-1">
+                                    SCREENSHOT PAKET PENYEDIA (KOLOM 7)
+                                </h4>
+                            </div>
+                            <button type="button" onclick="applyScanResult('PENYEDIA')"
+                                class="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold transition">
+                                Terapkan Penyedia
+                            </button>
+                        </div>
+
+                        <label class="block cursor-pointer rounded-xl border-2 border-dashed border-blue-300 bg-white hover:bg-blue-50/50 p-3 text-center transition">
+                            <input id="fileInputPenyedia" type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'PENYEDIA')">
+                            <div class="text-xs font-bold text-blue-700">
+                                <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Klik Upload Screenshot Rekap Penyedia
+                            </div>
+                            <div class="text-[11px] text-slate-500 mt-0.5">Mendukung PNG, JPG, atau paste gambar (Ctrl+V)</div>
+                        </label>
+
+                        <div id="statusPenyedia" class="text-[11px] font-semibold text-slate-600 bg-white rounded-xl px-3 py-2 border border-blue-100">
+                            Menunggu upload atau input nominal Paket Penyedia.
+                        </div>
+
+                        <div class="bg-white rounded-xl border border-blue-200 p-2.5 space-y-1.5">
+                            <div class="flex items-center justify-between gap-2">
+                                <label for="manualListPenyedia" class="text-[10px] font-extrabold uppercase tracking-wider text-blue-900">
+                                    Hitung Persis Deretan Pagu Penyedia
+                                </label>
+                                <button type="button" onclick="applyManualSum('PENYEDIA')" class="px-2 py-0.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-bold">
+                                    Hitung &amp; Isi Total
+                                </button>
+                            </div>
+                            <textarea id="manualListPenyedia" rows="2" oninput="previewManualSum('PENYEDIA')" placeholder="Contoh: 60.000.000&#10;9.613.400&#10;12.400.000" class="w-full rounded-lg border border-blue-200 px-2.5 py-1.5 font-mono text-[11px] text-slate-800 focus:outline-none focus:border-blue-600"></textarea>
+                            <div id="manualSumInfoPenyedia" class="text-[10px] font-semibold text-blue-800">0 angka terdeteksi • Total: Rp 0</div>
+                        </div>
+
+                        <img id="previewPenyedia" alt="Preview Screenshot Penyedia" class="hidden w-full max-h-40 object-contain rounded-xl border border-blue-200 bg-white">
+
+                        <div class="overflow-x-auto rounded-xl border border-blue-200 bg-white">
+                            <table class="w-full text-xs">
+                                <thead class="bg-blue-100/80 text-blue-950 text-[10px] uppercase">
+                                    <tr>
+                                        <th class="px-2.5 py-2 text-left">Keterangan</th>
+                                        <th class="px-2.5 py-2 text-right">Nilai (Rp)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-blue-100">
+                                    <tr>
+                                        <td class="px-2.5 py-1.5 font-medium text-slate-600">Nilai Awal Penyedia</td>
+                                        <td id="oldPenyediaVal" class="px-2.5 py-1.5 text-right font-mono font-semibold text-slate-700">Rp 0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2.5 py-1.5 font-semibold text-blue-900">Hasil Screenshot Penyedia</td>
+                                        <td class="px-2.5 py-1.5 text-right">
+                                            <input id="ocrPenyediaInput" type="number" step="1" oninput="updateScanPreviewSummary()"
+                                                class="w-full max-w-[180px] rounded-lg border border-blue-300 px-2 py-1 text-right font-mono font-bold text-blue-900 focus:outline-none focus:border-blue-600">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2.5 py-1.5 font-medium text-slate-600">Perubahan dari Nilai Awal</td>
+                                        <td id="diffPenyediaVal" class="px-2.5 py-1.5 text-right font-mono font-bold text-slate-800">Rp 0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="sectionSwakelola" class="rounded-2xl border-2 border-emerald-200 bg-emerald-50/30 p-4 space-y-3">
+                        <div class="flex items-center justify-between border-b border-emerald-200 pb-2">
+                            <div>
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-600 text-white">
+                                    Tabel &amp; Upload 2
+                                </span>
+                                <h4 class="text-sm font-extrabold text-emerald-950 mt-1">
+                                    SCREENSHOT PAKET SWAKELOLA (KOLOM 8)
+                                </h4>
+                            </div>
+                            <button type="button" onclick="applyScanResult('SWAKELOLA')"
+                                class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold transition">
+                                Terapkan Swakelola
+                            </button>
+                        </div>
+
+                        <label class="block cursor-pointer rounded-xl border-2 border-dashed border-emerald-300 bg-white hover:bg-emerald-50/50 p-3 text-center transition">
+                            <input id="fileInputSwakelola" type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'SWAKELOLA')">
+                            <div class="text-xs font-bold text-emerald-700">
+                                <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Klik Upload Screenshot Rekap Swakelola
+                            </div>
+                            <div class="text-[11px] text-slate-500 mt-0.5">Mendukung PNG, JPG, atau paste gambar (Ctrl+V)</div>
+                        </label>
+
+                        <div id="statusSwakelola" class="text-[11px] font-semibold text-slate-600 bg-white rounded-xl px-3 py-2 border border-emerald-100">
+                            Menunggu upload atau input nominal Paket Swakelola.
+                        </div>
+
+                        <div class="bg-white rounded-xl border border-emerald-200 p-2.5 space-y-1.5">
+                            <div class="flex items-center justify-between gap-2">
+                                <label for="manualListSwakelola" class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-900">
+                                    Hitung Persis Deretan Pagu Swakelola
+                                </label>
+                                <button type="button" onclick="applyManualSum('SWAKELOLA')" class="px-2 py-0.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold">
+                                    Hitung &amp; Isi Total
+                                </button>
+                            </div>
+                            <textarea id="manualListSwakelola" rows="2" oninput="previewManualSum('SWAKELOLA')" placeholder="Contoh: 7.800.000&#10;33.600.000&#10;86.400" class="w-full rounded-lg border border-emerald-200 px-2.5 py-1.5 font-mono text-[11px] text-slate-800 focus:outline-none focus:border-emerald-600"></textarea>
+                            <div id="manualSumInfoSwakelola" class="text-[10px] font-semibold text-emerald-800">0 angka terdeteksi • Total: Rp 0</div>
+                        </div>
+
+                        <img id="previewSwakelola" alt="Preview Screenshot Swakelola" class="hidden w-full max-h-40 object-contain rounded-xl border border-emerald-200 bg-white">
+
+                        <div class="overflow-x-auto rounded-xl border border-emerald-200 bg-white">
+                            <table class="w-full text-xs">
+                                <thead class="bg-emerald-100/80 text-emerald-950 text-[10px] uppercase">
+                                    <tr>
+                                        <th class="px-2.5 py-2 text-left">Keterangan</th>
+                                        <th class="px-2.5 py-2 text-right">Nilai (Rp)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-emerald-100">
+                                    <tr>
+                                        <td class="px-2.5 py-1.5 font-medium text-slate-600">Nilai Awal Swakelola</td>
+                                        <td id="oldSwakelolaVal" class="px-2.5 py-1.5 text-right font-mono font-semibold text-slate-700">Rp 0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2.5 py-1.5 font-semibold text-emerald-900">Hasil Screenshot Swakelola</td>
+                                        <td class="px-2.5 py-1.5 text-right">
+                                            <input id="ocrSwakelolaInput" type="number" step="1" oninput="updateScanPreviewSummary()"
+                                                class="w-full max-w-[180px] rounded-lg border border-emerald-300 px-2 py-1 text-right font-mono font-bold text-emerald-900 focus:outline-none focus:border-emerald-600">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-2.5 py-1.5 font-medium text-slate-600">Perubahan dari Nilai Awal</td>
+                                        <td id="diffSwakelolaVal" class="px-2.5 py-1.5 text-right font-mono font-bold text-slate-800">Rp 0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="scanProjectedResult" class="rounded-2xl bg-slate-900 text-white p-4 text-xs">
+                    Memuat simulasi selisih SKPD...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TAMBAH SKPD -->
+    <div id="addSkpdModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 w-full max-w-lg overflow-hidden">
+            <div class="bg-slate-900 text-white px-5 py-3.5 flex items-center justify-between">
+                <h3 class="font-bold text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-building-circle-plus text-emerald-400"></i>
+                    <span>Tambah Satuan Kerja (SKPD)</span>
+                </h3>
+                <button type="button" onclick="closeAddSkpdModal()" class="text-slate-300 hover:text-white">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form onsubmit="submitNewSkpd(event)" class="p-5 space-y-3 text-xs">
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">No. Urut</label>
+                        <input id="newSkpdNo" type="number" required class="w-full rounded-xl border border-slate-300 px-3 py-2 font-mono">
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block font-bold text-slate-700 mb-1">Nama Satuan Kerja</label>
+                        <input id="newSkpdName" type="text" required placeholder="Contoh: DINAS PERHUBUNGAN KAB. BARITO KUALA"
+                            class="w-full rounded-xl border border-slate-300 px-3 py-2 font-semibold">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Pagu SIPD (Kol 3)</label>
+                        <input id="newSkpdSipd" type="number" value="0" class="w-full rounded-xl border border-slate-300 px-2.5 py-2 font-mono text-right">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Belanja Pegawai (Kol 4)</label>
+                        <input id="newSkpdPegawai" type="number" value="0" class="w-full rounded-xl border border-slate-300 px-2.5 py-2 font-mono text-right">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Belanja Transfer (Kol 5)</label>
+                        <input id="newSkpdTransfer" type="number" value="0" class="w-full rounded-xl border border-slate-300 px-2.5 py-2 font-mono text-right">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block font-bold text-blue-900 mb-1">Penyedia SIRUP (Kol 7)</label>
+                        <input id="newSkpdPenyedia" type="number" value="0" class="w-full rounded-xl border border-blue-300 px-2.5 py-2 font-mono text-right">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-emerald-900 mb-1">Swakelola SIRUP (Kol 8)</label>
+                        <input id="newSkpdSwakelola" type="number" value="0" class="w-full rounded-xl border border-emerald-300 px-2.5 py-2 font-mono text-right">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Penyedia dlm Swakelola (Kol 9)</label>
+                        <input id="newSkpdPenyediaSwakelola" type="number" value="0" class="w-full rounded-xl border border-slate-300 px-2.5 py-2 font-mono text-right">
+                    </div>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeAddSkpdModal()" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 font-bold">Batal</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold">Simpan SKPD</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL IMPORT EXCEL -->
+    <div id="importModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 w-full max-w-md overflow-hidden">
+            <div class="bg-slate-900 text-white px-5 py-3.5 flex items-center justify-between">
+                <h3 class="font-bold text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-file-import text-amber-400"></i>
+                    <span>Import Data Excel (.xlsx / .csv)</span>
+                </h3>
+                <button type="button" onclick="closeImportModal()" class="text-slate-300 hover:text-white">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-5 space-y-3 text-xs">
+                <p class="text-slate-600 leading-relaxed">
+                    Pilih file Excel rekapitulasi RUP/SIRUP. Baris yang memiliki nama Satuan Kerja dan nominal pagu akan otomatis dimuat.
+                </p>
+                <input id="excelImportInput" type="file" accept=".xlsx,.xls,.csv" onchange="handleExcelImport(event)"
+                    class="w-full rounded-xl border border-slate-300 p-2 text-xs">
+                <div class="flex justify-end">
+                    <button type="button" onclick="closeImportModal()" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 font-bold">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFIKASI -->
+    <div id="toastBox" class="fixed bottom-4 right-4 z-50 hidden max-w-sm rounded-2xl bg-slate-900 text-white px-4 py-3 text-xs font-semibold shadow-xl border border-slate-700">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'REKAP_RUP_BATOLA_PREVIEW_V1';
+        let customLogoDataUrl = '';
+        let currentScanRowIndex = null;
+        let lastActivePasteTarget = 'PENYEDIA';
+
+        const SAMPLE_SKPD_DATA = [
+            {
+                no: 1,
+                name: 'DINAS PERHUBUNGAN KAB. BARITO KUALA',
+                sipd: 25468493575,
+                pegawai: 5120000000,
+                transfer: 0,
+                penyedia: 12420000000,
+                swakelola: 7928493575,
+                penyediaSwakelola: 0,
+                aktif: 'AKTIF / 25 Nov 2026'
+            },
+            {
+                no: 2,
+                name: 'KECAMATAN TABUNGANEN',
+                sipd: 4850000000,
+                pegawai: 2150000000,
+                transfer: 0,
+                penyedia: 1450000000,
+                swakelola: 980000000,
+                penyediaSwakelola: 0,
+                aktif: 'TIDAK / 25 Nov 2026'
+            },
+            {
+                no: 3,
+                name: 'DINAS KOMUNIKASI DAN INFORMATIKA KAB. BARITO KUALA',
+                sipd: 18900000000,
+                pegawai: 3400000000,
+                transfer: 0,
+                penyedia: 11200000000,
+                swakelola: 4300000000,
+                penyediaSwakelola: 0,
+                aktif: 'AKTIF / 25 Nov 2026'
+            }
+        ];
+
+        let skpdRows = [];
+
+        function formatNum(val) {
+            if (val === '' || val === null || val === undefined) return '0';
+            const num = Math.round(Number(val) || 0);
+            return num.toLocaleString('id-ID');
+        }
+
+        function formatRp(val) {
+            const num = Math.round(Number(val) || 0);
+            return (num < 0 ? '-Rp ' : 'Rp ') + Math.abs(num).toLocaleString('id-ID');
+        }
+
+        function parseNum(str) {
+            if (typeof str === 'number') return isNaN(str) ? 0 : Math.round(str);
+            if (str === null || str === undefined) return 0;
+            let raw = String(str).trim();
+            if (!raw || raw === '-' || raw === '0') return 0;
+            raw = raw.replace(/Rp\.?/gi, '').replace(/\s+/g, '').trim();
+            const isNegative = raw.startsWith('-');
+            const unsigned = raw.replace(/^[+-]/, '');
+            if (/^\d{1,3}(\.\d{3})+(,\d+)?$/.test(unsigned)) {
+                const num = parseInt(unsigned.split(',')[0].replace(/\./g, ''), 10) || 0;
+                return isNegative ? -num : num;
+            }
+            if (/^\d{1,3}(,\d{3})+(\.\d+)?$/.test(unsigned)) {
+                const num = parseInt(unsigned.split('.')[0].replace(/,/g, ''), 10) || 0;
+                return isNegative ? -num : num;
+            }
+            const digitsOnly = unsigned.replace(/\D/g, '');
+            const num = parseInt(digitsOnly || '0', 10) || 0;
+            return isNegative ? -num : num;
+        }
+
+        function computeMetrics(row) {
+            const sipd = Number(row.sipd) || 0;
+            const pegawai = Number(row.pegawai) || 0;
+            const transfer = Number(row.transfer) || 0;
+            const paguPengadaan = sipd - pegawai - transfer;
+
+            const penyedia = Number(row.penyedia) || 0;
+            const swakelola = Number(row.swakelola) || 0;
+            const penyediaSwakelola = Number(row.penyediaSwakelola) || 0;
+            const totalSirup = penyedia + swakelola + penyediaSwakelola;
+
+            const selisih = paguPengadaan - totalSirup;
+            let status = 'TIDAK ADA SELISIH';
+            if (selisih > 0) status = 'SELISIH KURANG INPUT';
+            else if (selisih < 0) status = 'SELISIH KELEBIHAN INPUT SIRUP';
+
+            return { paguPengadaan, totalSirup, selisih, status };
+        }
+
+        function showToast(msg) {
+            const box = document.getElementById('toastBox');
+            const label = document.getElementById('toastMessage');
+            if (!box || !label) return;
+            label.textContent = msg;
+            box.classList.remove('hidden');
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => box.classList.add('hidden'), 3200);
+        }
+
+        function saveState() {
+            try {
+                const payload = {
+                    title: document.getElementById('docTitleInput')?.value || '',
+                    date: document.getElementById('docDateInput')?.value || '',
+                    logo: customLogoDataUrl || '',
+                    rows: skpdRows
+                };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+            } catch (err) {
+                console.warn('Gagal menyimpan state:', err);
+            }
+        }
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed.title && document.getElementById('docTitleInput')) {
+                        document.getElementById('docTitleInput').value = parsed.title;
+                    }
+                    if (parsed.date && document.getElementById('docDateInput')) {
+                        document.getElementById('docDateInput').value = parsed.date;
+                    }
+                    if (parsed.logo) {
+                        applyCustomLogo(parsed.logo);
+                    }
+                    if (Array.isArray(parsed.rows) && parsed.rows.length > 0) {
+                        skpdRows = parsed.rows;
+                        return;
+                    }
+                }
+            } catch (err) {
+                console.warn('Gagal memuat state:', err);
+            }
+            skpdRows = SAMPLE_SKPD_DATA.map(r => ({ ...r }));
+        }
+
+        function loadSampleSkpdData() {
+            skpdRows = SAMPLE_SKPD_DATA.map(r => ({ ...r }));
+            saveState();
+            renderTable();
+            showToast('Contoh data SKPD Kabupaten Barito Kuala dimuat.');
+        }
+
+        function resetDefaultData() {
+            skpdRows = [];
+            saveState();
+            renderTable();
+            showToast('Tabel dikosongkan. Klik "Muat Contoh SKPD" atau "Tambah SKPD".');
+        }
+
+        function applyCustomLogo(dataUrl) {
+            customLogoDataUrl = dataUrl;
+            const img = document.getElementById('customLogoImg');
+            const svg = document.getElementById('defaultSelidahSvg');
+            if (img && svg && dataUrl) {
+                img.src = dataUrl;
+                img.classList.remove('hidden');
+                svg.classList.add('hidden');
+            }
+        }
+
+        function handleLogoUpload(event) {
+            const file = event.target?.files?.[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                applyCustomLogo(e.target.result);
+                saveState();
+                showToast('Logo berhasil diperbarui!');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('rekapTableBody');
+            const tfoot = document.getElementById('rekapTableFooter');
+            if (!tbody || !tfoot) return;
+
+            const q = (document.getElementById('searchInput')?.value || '').trim().toLowerCase();
+            const filterStatus = document.getElementById('statusFilter')?.value || 'ALL';
+
+            let sumSipd = 0, sumPegawai = 0, sumTransfer = 0, sumPengadaan = 0;
+            let sumPenyedia = 0, sumSwakelola = 0, sumPenyediaSwakelola = 0, sumSirup = 0, sumSelisih = 0;
+            let countPas = 0, countKurang = 0, countLebih = 0;
+
+            skpdRows.forEach(r => {
+                const m = computeMetrics(r);
+                sumSipd += Number(r.sipd) || 0;
+                sumPegawai += Number(r.pegawai) || 0;
+                sumTransfer += Number(r.transfer) || 0;
+                sumPengadaan += m.paguPengadaan;
+                sumPenyedia += Number(r.penyedia) || 0;
+                sumSwakelola += Number(r.swakelola) || 0;
+                sumPenyediaSwakelola += Number(r.penyediaSwakelola) || 0;
+                sumSirup += m.totalSirup;
+                sumSelisih += m.selisih;
+
+                if (m.status === 'TIDAK ADA SELISIH') countPas++;
+                else if (m.status === 'SELISIH KURANG INPUT') countKurang++;
+                else countLebih++;
+            });
+
+            document.getElementById('kpiTotalSipd').textContent = formatRp(sumSipd);
+            document.getElementById('kpiTotalPengadaan').textContent = formatRp(sumPengadaan);
+            document.getElementById('kpiTotalTerumumkan').textContent = formatRp(sumSirup);
+            const pct = sumPengadaan > 0 ? ((sumSirup / sumPengadaan) * 100).toFixed(1) : '0.0';
+            document.getElementById('kpiPersentaseTayang').textContent = `${pct}% dari pagu pengadaan`;
+            document.getElementById('kpiTotalSelisih').textContent = formatRp(sumSelisih);
+            document.getElementById('kpiStatusBreakdown').textContent = `${countPas} Pas • ${countKurang} Kurang • ${countLebih} Lebih`;
+
+            tbody.innerHTML = '';
+            skpdRows.forEach((row, idx) => {
+                const m = computeMetrics(row);
+                const matchText = !q || row.name.toLowerCase().includes(q) || String(row.no).includes(q);
+                const matchStatus = filterStatus === 'ALL' || m.status === filterStatus;
+                if (!matchText || !matchStatus) return;
+
+                let badgeClass = 'badge-aman';
+                if (m.status === 'SELISIH KURANG INPUT') badgeClass = 'badge-kurang';
+                else if (m.status === 'SELISIH KELEBIHAN INPUT SIRUP') badgeClass = 'badge-lebih';
+
+                const tr = document.createElement('tr');
+                tr.id = `skpd-row-${idx}`;
+                tr.className = 'hover:bg-slate-50/90 transition-colors';
+                tr.innerHTML = `
+                    <td class="px-2 py-2 border-r border-slate-200 text-center font-mono font-bold text-slate-700">${row.no}</td>
+                    <td class="sticky-col-skpd bg-white px-3 py-2 border-r border-slate-200 align-top">
+                        <div class="font-bold text-slate-900 leading-snug">${row.name}</div>
+                        <div class="mt-1.5 rounded-lg bg-slate-50 border border-slate-200 px-2 py-1 text-[10px] space-y-0.5">
+                            <div class="flex justify-between gap-2 text-blue-800">
+                                <span>Penyedia:</span>
+                                <span class="font-mono font-bold">${formatRp(row.penyedia)}</span>
+                            </div>
+                            <div class="flex justify-between gap-2 text-emerald-800">
+                                <span>Swakelola:</span>
+                                <span class="font-mono font-bold">${formatRp(row.swakelola)}</span>
+                            </div>
+                            <div class="flex justify-between gap-2 border-t border-slate-200 pt-0.5 font-bold ${m.selisih === 0 ? 'text-emerald-700' : (m.selisih > 0 ? 'text-orange-700' : 'text-yellow-700')}">
+                                <span>Selisih:</span>
+                                <span class="font-mono">${formatRp(m.selisih)}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-1.5 py-2 border-r border-slate-200">
+                        <input type="text" value="${formatNum(row.sipd)}" onfocus="handleNumberFocus(this)" onblur="handleNumberBlur(${idx}, 'sipd', this)" onchange="updateCell(${idx}, 'sipd', this.value)"
+                            class="cell-input font-mono font-semibold text-slate-800">
+                    </td>
+                    <td class="px-1.5 py-2 border-r border-slate-200">
+                        <input type="text" value="${formatNum(row.pegawai)}" onfocus="handleNumberFocus(this)" onblur="handleNumberBlur(${idx}, 'pegawai', this)" onchange="updateCell(${idx}, 'pegawai', this.value)"
+                            class="cell-input font-mono text-slate-700">
+                    </td>
+                    <td class="px-1.5 py-2 border-r border-slate-200">
+                        <input type="text" value="${formatNum(row.transfer)}" onfocus="handleNumberFocus(this)" onblur="handleNumberBlur(${idx}, 'transfer', this)" onchange="updateCell(${idx}, 'transfer', this.value)"
+                            class="cell-input font-mono text-slate-700">
+                    </td>
+                    <td class="px-2.5 py-2 border-r border-slate-200 text-right font-mono font-bold text-indigo-950 bg-indigo-50/60">
+                        ${formatNum(m.paguPengadaan)}
+                    </td>
+                    <td class="px-1.5 py-2 border-r border-slate-200 bg-blue-50/40">
+                        <input type="text" value="${formatNum(row.penyedia)}" onfocus="handleNumberFocus(this)" onblur="handleNumberBlur(${idx}, 'penyedia', this)" onchange="updateCell(${idx}, 'penyedia', this.value)"
+                            class="cell-input font-mono font-semibold text-blue-950">
+                    </td>
+                    <td class="px-1.5 py-2 border-r border-slate-200 bg-emerald-50/40">
+                        <input type="text" value="${formatNum(row.swakelola)}" onfocus="handleNumberFocus(this)" onblur="handleNumberBlur(${idx}, 'swakelola', this)" onchange="updateCell(${idx}, 'swakelola', this.value)"
+                            class="cell-input font-mono font-semibold text-emerald-950">
+                    </td>
+                    <td class="px-1.5 py-2 border-r border-slate-200">
+                        <input type="text" value="${formatNum(row.penyediaSwakelola)}" onfocus="handleNumberFocus(this)" onblur="handleNumberBlur(${idx}, 'penyediaSwakelola', this)" onchange="updateCell(${idx}, 'penyediaSwakelola', this.value)"
+                            class="cell-input font-mono text-slate-700">
+                    </td>
+                    <td class="px-2.5 py-2 border-r border-slate-200 text-right font-mono font-bold text-teal-950 bg-teal-50/60">
+                        ${formatNum(m.totalSirup)}
+                    </td>
+                    <td class="px-2.5 py-2 border-r border-slate-200 text-right font-mono font-extrabold ${m.selisih === 0 ? 'text-emerald-700' : (m.selisih > 0 ? 'text-orange-700' : 'text-yellow-700')}">
+                        ${formatNum(m.selisih)}
+                    </td>
+                    <td class="px-2 py-2 border-r border-slate-200 text-center">
+                        <span class="inline-block px-2 py-1 rounded-lg text-[10px] font-extrabold leading-tight ${badgeClass}">
+                            ${m.status}
+                        </span>
+                    </td>
+                    <td class="px-1.5 py-2 border-r border-slate-200 text-center">
+                        <input type="text" value="${row.aktif || ''}" onchange="updateTextCell(${idx}, 'aktif', this.value)"
+                            class="w-full text-center text-[11px] font-medium text-slate-700 bg-transparent border border-transparent hover:border-slate-300 rounded px-1.5 py-1 focus:outline-none focus:border-blue-600 focus:bg-white">
+                    </td>
+                    <td class="px-2 py-2 text-center">
+                        <div class="flex flex-col gap-1 items-center">
+                            <div class="flex gap-1">
+                                <button type="button" onclick="openScanModal(${idx}, 'PENYEDIA')"
+                                    class="px-2 py-1 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-bold">
+                                    Penyedia
+                                </button>
+                                <button type="button" onclick="openScanModal(${idx}, 'SWAKELOLA')"
+                                    class="px-2 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold">
+                                    Swakelola
+                                </button>
+                            </div>
+                            <button type="button" onclick="deleteSkpd(${idx})"
+                                class="text-[10px] text-rose-600 hover:text-rose-800 font-semibold">
+                                <i class="fa-solid fa-trash-can"></i> Hapus
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const totalStatus = sumSelisih === 0
+                ? 'TIDAK ADA SELISIH'
+                : (sumSelisih > 0 ? 'SELISIH KURANG INPUT' : 'SELISIH KELEBIHAN INPUT SIRUP');
+
+            tfoot.innerHTML = `
+                <tr class="bg-slate-900 text-white font-bold text-xs">
+                    <td colspan="2" class="sticky-col-skpd bg-slate-900 px-3 py-3 border-r border-slate-700 text-left uppercase tracking-wider">
+                        TOTAL KESELURUHAN (${skpdRows.length} SKPD)
+                    </td>
+                    <td class="px-2.5 py-3 border-r border-slate-700 text-right font-mono">${formatNum(sumSipd)}</td>
+                    <td class="px-2.5 py-3 border-r border-slate-700 text-right font-mono">${formatNum(sumPegawai)}</td>
+                    <td class="px-2.5 py-3 border-r border-slate-700 text-right font-mono">${formatNum(sumTransfer)}</td>
+                    <td class="px-2.5 py-3 border-r border-slate-700 text-right font-mono text-indigo-200 bg-indigo-950/80">${formatNum(sumPengadaan)}</td>
+                    <td class="px-2.5 py-3 border-r border-slate-700 text-right font-mono text-blue-200 bg-blue-950/70">${formatNum(sumPenyedia)}</td>
+                    <td class="px-2.5 py-3 border-r border-slate-700 text-right font-mono text-emerald-200 bg-emerald-950/70">${formatNum(sumSwakelola)}</td>
+                    <td class="px-2.5 py-3 border-r border-slate-700 text-right font-mono">${formatNum(sumPenyediaSwakelola)}</td>
+                    <td class="px-2.5 py-3 border-r border-slate-700 text-right font-mono text-teal-200 bg-teal-950/80">${formatNum(sumSirup)}</td>
+                    <td class="px-2.5 py-3 border-r border-slate-700 text-right font-mono ${sumSelisih === 0 ? 'text-emerald-300' : (sumSelisih > 0 ? 'text-orange-300' : 'text-yellow-300')}">${formatNum(sumSelisih)}</td>
+                    <td class="px-2 py-3 border-r border-slate-700 text-center text-[10px] font-extrabold">${totalStatus}</td>
+                    <td class="px-2 py-3 border-r border-slate-700 text-center text-[10px] text-slate-300">-</td>
+                    <td class="px-2 py-3 text-center text-[10px] text-slate-400">-</td>
+                </tr>
+            `;
+        }
+
+        function handleNumberFocus(inputEl) {
+            if (!inputEl) return;
+            const parsed = parseNum(inputEl.value);
+            inputEl.value = parsed === 0 ? '' : String(parsed);
+            inputEl.select();
+        }
+
+        function handleNumberBlur(idx, field, inputEl) {
+            if (!inputEl) return;
+            const parsed = parseNum(inputEl.value);
+            inputEl.value = formatNum(parsed);
+            if (skpdRows[idx] && (Number(skpdRows[idx][field]) || 0) !== parsed) {
+                updateCell(idx, field, parsed);
+            }
+        }
+
+        function updateCell(idx, field, rawVal) {
+            if (!skpdRows[idx]) return;
+            skpdRows[idx][field] = parseNum(rawVal);
+            saveState();
+            renderTable();
+        }
+
+        function updateTextCell(idx, field, val) {
+            if (!skpdRows[idx]) return;
+            skpdRows[idx][field] = val;
+            saveState();
+        }
+
+        function deleteSkpd(idx) {
+            if (!skpdRows[idx]) return;
+            const removed = skpdRows.splice(idx, 1)[0];
+            saveState();
+            renderTable();
+            showToast(`SKPD "${removed.name}" dihapus.`);
+        }
+
+        function openScanModal(rowIdx = null, focusType = 'BOTH') {
+            if (!skpdRows.length) {
+                loadSampleSkpdData();
+            }
+            const modal = document.getElementById('scanModal');
+            const select = document.getElementById('scanSkpdSelect');
+            if (!modal || !select) return;
+
+            select.innerHTML = skpdRows.map((r, i) =>
+                `<option value="${i}">${r.no}. ${r.name}</option>`
+            ).join('');
+
+            currentScanRowIndex = (rowIdx !== null && skpdRows[rowIdx]) ? rowIdx : 0;
+            select.value = String(currentScanRowIndex);
+            lastActivePasteTarget = focusType === 'SWAKELOLA' ? 'SWAKELOLA' : 'PENYEDIA';
+
+            onScanSkpdChange();
+            modal.classList.remove('hidden');
+        }
+
+        function closeScanModal() {
+            document.getElementById('scanModal')?.classList.add('hidden');
+        }
+
+        function onScanSkpdChange() {
+            const select = document.getElementById('scanSkpdSelect');
+            const idx = parseInt(select?.value || '0', 10);
+            currentScanRowIndex = (!isNaN(idx) && skpdRows[idx]) ? idx : 0;
+            const row = skpdRows[currentScanRowIndex];
+            if (!row) return;
+
+            document.getElementById('oldPenyediaVal').textContent = formatRp(row.penyedia);
+            document.getElementById('oldSwakelolaVal').textContent = formatRp(row.swakelola);
+            const penyediaInput = document.getElementById('ocrPenyediaInput');
+            const swakelolaInput = document.getElementById('ocrSwakelolaInput');
+            if (penyediaInput) penyediaInput.value = String(Math.round(Number(row.penyedia) || 0));
+            if (swakelolaInput) swakelolaInput.value = String(Math.round(Number(row.swakelola) || 0));
+
+            updateScanPreviewSummary();
+        }
+
+        function extractRupiahListFromText(rawText) {
+            if (!rawText) return [];
+            const cleaned = String(rawText).replace(/Rp\.?/gi, ' ');
+            const tokens = cleaned.match(/-?\d[\d.,]*/g) || [];
+            const values = [];
+            for (const tok of tokens) {
+                if (!tok.replace(/\D/g, '')) continue;
+                const val = parseNum(tok);
+                if (val > 0) values.push(val);
+            }
+            return values;
+        }
+
+        function previewManualSum(targetType) {
+            const isPenyedia = targetType === 'PENYEDIA';
+            const ta = document.getElementById(isPenyedia ? 'manualListPenyedia' : 'manualListSwakelola');
+            const infoEl = document.getElementById(isPenyedia ? 'manualSumInfoPenyedia' : 'manualSumInfoSwakelola');
+            if (!ta || !infoEl) return;
+            const list = extractRupiahListFromText(ta.value);
+            const total = list.reduce((a, b) => a + b, 0);
+            infoEl.textContent = `${list.length} angka terdeteksi • Total: ${formatRp(total)}`;
+        }
+
+        function applyManualSum(targetType) {
+            const isPenyedia = targetType === 'PENYEDIA';
+            const ta = document.getElementById(isPenyedia ? 'manualListPenyedia' : 'manualListSwakelola');
+            const targetInput = document.getElementById(isPenyedia ? 'ocrPenyediaInput' : 'ocrSwakelolaInput');
+            const statusEl = document.getElementById(isPenyedia ? 'statusPenyedia' : 'statusSwakelola');
+            if (!ta || !targetInput) return;
+
+            const list = extractRupiahListFromText(ta.value);
+            const total = list.reduce((a, b) => a + b, 0);
+            targetInput.value = String(total);
+            previewManualSum(targetType);
+            updateScanPreviewSummary();
+
+            if (statusEl) {
+                statusEl.innerHTML = `<span class="${isPenyedia ? 'text-blue-700' : 'text-emerald-700'}"><i class="fa-solid fa-calculator"></i> Total akurat dari <strong>${list.length} nominal</strong>: <strong>${formatRp(total)}</strong>.</span>`;
+            }
+        }
+
+        function updateScanPreviewSummary() {
+            const row = skpdRows[currentScanRowIndex];
+            if (!row) return;
+
+            const oldPenyedia = Number(row.penyedia) || 0;
+            const oldSwakelola = Number(row.swakelola) || 0;
+            const newPenyedia = parseNum(document.getElementById('ocrPenyediaInput')?.value);
+            const newSwakelola = parseNum(document.getElementById('ocrSwakelolaInput')?.value);
+
+            const diffP = newPenyedia - oldPenyedia;
+            const diffS = newSwakelola - oldSwakelola;
+
+            document.getElementById('diffPenyediaVal').textContent = (diffP >= 0 ? '+' : '') + formatRp(diffP);
+            document.getElementById('diffSwakelolaVal').textContent = (diffS >= 0 ? '+' : '') + formatRp(diffS);
+
+            const mOld = computeMetrics(row);
+            const projectedRow = { ...row, penyedia: newPenyedia, swakelola: newSwakelola };
+            const mNew = computeMetrics(projectedRow);
+
+            document.getElementById('scanSkpdSubSummary').innerHTML = `
+                <div class="font-bold text-slate-900">${row.name}</div>
+                <div class="flex flex-wrap gap-3 mt-1 text-[11px]">
+                    <span>Pagu Pengadaan: <strong class="font-mono text-indigo-700">${formatRp(mOld.paguPengadaan)}</strong></span>
+                    <span>SIRUP Awal: <strong class="font-mono text-teal-700">${formatRp(mOld.totalSirup)}</strong></span>
+                </div>
+            `;
+
+            document.getElementById('scanProjectedResult').innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                    <div>
+                        <div class="text-[10px] uppercase tracking-wider text-slate-400">Estimasi Hasil Setelah Diterapkan</div>
+                        <div class="font-bold text-sm mt-0.5">
+                            Total SIRUP Baru: <span class="font-mono text-teal-300">${formatRp(mNew.totalSirup)}</span>
+                            &nbsp;|&nbsp;
+                            Selisih Baru: <span class="font-mono ${mNew.selisih === 0 ? 'text-emerald-400' : 'text-amber-300'}">${formatRp(mNew.selisih)}</span>
+                        </div>
+                    </div>
+                    <span class="px-3 py-1 rounded-xl text-[11px] font-extrabold ${mNew.status === 'TIDAK ADA SELISIH' ? 'bg-emerald-600 text-white' : 'bg-amber-500 text-slate-950'}">
+                        ${mNew.status}
+                    </span>
+                </div>
+            `;
+        }
+
+        function handleImageUpload(event, targetType) {
+            const file = event.target?.files?.[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const isPenyedia = targetType === 'PENYEDIA';
+                const imgEl = document.getElementById(isPenyedia ? 'previewPenyedia' : 'previewSwakelola');
+                const statusEl = document.getElementById(isPenyedia ? 'statusPenyedia' : 'statusSwakelola');
+                if (imgEl) {
+                    imgEl.src = e.target.result;
+                    imgEl.classList.remove('hidden');
+                }
+                if (statusEl) {
+                    statusEl.innerHTML = `<span class="${isPenyedia ? 'text-blue-700' : 'text-emerald-700'}"><i class="fa-solid fa-image"></i> Screenshot tampil. Masukkan daftar pagu di kolom hitung persis atau angka total lalu klik <strong>Terapkan</strong>.</span>`;
+                }
+            };
+            reader.readAsDataURL(file);
+            event.target.value = '';
+        }
+
+        function simulateScan(targetType) {
+            const row = skpdRows[currentScanRowIndex];
+            if (!row) return;
+            const m = computeMetrics(row);
+            if (targetType === 'PENYEDIA') {
+                const targetPenyedia = Math.max(0, m.paguPengadaan - (Number(row.swakelola) || 0) - (Number(row.penyediaSwakelola) || 0));
+                document.getElementById('ocrPenyediaInput').value = targetPenyedia;
+                document.getElementById('statusPenyedia').innerHTML =
+                    `<span class="text-blue-700"><i class="fa-solid fa-wand-magic-sparkles"></i> Simulasi membaca Pagu Penyedia: <strong>${formatRp(targetPenyedia)}</strong></span>`;
+            } else {
+                const targetSwakelola = Math.max(0, m.paguPengadaan - (Number(row.penyedia) || 0) - (Number(row.penyediaSwakelola) || 0));
+                document.getElementById('ocrSwakelolaInput').value = targetSwakelola;
+                document.getElementById('statusSwakelola').innerHTML =
+                    `<span class="text-emerald-700"><i class="fa-solid fa-wand-magic-sparkles"></i> Simulasi membaca Pagu Swakelola: <strong>${formatRp(targetSwakelola)}</strong></span>`;
+            }
+            updateScanPreviewSummary();
+        }
+
+        function applyScanResult(mode) {
+            const row = skpdRows[currentScanRowIndex];
+            if (!row) return;
+            const nextPenyedia = parseNum(document.getElementById('ocrPenyediaInput')?.value);
+            const nextSwakelola = parseNum(document.getElementById('ocrSwakelolaInput')?.value);
+
+            if (mode === 'PENYEDIA' || mode === 'BOTH') row.penyedia = nextPenyedia;
+            if (mode === 'SWAKELOLA' || mode === 'BOTH') row.swakelola = nextSwakelola;
+
+            saveState();
+            renderTable();
+            onScanSkpdChange();
+            showToast(`Data ${mode} diterapkan ke ${row.name}.`);
+            if (mode === 'BOTH') closeScanModal();
+        }
+
+        function openAddSkpdModal() {
+            const maxNo = skpdRows.reduce((acc, r) => Math.max(acc, Number(r.no) || 0), 0);
+            document.getElementById('newSkpdNo').value = maxNo + 1;
+            document.getElementById('newSkpdName').value = '';
+            document.getElementById('addSkpdModal')?.classList.remove('hidden');
+        }
+
+        function closeAddSkpdModal() {
+            document.getElementById('addSkpdModal')?.classList.add('hidden');
+        }
+
+        function submitNewSkpd(e) {
+            e.preventDefault();
+            const dateStr = (document.getElementById('docDateInput')?.value || '25 November 2026').trim();
+            const nameVal = (document.getElementById('newSkpdName').value || '').trim().toUpperCase();
+            if (!nameVal) return;
+
+            skpdRows.push({
+                no: parseNum(document.getElementById('newSkpdNo').value) || (skpdRows.length + 1),
+                name: nameVal,
+                sipd: parseNum(document.getElementById('newSkpdSipd').value),
+                pegawai: parseNum(document.getElementById('newSkpdPegawai').value),
+                transfer: parseNum(document.getElementById('newSkpdTransfer').value),
+                penyedia: parseNum(document.getElementById('newSkpdPenyedia').value),
+                swakelola: parseNum(document.getElementById('newSkpdSwakelola').value),
+                penyediaSwakelola: parseNum(document.getElementById('newSkpdPenyediaSwakelola').value),
+                aktif: `TIDAK/ ${dateStr}`
+            });
+            saveState();
+            renderTable();
+            closeAddSkpdModal();
+            showToast(`SKPD "${nameVal}" ditambahkan.`);
+        }
+
+        function openImportModal() {
+            document.getElementById('importModal')?.classList.remove('hidden');
+        }
+
+        function closeImportModal() {
+            document.getElementById('importModal')?.classList.add('hidden');
+        }
+
+        function handleExcelImport(event) {
+            const file = event.target?.files?.[0];
+            if (!file || !window.XLSX) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const wb = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+                    const ws = wb.Sheets[wb.SheetNames[0]];
+                    const aoa = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+                    const imported = [];
+                    aoa.forEach((row) => {
+                        const noVal = Number(row[0]);
+                        const nameVal = String(row[1] || '').trim();
+                        if (!isNaN(noVal) && noVal > 0 && nameVal && nameVal.toUpperCase() !== 'SATUAN KERJA' && !nameVal.toUpperCase().startsWith('TOTAL')) {
+                            imported.push({
+                                no: noVal,
+                                name: nameVal.toUpperCase(),
+                                sipd: parseNum(row[2]),
+                                pegawai: parseNum(row[3]),
+                                transfer: parseNum(row[4]),
+                                penyedia: parseNum(row[6]),
+                                swakelola: parseNum(row[7]),
+                                penyediaSwakelola: parseNum(row[8]),
+                                aktif: String(row[12] || 'TIDAK/ 25 November 2026')
+                            });
+                        }
+                    });
+                    if (imported.length > 0) {
+                        skpdRows = imported;
+                        saveState();
+                        renderTable();
+                        closeImportModal();
+                        showToast(`Berhasil mengimpor ${imported.length} data SKPD.`);
+                    } else {
+                        showToast('Tidak ditemukan baris data SKPD yang sesuai.');
+                    }
+                } catch (err) {
+                    console.error(err);
+                    showToast('Gagal membaca file Excel.');
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function exportToExcel() {
+            if (!window.XLSX) return;
+            const dateStr = (document.getElementById('docDateInput')?.value || '25 November 2026').trim();
+            const rowsData = skpdRows.map(r => {
+                const m = computeMetrics(r);
+                return {
+                    'NO.': r.no,
+                    'SATUAN KERJA': r.name,
+                    'TOTAL PAGU SIPD': Number(r.sipd) || 0,
+                    'BELANJA PEGAWAI': Number(r.pegawai) || 0,
+                    'BELANJA TRANSFER': Number(r.transfer) || 0,
+                    'TOTAL PAGU PENGADAAN': m.paguPengadaan,
+                    'PENYEDIA SIRUP': Number(r.penyedia) || 0,
+                    'SWAKELOLA SIRUP': Number(r.swakelola) || 0,
+                    'PENYEDIA DLM SWAKELOLA': Number(r.penyediaSwakelola) || 0,
+                    'TOTAL PAGU SIRUP': m.totalSirup,
+                    'SELISIH': m.selisih,
+                    'STATUS': m.status
+                };
+            });
+            const ws = XLSX.utils.json_to_sheet(rowsData);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'REKAP SIRUP');
+            XLSX.writeFile(wb, `REKAP_SIRUP_BATOLA_${dateStr.replace(/\s+/g, '_')}.xlsx`);
+            showToast('File Excel (.xlsx) berhasil diunduh.');
+        }
+
+        function exportToPdf() {
+            if (!window.jspdf || !window.jspdf.jsPDF) return;
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+            const titleStr = (document.getElementById('docTitleInput')?.value || 'REKAPITULASI SIRUP KAB. BARITO KUALA').trim();
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(11);
+            doc.text(titleStr, 14, 14);
+            doc.autoTable({
+                startY: 20,
+                head: [['No', 'Satuan Kerja', 'Pagu SIPD', 'Pagu Pengadaan', 'Penyedia', 'Swakelola', 'Total SIRUP', 'Selisih', 'Status']],
+                body: skpdRows.map(r => {
+                    const m = computeMetrics(r);
+                    return [r.no, r.name, formatNum(r.sipd), formatNum(m.paguPengadaan), formatNum(r.penyedia), formatNum(r.swakelola), formatNum(m.totalSirup), formatNum(m.selisih), m.status];
+                })
+            });
+            doc.save('REKAP_SIRUP_BATOLA.pdf');
+            showToast('File PDF berhasil diunduh.');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            renderTable();
+        });
+    </script>
+</body>
+</html>
