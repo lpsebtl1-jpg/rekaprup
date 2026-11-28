@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f1f5f9;
@@ -67,27 +67,221 @@
             color: #854d0e;
             border: 1px solid #fde047;
         }
+
+        /* ANIMASI LAYAR LOGIN KEREN */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes blobFloat1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(45px, -55px) scale(1.12); }
+            66% { transform: translate(-30px, 30px) scale(0.92); }
+        }
+        @keyframes blobFloat2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-50px, 40px) scale(1.1); }
+            66% { transform: translate(35px, -35px) scale(0.95); }
+        }
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-7px); }
+        }
+        @keyframes pulseRing {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            70% { transform: scale(1.22); opacity: 0; }
+            100% { transform: scale(1.22); opacity: 0; }
+        }
+        @keyframes cardEntrance {
+            0% { opacity: 0; transform: translateY(24px) scale(0.97); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes scanBeam {
+            0% { top: 0%; opacity: 0; }
+            15% { opacity: 0.8; }
+            85% { opacity: 0.8; }
+            100% { top: 100%; opacity: 0; }
+        }
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        .login-bg-animated {
+            background: linear-gradient(-45deg, #020617, #0f172a, #064e3b, #1e1b4b, #0f172a);
+            background-size: 400% 400%;
+            animation: gradientShift 16s ease infinite;
+        }
+        .login-grid-overlay {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridMove 8s linear infinite;
+        }
+        .animate-blob-1 {
+            animation: blobFloat1 12s ease-in-out infinite;
+        }
+        .animate-blob-2 {
+            animation: blobFloat2 15s ease-in-out infinite;
+        }
+        .animate-logo-float {
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+        .animate-pulse-ring {
+            animation: pulseRing 2.6s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+        }
+        .animate-card-enter {
+            animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .animate-scan-beam {
+            animation: scanBeam 3.5s ease-in-out infinite;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
 </head>
 <body class="min-h-screen flex flex-col">
-    <section id="cloudPanel" style="position:sticky;top:0;z-index:99999;background:#fff;padding:12px;border-bottom:1px solid #ccc;color:#172033">
-        <div class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-2">
-            <div>
-                <strong>Database RUP</strong> — <span id="cloudStatus">Memeriksa koneksi...</span>
+
+    <!-- HALAMAN LOGIN FULLSCREEN DENGAN ANIMASI & LOGO INSTANSI -->
+    <section id="loginScreen" class="fixed inset-0 z-[99999] login-bg-animated flex items-center justify-center p-4 overflow-y-auto">
+        <!-- Grid & Ornamen Cahaya Bergerak -->
+        <div class="absolute inset-0 login-grid-overlay pointer-events-none"></div>
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl animate-blob-1 pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-[28rem] h-[28rem] bg-indigo-500/25 rounded-full blur-3xl animate-blob-2 pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[34rem] h-[34rem] bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Kartu Login Glassmorphism -->
+        <div class="relative z-10 w-full max-w-md animate-card-enter my-auto">
+            <div class="relative overflow-hidden rounded-3xl bg-slate-900/75 backdrop-blur-xl border border-white/15 shadow-[0_25px_70px_-15px_rgba(0,0,0,0.85)] p-6 sm:p-8 text-white">
+                <!-- Garis Cahaya Halus di Atas Kartu -->
+                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-400"></div>
+
+                <!-- Logo Instansi + Animasi Melayang & Pulse -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="relative mb-4">
+                        <div class="absolute inset-0 rounded-2xl bg-emerald-400/30 animate-pulse-ring"></div>
+                        <div class="relative w-20 h-24 rounded-2xl bg-white p-1.5 border-2 border-emerald-300/70 shadow-xl flex items-center justify-center overflow-hidden animate-logo-float">
+                            <div class="absolute inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent animate-scan-beam pointer-events-none"></div>
+                            <svg viewBox="0 0 220 240" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <polygon points="110,8 212,84 176,226 44,226 8,84" fill="#ffffff" stroke="#1e1b6b" stroke-width="9" stroke-linejoin="round"/>
+                                <polygon points="110,16 203,87 170,219 50,219 17,87" fill="#ffffff" stroke="#facc15" stroke-width="4" stroke-linejoin="round"/>
+                                <path d="M92,175 C62,145 58,92 84,54" fill="none" stroke="#15803d" stroke-width="3.5" stroke-linecap="round"/>
+                                <path d="M84,174 C50,148 44,102 64,66" fill="none" stroke="#15803d" stroke-width="3.2" stroke-linecap="round"/>
+                                <path d="M76,173 C38,152 30,115 44,82" fill="none" stroke="#15803d" stroke-width="3" stroke-linecap="round"/>
+                                <ellipse cx="76" cy="72" rx="4" ry="9" transform="rotate(-20 76 72)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
+                                <circle cx="80" cy="64" r="3.5" fill="#dc2626"/>
+                                <ellipse cx="64" cy="96" rx="4.5" ry="10" transform="rotate(-18 64 96)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
+                                <circle cx="71" cy="92" r="3.5" fill="#dc2626"/>
+                                <ellipse cx="52" cy="112" rx="4.5" ry="10" transform="rotate(-15 52 112)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
+                                <circle cx="62" cy="122" r="3.5" fill="#dc2626"/>
+                                <ellipse cx="42" cy="134" rx="4.5" ry="9.5" transform="rotate(-12 42 134)" fill="#16a34a" stroke="#14532d" stroke-width="1.2"/>
+                                <circle cx="55" cy="144" r="3.5" fill="#dc2626"/>
+                                <circle cx="66" cy="154" r="3.5" fill="#dc2626"/>
+                                <path d="M128,175 C162,152 174,105 144,46" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+                                <g fill="#facc15" stroke="#1e293b" stroke-width="1.4">
+                                    <ellipse cx="144" cy="52" rx="4" ry="8" transform="rotate(-25 144 52)"/>
+                                    <ellipse cx="151" cy="64" rx="4.5" ry="8.5" transform="rotate(20 151 64)"/>
+                                    <ellipse cx="146" cy="74" rx="4.5" ry="8.5" transform="rotate(-25 146 74)"/>
+                                    <ellipse cx="156" cy="86" rx="4.5" ry="9" transform="rotate(22 156 86)"/>
+                                    <ellipse cx="150" cy="97" rx="4.5" ry="9" transform="rotate(-25 150 97)"/>
+                                    <ellipse cx="160" cy="110" rx="4.5" ry="9" transform="rotate(22 160 110)"/>
+                                    <ellipse cx="153" cy="121" rx="4.5" ry="9" transform="rotate(-25 153 121)"/>
+                                    <ellipse cx="160" cy="133" rx="4.5" ry="9" transform="rotate(22 160 133)"/>
+                                    <ellipse cx="152" cy="144" rx="4.5" ry="8.5" transform="rotate(-25 152 144)"/>
+                                    <ellipse cx="154" cy="155" rx="4.5" ry="8.5" transform="rotate(20 154 155)"/>
+                                    <ellipse cx="144" cy="164" rx="4.5" ry="8" transform="rotate(-22 144 164)"/>
+                                </g>
+                                <path d="M110,58 L138,76 L133,156 L110,174 L87,156 L82,76 Z" fill="#18181b" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M110,74 C115,92 115,118 111,134 L109,134 C105,118 105,92 110,74 Z" fill="#ffffff"/>
+                                <path d="M106,134 L115,134 L114,148 C113,156 104,160 95,158 L98,149 C103,150 106,147 106,142 Z" fill="#facc15"/>
+                                <path d="M46,166 L76,174 L76,204 L46,196 L56,181 Z" fill="#b91c1c" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M174,166 L144,174 L144,204 L174,196 L164,181 Z" fill="#b91c1c" stroke="#18181b" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M74,172 Q110,164 146,172 L146,202 Q110,194 74,202 Z" fill="#dc2626" stroke="#18181b" stroke-width="2.2" stroke-linejoin="round"/>
+                                <text x="110" y="191" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="18" letter-spacing="1" fill="#ffffff">SELIDAH</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-[10px] font-extrabold uppercase tracking-widest text-emerald-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                        Pemerintah Kabupaten Barito Kuala
+                    </span>
+                    <h2 class="text-lg sm:text-xl font-black tracking-tight text-white mt-2.5">
+                        SISTEM MONITORING RUP &amp; SIRUP
+                    </h2>
+                    <p class="text-xs text-slate-300 mt-1">
+                        Sekretariat Daerah • Bagian Pengadaan Barang &amp; Jasa
+                    </p>
+                </div>
+
+                <!-- Status Koneksi Database -->
+                <div class="mt-5 rounded-xl bg-white/5 border border-white/10 px-3.5 py-2.5 flex items-center justify-between text-[11px]">
+                    <span class="text-slate-400 flex items-center gap-1.5">
+                        <i class="fa-solid fa-database text-emerald-400"></i> Status Server:
+                    </span>
+                    <span id="loginStatusBadge" class="font-bold text-emerald-300">Memeriksa koneksi...</span>
+                </div>
+
+                <!-- Form Login Admin -->
+                <form id="cloudLogin" onsubmit="loginCloud(event)" class="mt-5 space-y-4">
+                    <div>
+                        <label for="cloudEmail" class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                            Email Administrator
+                        </label>
+                        <div class="relative">
+                            <i class="fa-solid fa-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                            <input id="cloudEmail" type="email" required placeholder="Masukkan email admin..."
+                                class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950/60 border border-white/15 text-xs sm:text-sm font-medium text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/25 transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="cloudPassword" class="block text-[11px] font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                            Kata Sandi (Password)
+                        </label>
+                        <div class="relative">
+                            <i class="fa-solid fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                            <input id="cloudPassword" type="password" required placeholder="Masukkan password admin..."
+                                class="w-full pl-10 pr-10 py-2.5 rounded-xl bg-slate-950/60 border border-white/15 text-xs sm:text-sm font-medium text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/25 transition">
+                            <button type="button" onclick="togglePasswordVisibility()" title="Tampilkan / Sembunyikan Password"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs p-1">
+                                <i id="eyeIcon" class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button id="loginSubmitBtn" type="submit"
+                        class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-lg shadow-emerald-950/50 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>MASUK KE DASHBOARD RUP</span>
+                    </button>
+                </form>
+
+                <div class="mt-6 pt-4 border-t border-white/10 text-center text-[10px] text-slate-400">
+                    Jalan Pangeran Antasari No. 1 Marabahan 70511 • Copyright &copy; REEZZ 2026
+                </div>
             </div>
-            <button id="cloudLogout" type="button" hidden onclick="logoutCloud()" style="padding:6px 14px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;font-weight:700;font-size:12px;cursor:pointer">
-                <i class="fa-solid fa-right-from-bracket mr-1"></i> Logout
-            </button>
         </div>
-        <form id="cloudLogin" onsubmit="loginCloud(event)" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px" class="max-w-[1600px] mx-auto">
-            <input id="cloudEmail" type="email" required placeholder="Email admin" style="border:1px solid #aaa;border-radius:8px;padding:6px 10px;font-size:13px">
-            <input id="cloudPassword" type="password" required placeholder="Password admin" style="border:1px solid #aaa;border-radius:8px;padding:6px 10px;font-size:13px">
-            <button type="submit" style="background:#166534;color:white;border-radius:8px;padding:6px 16px;font-weight:700;font-size:13px;cursor:pointer">Login</button>
-        </form>
     </section>
 
+    <!-- WORKSPACE UTAMA (HANYA MUNCUL SETELAH LOGIN BERHASIL) -->
     <div id="appWorkspace" class="flex-1 flex flex-col hidden">
+        <!-- BAR STATUS & LOGOUT MINIMALIS DI ATAS -->
+        <div id="cloudPanel" class="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md text-white border-b border-slate-800 px-4 py-2">
+            <div class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-2 text-xs">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <strong class="text-slate-200">Database RUP</strong>
+                    <span class="text-slate-500">—</span>
+                    <span id="cloudStatus" class="text-emerald-300 font-semibold">Online • data tersinkron</span>
+                </div>
+                <button id="cloudLogout" type="button" onclick="logoutCloud()"
+                    class="px-3 py-1 rounded-lg bg-rose-600/20 hover:bg-rose-600 text-rose-200 hover:text-white border border-rose-500/40 font-bold text-xs transition flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+
         <!-- KOP SURAT & HEADER APLIKASI -->
         <header class="bg-slate-900 text-white border-b border-slate-800 shadow-lg">
             <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-4">
@@ -631,6 +825,21 @@
         let yearlyArchives = [];
         const DEFAULT_SKPD_DATA = [];
         let skpdRows = [];
+
+        function togglePasswordVisibility() {
+            const passInput = document.getElementById('cloudPassword');
+            const eyeIcon = document.getElementById('eyeIcon');
+            if (!passInput || !eyeIcon) return;
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                passInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
 
         function formatNum(val) {
             if (val === '' || val === null || val === undefined) return '0';
@@ -1225,9 +1434,9 @@
                     <td class="px-2.5 py-3 border-r border-slate-700 text-right font-mono">${formatNum(sumPenyediaSwakelola)}</td>
                     <td class="px-2.5 py-3 border-r border-slate-700 text-right font-mono text-teal-200 bg-teal-950/80">${formatNum(sumSirup)}</td>
                     <td class="px-2.5 py-3 border-r border-slate-700 text-right font-mono ${sumSelisih === 0 ? 'text-emerald-300' : (sumSelisih > 0 ? 'text-orange-300' : 'text-yellow-300')}">${formatNum(sumSelisih)}</td>
-                    <td class="px-2 py-3 border-r border-slate-700 text-center text-[10px] font-extrabold">${totalStatus}</td>
-                    <td class="px-2 py-3 border-r border-slate-700 text-center text-[10px] text-slate-300">-</td>
-                    <td class="px-2 py-3 text-center text-[10px] text-slate-400">-</td>
+                    <td class="px-2.5 py-3 border-r border-slate-700 text-center text-[10px] font-extrabold">${totalStatus}</td>
+                    <td class="px-2.5 py-3 border-r border-slate-700 text-center text-[10px] text-slate-300">-</td>
+                    <td class="px-2.5 py-3 text-center text-[10px] text-slate-400">-</td>
                 </tr>
             `;
         }
@@ -1402,13 +1611,9 @@
             const values = [];
 
             for (const line of lines) {
-                // Abaikan baris info pagination seperti "Menampilkan 1 sampai 10 dari 25 entri"
                 if (/menampilkan\s+\d+\s+sampai\s+\d+/i.test(line)) continue;
-
-                // Cari nominal berformat ribuan (contoh: 25.720.347.697 atau Rp 1.950.000 atau 150.000,00)
                 const matches = line.match(/(?:rp\.?\s*)?\d{1,3}(?:[.,]\d{3})+(?:,\d{1,2})?/gi) || [];
                 for (const m of matches) {
-                    // Jangan ambil kode RUP (biasanya angka panjang tanpa pemisah ribuan, atau kode paket)
                     const val = parseNum(m);
                     if (val >= 1000 && Number.isSafeInteger(val)) {
                         values.push(val);
@@ -2051,16 +2256,27 @@
     <script>
         const cloud = window.supabase?.createClient('https://exuxwgcnhuwsokyuoefk.supabase.co', 'sb_publishable_8Yi4u1GURXdl8CyoSNKK7A_0LC7UjH9');
         let cloudReady = false, timer, dirty = false, busy = false, revision = null;
-        const statusCloud = t => {
+        
+        const statusCloud = (t, isError = false) => {
             const el = document.getElementById('cloudStatus');
+            const loginBadge = document.getElementById('loginStatusBadge');
             if (el) el.textContent = t;
+            if (loginBadge) {
+                loginBadge.textContent = t;
+                loginBadge.className = isError ? 'font-bold text-rose-400' : 'font-bold text-emerald-300';
+            }
         };
 
         function setWorkspaceLocked(locked) {
             const ws = document.getElementById('appWorkspace');
-            if (!ws) return;
-            ws.inert = locked;
-            ws.classList.toggle('hidden', locked);
+            const loginScreen = document.getElementById('loginScreen');
+            if (ws) {
+                ws.inert = locked;
+                ws.classList.toggle('hidden', locked);
+            }
+            if (loginScreen) {
+                loginScreen.classList.toggle('hidden', !locked);
+            }
         }
 
         function snapshotCloud() {
@@ -2101,10 +2317,8 @@
 
         async function initCloud() {
             setWorkspaceLocked(true);
-            document.getElementById('cloudLogin').hidden = false;
-            document.getElementById('cloudLogout').hidden = true;
             if (!cloud) {
-                statusCloud('SDK gagal dimuat. Muat ulang halaman.');
+                statusCloud('SDK gagal dimuat. Muat ulang halaman.', true);
                 return;
             }
             try {
@@ -2113,11 +2327,11 @@
                     await startCloud();
                 } else {
                     clearSessionData();
-                    statusCloud('Silakan login admin');
+                    statusCloud('Siap • Silakan login admin');
                 }
             } catch (e) {
                 clearSessionData();
-                statusCloud(e.message);
+                statusCloud(e.message, true);
             }
         }
 
@@ -2127,15 +2341,19 @@
             await pullCloud();
             cloudReady = true;
             setWorkspaceLocked(false);
-            document.getElementById('cloudLogin').hidden = true;
-            document.getElementById('cloudLogout').hidden = false;
             statusCloud('Online • data tersinkron');
         }
 
         async function loginCloud(e) {
             e.preventDefault();
+            const btn = document.getElementById('loginSubmitBtn');
+            const origHtml = btn ? btn.innerHTML : '';
             try {
-                statusCloud('Menghubungkan...');
+                if (btn) {
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span>MEMVERIFIKASI AKUN...</span>';
+                }
+                statusCloud('Menghubungkan ke server...');
                 const { error } = await cloud.auth.signInWithPassword({
                     email: document.getElementById('cloudEmail').value,
                     password: document.getElementById('cloudPassword').value
@@ -2143,15 +2361,21 @@
                 document.getElementById('cloudPassword').value = '';
                 if (error) throw error;
                 await startCloud();
+                showToast('Selamat datang! Berhasil masuk ke Dashboard RUP.');
             } catch (e) {
-                statusCloud(e.message);
+                statusCloud(e.message, true);
+            } finally {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = origHtml;
+                }
             }
         }
 
         function queueCloud() {
             if (!cloudReady) return;
             dirty = true;
-            statusCloud('Perubahan belum tersimpan');
+            statusCloud('Perubahan belum tersimpan...');
             clearTimeout(timer);
             timer = setTimeout(pushCloud, 700);
         }
@@ -2174,7 +2398,7 @@
                 statusCloud('Online • tersimpan');
             } catch (e) {
                 dirty = true;
-                statusCloud('Gagal simpan: ' + e.message);
+                statusCloud('Gagal simpan: ' + e.message, true);
             } finally {
                 busy = false;
             }
@@ -2193,9 +2417,7 @@
             } catch (_) {}
             clearSessionData();
             setWorkspaceLocked(true);
-            document.getElementById('cloudLogin').hidden = false;
-            document.getElementById('cloudLogout').hidden = true;
-            statusCloud('Silakan login admin');
+            statusCloud('Anda telah keluar • Silakan login admin');
         }
 
         window.addEventListener('beforeunload', e => {
